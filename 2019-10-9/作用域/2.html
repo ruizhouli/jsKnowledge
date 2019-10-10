@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //1
+        /*var   a=123;
+　　function  fun(){
+　　　　alert(a)　　//123
+　　　}
+　　fun()*/
+
+
+        //2
+        /*  var   a=123;
+　　function fun(){
+　　　　alert(a);　　//undefined
+　　　　var a=456;
+　　　}
+　　fun()
+　　alert(a)　　//123
+*/
+
+
+
+
+        //3
+       /* var a = 123;
+
+        function fun() {
+            alert(a); //123
+            a = 456;
+        }
+        fun()
+        alert(a) //456*/
+
+
+
+        //4
+      /*  var   a=123;
+　　    function   fun(a){
+　　　     　alert(a);　　//undefined
+　　　     　a=456;
+            console.log(a);
+　　   　}
+　　    fun();
+　　    alert(a)　　//123*/
+
+
+
+
+         //5
+      /*   var   a=123;
+　　function    fun(a){
+　　　 　alert(a);　　//123
+　　　 　a=456;
+　　　}
+　　  fun(123)
+　　  alert(a)　　//123*/
+
+
+
+
+      //6
+  /*   var a=12;
+　　function fn(){
+　　　　console.log(a)　　//undefined
+　　　　var a=45;
+　　　  console.log(a)　　//45
+　　　}
+　　fn()*/
+
+
+   //7
+  /* var   a=12;
+
+　　function   fn(){
+
+　　　　console . log(a)　　//12
+
+　　　　a=45;
+
+　　　　console . log(a)　　//45
+
+　　　　}
+
+　　fn()
+   console.log(a);//45*/
+
+
+
+    //8
+//     function   fn(){
+// 　　　　console . log(11)
+// 　　　　function    ff(){
+// 　　　　　console . log(22)
+// 　　　　　　}
+// 　　　ff()　　//22
+// 　　}
+// 　　fn()　//11
+
+
+
+    //9
+//     var   a=12;
+// 　　function   fn(){
+// 　　　　console . log(a)　　//undefined
+// 　　　　return  4;
+// 　　　　var  a=45;
+// 　　　}
+// 　　fn()  
+
+
+
+
+//10
+// console . log(total);　　//undefined
+
+// 　　var   total=0;
+
+// 　　function  fn(num1,num2){
+
+// 　　　　console . log(total);　　//undefined
+
+// 　　　　var  total=num1+num2;
+
+// 　　　　console . log(total)　　　//300
+
+// 　　　}
+
+// 　　fn(100,200)
+
+// 　　console . log(total)　　//0
+
+//11
+// console . log(to)　　　　//undefined
+
+// 　　var to=1;
+
+// 　　function  fn(n1,n2){
+
+// 　　　　console . log(to)　　　//1
+
+// 　　　　to=n1+n2;
+
+// 　　　　console . log(to)　　　　//30
+
+// 　　　}
+
+// 　　fn(10,20)
+
+// 　　console . log(to)　　　　//30
+
+
+
+//12
+
+function  fn(a){
+
+　　　　console . log(a)　　//function
+
+　　　　var   a=123;
+
+　　　　console . log(a)　　//123
+
+　　　　function  a(){ }
+
+　　　　console . log(a)　　//123
+
+　　　　var  b=function(){ }
+
+　　　　console . log(b)　　//function
+
+　　　　function b(){ }
+
+　　　}
+
+　　fn(1)
+
+
+    </script>
+</body>
+
+</html>

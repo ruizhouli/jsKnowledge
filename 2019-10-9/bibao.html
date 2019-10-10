@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+
+    <script>
+        /*
+    什么是闭包？
+    (1)函数嵌套函数 (2)子函数引用父函数的参数和变量 (3)并且子函数被外界所引用；这个时候子函数的作用域链仍然保持着对父函数活动对象的引用，父函数的参数和变量就不会被浏览器的垃圾回收机制所回收，此时打印父函数的函数返回值，会发现在返回值下面有一个scopes,这个scops下面有一个closure，它就是闭包。(此时整个父级都形成闭包环境)。
+
+    全局活动对象会在关闭浏览器的时候销毁
+    
+    */
+        // function fun(a,b){
+        //     let i =62;
+        //     function fn(){
+        //         a++;
+        //         b++;
+        //         i++;
+        //         console.log(a+b);
+        //         console.log(i);
+        //     }
+        //     return fn;
+        // }
+        // let f =fun(1,2);
+        // f();
+        // f();
+        // console.dir(f);
+
+        // for(var i =0;i<10;i++){
+        //     function fun(i){
+        //         setTimeout(function(){
+        //             console.log(i)
+        //         },100)
+        //     }
+        //     fun(i);
+        // }
+
+
+
+        // function fun(n, o) {
+        //     console.log(o);//undefined
+        //     return {
+        //         fun: function (m) { //[2]
+        //             return fun(m, n); //[1]
+        //            }
+        //        }
+        //     }
+        // var a = fun(0);
+        // a.fun(1);
+        // a.fun(2);
+        // a.fun(3);
+        // var b = fun(0).fun(1).fun(2).fun(3);
+        // var c = fun(0).fun(1);
+        // c.fun(2);
+        // c.fun(3);
+    
+    const btns = document.querySelectorAll("button");
+    //    console.log(btns.length);    //事件是异步的等for循环完才执行 通过闭包可以解决
+    //    for(var i=0;i<btns.length;i++){
+    //         function fun(a){
+    //             btns[a].onclick=function(){
+    //                 alert(a);
+    //             }
+    //         }
+    //         fun(i);
+    //    }
+
+    // for(var i=0;i<btns.length;i++){
+    //    function fn(i){
+    //     setTimeout(()=>{
+    //         console.log(i)
+    //     },100)
+    //    }
+    //    fn(i)
+    // }
+
+  
+
+
+
+
+    </script>
+</body>
+
+</html>

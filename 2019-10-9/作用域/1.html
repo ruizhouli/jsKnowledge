@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // var a = 123;
+    // function fun(a){
+    //   alert(a);
+    //   a=456;
+    // }
+    // fun(123)
+    // alert(a);
+    // function test(a,b){
+    //     console.log(a);
+    //     console.log(b);
+    //     var b =234;
+    //     console.log(b);
+    //     a=123;
+    //     console.log(a);
+    //     function a(){};
+    //     var a;
+    //     b=234;
+    //     var b = function(){};
+    //     console.log(a);
+    //     console.log(b);
+    // }
+    // test(1);
+
+//     var a = 12;
+//     function fn(){
+//         console.log(a);
+//         return 4;
+//         var a = 45;
+//         console.log(a);
+//     }
+//    console.log(fn());
+
+// var i = 50;
+// function fun(){
+//     i=40;
+//     console.log(i);
+//     console.log(this.i);
+// }
+// fun();
+// console.log(i);
+
+// var i = 10;
+// function a(){
+//     i=20;
+//     console.log(i);//20
+//     // for(var i=0;i<6;i++){
+//     //    console.log(i);
+//     // }
+//     var i=0;
+//     console.log(this.i);//10
+//     console.log(i);//0
+// }
+// a();
+// console.log(i);//10
+
+
+
+/*全局作用域
+    1.变量提升：先找var 和函数申明
+     var a = undefined
+     fn = function fn(){...}
+    2.从上而下逐行解读代码:只看 = 号后面的
+     */
+    //  console.log(fn);  //fn = function fn(){...}
+    // var a = 5;
+    // console.log(a);//5
+
+    // function fn() {
+    //     /*局部作用域
+    //     1.变量提升：先找var 和函数申明
+    //      var a = undefined
+    //      var fn = undefined
+    //      fn = function fn(){alert(1);}
+    //      （重名了，函数 覆盖了 var）
+    //     2.从上而下逐行解读代码:只看 = 号后面的
+    //      */
+    //     fn = 30;
+    //     console.log(fn); //30
+    //     var fn = function () {
+    //         alert(1);
+    //     };
+    //     a = 50;
+    //     console.log(fn, a); //function(){alert(1);},50
+    //     function fn() {
+    //         alert(5);
+    //     }
+    //     console.log(fn); //function(){alert(1);}  （解读的时候看 = 等号，有等号赋值后就看等号后面的）
+    //     var a = fn = 70;//相当于var了一个a = 70   和赋值了一个  fn = 70
+    //     console.log(a, fn); //70,70
+    //     //window.fn = 70;
+    //     window.a = 80
+    // }
+    // fn();
+    // console.log(a, fn); //80,整个大的代码块 （没有参数，看函数体内有没有var fn  和fn的函数声明。有，函数体内形参私有作用域，里边的fn改变了，不会影响外面的fn，除非是挂在window下，比如window.a = 80）
+    // var i =3;
+    // function fun(){
+    //     console.log(i);//3
+    //     return 4;
+    //     i=6;
+    // }
+    // fun();
+    console.log(test);//function test(test){
+//     console.log(test);// function test (){}
+//     var test = 123
+//     console.log(test)//123
+//     function test (){}
+// }
+function test(test){
+    console.log(test);// function test (){}
+    var test = 123
+    console.log(test)//123
+    function test (){}
+}
+test(1);
+var test = 123
+    </script>
+</body>
+</html>

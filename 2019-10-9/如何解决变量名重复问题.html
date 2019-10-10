@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    解决变量名重复问题：（封闭空间）
+    函数天生就有局部作用域，函数内的变量、函数或者参数不被外界污染
+    就形成了一个天然的保护层，不会被全局污染。
+    
+    */
++function(){
+    function fn(){
+        console.log(1);
+    }
+    fn();
+    }()
++function(){
+    function fn(){
+        console.log(2);
+    }
+    fn();
+}()    
+
+/*
+ 每个引用类型的地址是不一样的，在不一样的地址下挂同名属性
+ 访问的时候，虽然属性名一样，但是空间地址不一样，也能解决
+ 重命名的问题(命名空间)
+*/
+//设俩对象：
+let obj ={
+    fun:function(){
+        console.log(1);
+    }
+}
+let obj1 ={
+    fun:function(){
+        console.log(2);
+    }
+}
+ obj.fun();
+ obj1.fun();   
+    </script>
+</body>
+</html>

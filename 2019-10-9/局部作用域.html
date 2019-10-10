@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    function fun(){
+
+    }
+    fun();
+    函数调用的时候开辟了一个栈内存空间：
+       1.形参赋值
+       2.变量提升
+       3.执行代码
+       4.执行栈销毁（变量和参数）
+    
+    
+    */
+  /*  function fn(a){
+        console.log(a);  //function a(){}  只要函数体内有函数那么结果就是函数体内的那个函数
+        var a = 20;
+        function a(){}
+    }
+    fn(function(){console.log(1111)});*/
+    
+    // var a= 2;
+    // function fn(a){
+    //     console.log(a);//5  
+    //     // var a=20;
+    //     a = 30;
+    // }
+    // fn(5)
+    
+    // function fn(a){
+    //     console.log(a);//5  
+    //     var a=20;
+       
+    // }
+    // fn(5)
+
+
+    //  var a = 20; //a = 20 它是window.a = 20
+    // function fn(a){
+    //     /*
+    //         var b
+    //         var a
+    //     */
+    //     console.log(a);//20
+    //     var b = 6; //b = 6
+    //     var a = 5;// a = 5
+    //     console.log(b,a); //6 5
+    // }
+    // fn(a);
+
+
+     var a = 10;
+    function fn(a){
+        console.log(a);
+    }
+    fn(5);
+
+    </script>
+</body>
+</html>
