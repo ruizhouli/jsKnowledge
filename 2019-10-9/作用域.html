@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    作用域 (scope)
+        运行js的范围
+
+    当打开浏览器的时候，解读到script标签的时候，会把js运行在一个window的全局作用域下(全局域)
+
+    在运行函数的时候，函数内部会开辟一个执行栈，在执行栈中会创建一个活动变量的对象，会把函数中所有的变量函数存储到这个活动变量下，执行栈去运行这个活动变量，这些活动变量、函数只会作用在函数内部 这种现象叫做局部作用域(局部作用域)
+    
+    */
+//    var a = 2;
+//    function fun(){
+//        var a =0;
+//        b=3;
+//        console.log(this.a);
+//        console.log(b);
+//    }
+//     fun();
+    
+    // function fun(){
+    //     var a=2;
+    //     function fn(){
+    //         var a = 3;
+    //         console.log(a);
+    //     }
+    // }
+   
+    // console.log(window.a);//undefined 如果没有用var声明变量 再此之前是不会吧a挂在window上，所以a找不到
+    // // a = 10;//不带var 
+    // var a=10;
+    // console.log(window.a)//10
+    </script>
+</body>
+</html>
