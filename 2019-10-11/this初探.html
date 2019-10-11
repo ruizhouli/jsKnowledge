@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //  document.onclick=function(){
+    //      console.log(this);//document
+    //  }
+    //  document.onclick=function(){
+    //      console.log(this);//window
+    //  }()
+
+    //  console.log(document.onclick);//null
+    //  document.hh=function(){
+    //      console.log(this);
+    //  }();
+    //  console.log(document.hh);//undefined
+      
+     
+    //  function fn(){
+    //       console.log(this);
+    //   }  
+    //   fn();//window
+    //   let obj={
+    //       fn:fn,
+    //   }
+    //   obj.fn();//obj
+    //   let a = obj.fn;
+    //   a();//window
+    //  function fn(){
+    //      console.log(this);
+    //  }
+    // document.onclick=function(){
+    //     console.log(this);//document
+    //     fn();//window
+    // }
+
+
+    let obj={
+        name:"lilili",
+        obj1:{
+            fn:()=>{
+                console.log(this);
+            }
+        }
+    }
+    obj.obj1.fn();//window
+    // document.onclick=()=>{
+    //     console.log(this);//window
+    // }
+
+
+    document.onclick=function(){
+        let fn=()=>{
+            console.log(this);//document
+        }
+        fn();
+    }
+
+    </script>
+</body>
+</html>

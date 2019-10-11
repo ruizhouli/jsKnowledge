@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     let person =function(name,job,sex,age){
+                let obj = new Object();
+                obj.name = name;
+                obj.job = job;
+                obj.sex = sex;
+                obj.age = age;
+                return obj;
+         }
+         let p1 = person("lili","huhu",'男',24);
+         console.log(p1.name);    
+
+
+
+
+    let obj ={
+        name:this,
+        hua:'he',
+        name1:function(){
+            console.log(this);
+        },
+        name3:()=>{
+            console.log(this);
+        }
+
+    }
+    console.log(obj.name);
+    obj.name1();
+    obj.name3();
+    console.dir(Object.prototype);
+    // console.log(obj.name);
+    </script>
+</body>
+</html>

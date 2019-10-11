@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+   let obj = (function(){
+       function fn(){
+           let num=null;
+           for(let i=0;i<arguments.length;i++){
+                num+=arguments[i];
+           }
+           return num;
+       };
+       function sw(a){
+           function fn(){
+                alert(a);
+           }
+           return fn();
+       }
+       return{
+           fn:fn,
+           sw:sw,
+       }
+   })();
+   console.log(obj.fn(5,6,9,8,58,5));
+   console.dir(obj.sw(5));
+
+
+
+   
+        
+</script>
+</body>
+</html>

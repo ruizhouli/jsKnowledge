@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    原型：
+          当一个函数创建出来的时候本身会带一些属性和方法 如：name length...
+
+          每个函数下面都有一个prototype属性这个属性是一个对象
+
+          只有函数有prototype属性
+
+          那么这个prototype就是原型
+
+    原型链：
+        只要是构造实例都有__proto__ 而且这个__proto__全等于构造函数中的prototype
+    
+    
+    */
+   function Fun(){
+
+   }
+   let obj=new Fun;
+   Fun.prototype.age=24;
+//    给构造函数下添加一个age
+    // obj.age=24;
+    // obj.__proto__.age=24;原型链
+
+    let obj1=new Fun;
+    console.log(obj.age===obj1.age)//true
+    console.log(obj.__proto__===Fun.prototype);//true
+    console.log(Fun.prototype.__proto__===Object.prototype);//TRUE
+    console.log(Object.prototype.__proto__===null);//true
+
+   console.log(obj.age);
+ console.dir(Fun);//查看下面就由一个属性prototype
+
+
+    </script>
+</body>
+</html>

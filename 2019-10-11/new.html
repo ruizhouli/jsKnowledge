@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        new 一元运算符  只运算函数  可以让函数不加括号的情况下运行   加括号是为了传递参数
+         
+        构造函数中的this指向的是这个构造函数实例化的对象 默认的this也是指向实例化对象
+
+        return的返回值是简单类型的时候那么返回实例化对象 当return的返回值是引用类型的时候 那么返回这个引用类型
+        
+        */
+       function Fun(name){
+           this.name=name;
+            console.log(this);
+            return null
+       }
+        let obj= new Fun("lilili");
+        console.log(obj.name);
+        </script>
+</body>
+</html>

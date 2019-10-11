@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //     for(var i=0;i<5;i++){
+    //     (function(){
+    //         setTimeout(function(){
+    //             console.log(i);//结果为5个5  函数中没有形参接收 如果有形参接收，那么结果将会是0,1,2,3,4
+    //         }, i*1000);
+    //     })(i)
+    // }    
+    // console.dir(window)  
+    
+    // var y = 10;
+    // if(!(x in window)){
+    //     var x = 10;
+    // }else{
+    //     var x=function (){
+    //         console.log(1);
+    //     }
+    // }
+    // console.log(x);//function (){
+    //         //console.log(1);
+    //    // }
+    // console.log(y);//10
+
+    //写出判断数据类型的方法
+    // typeof
+    //instanceof
+    //Object.prototype.toString.call(xxx)
+
+
+    //全局栈一般是等到浏览器关闭的时候才销毁
+    //局部栈是等到函数调用完以后才销毁
+    //引用类型销毁是将其赋值null   谷歌浏览器在空闲的时候会去查看引用类型的值 如果是null 那么就销毁
+
+
+     //当莫名写了一个闭包的时候，记得释放内存
+     window.onload = function(){
+        let a = 10;
+        document.onclick = function(){
+            console.log(a);
+            console.dir(document.onclick)
+            a = null;
+        }
+    }
+
+        
+    </script>
+</body>
+</html>

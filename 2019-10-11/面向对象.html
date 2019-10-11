@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        面向对象:是一种对现实世界的理解和抽象方法
+                抽象：抽出像的部分(归类)
+                归类：归纳相同的特点
+
+                面向对象是一种编程思想，把相同的代码抽出来归为一类，然后将描述这个类的共有特征方法或者属性，挂到这个类的原型上的编程思想
+
+                一般来说类的首字母是一个大写字母
+
+    */
+       
+       function Class(teacher,fangzi,heiban,table,student){
+            this.teacher=teacher;
+            this.fangzi=fangzi;
+            this.heiban=heiban;
+            this.table=table;
+            this.student=student;
+       }
+       let class1=new Class("lilili",1,2,52,52);
+       console.log(class1);
+       let class2=new Class("ruiruirui",2,4,52,52);
+
+        Class("lilili");
+        console.log(teacher);
+       console.log(class2);
+       console.dir(Class);
+
+       
+       console.dir(Object);
+
+
+    </script>
+</body>
+
+</html>
