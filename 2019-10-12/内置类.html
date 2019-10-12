@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+       内置类就是浏览器自带的一些类，这些类都是函数
+
+        Object String Boolean Number  Symbol Function
+
+
+         包装对象：
+            在简单类型(排除Null,Undefined)使用属性或者方法的时候，浏览器会偷偷地创建一个内置类型的实例
+            把使用的属性或者方法返回出去之后，这个对象被销毁，这个内置类的实例就叫包装对象
+    
+    */
+
+    // let str = "123";
+    // str.name="ll";
+    // console.log(str.name);//undefined
+
+    let str = '123';
+    str.num = 20;
+    let str2 = new String('123');
+    // console.log(str.substring);
+
+    // console.log(typeof str2);//'object'
+    str2.length = 2;
+    console.log(str2.length);//3
+
+    console.dir(Array);
+    Array.prototype.push=function(){
+        alert("a");
+    }
+    let ary=[];
+    ary.push();//弹框谈出a;
+
+
+    </script>
+</body>
+</html>

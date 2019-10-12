@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let fun = function () {
+
+        }
+        let c = new fun;
+        console.log(fun.prototype.__proto__.__proto__);//null
+        console.dir(fun);//fun{}
+        console.log(Object.prototype.__proto__); //null 到头了
+        console.log(typeof fun)//Function
+        console.log(c.__proto__.__proto__.__proto__);//null
+        console.log(fun.__proto__.__proto__.__proto__);//null
+        console.log(Function instanceof Object);//true
+        console.log(fun instanceof Function);//true
+        console.log(c instanceof fun);//true
+        console.log(fun instanceof Object);//true
+    </script>
+</body>
+
+</html>

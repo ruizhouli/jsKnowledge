@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+    this
+            window
+                单纯的函数调用  fn()
+            事件对象
+                事件函数中的this指向事件触发的对象
+
+            主
+                this就是点前面的引用类型
+
+            箭头函数
+                跟着创建箭头函数时的上下文作用域
+
+        
+        单例模式、高级单例模式，实例身上有集合了各种属性和方法
+        (function (){
+
+            return {}
+        })()
+
+        工厂模式(为了批量生成对象，其中有初始化、加工、出厂)
+
+        面向对象
+            把具有相同特征的代码抽离出来归成一类，
+            再把描述这个类的公共功能挂在这个类的原型下的一种编程思想
+        
+
+        原型与原型链的关系
+
+            什么是原型:
+                函数下的一个属性prototype，值为对象。
+                作用:
+                    构造函数原型下的属性或者方法只给这个构造函数的实例使用
+
+            什么是原型链:
+                __proto__ 每个实例上都有一个__proto__属性
+                作用:
+                    实例上的原型链 === 构造函数的原型
+    */
+
+        // document.onclick = function () {
+        //     console.log(this); //指向document
+        // }
+
+        // function fun() {
+        //     console.log(this);
+        // }
+        // let obj = {
+        //     fun: {
+        //         fn: {
+        //             fun: fun,
+        //         }
+        //     }
+        // }
+        // obj.fun.fn.fun(); //this指向fun
+        // let obj1 = {
+        //     fun: () => {
+        //         console.log(this);
+        //     }
+        // }
+        // obj1.fun(); //this指向window
+
+        // //单例
+        // let obj2 = {
+        //     name: "lilili",
+        //     age: 15,
+        //     sex: '男',
+        // }
+        // //高级单例
+        // let obj3 = (function () {
+        //     function fun() {
+        //         console.log(0)
+        //     }
+        //     return {
+        //         fn: fun
+        //     }
+        // })()
+        // obj3.fn() //0
+        // console.log(obj3.fn()); //undefined
+
+        // //工厂模式 批量生产对象
+
+        // function fun(name, age, sex) {
+        //     let obj = {
+        //         name: name,
+        //         age: age,
+        //         sex: age,
+        //     }
+        //     return obj;
+        // }
+        // let ming = fun("ming", 15, '男');
+        // console.log(ming); //{name: "ming", age: 15, sex: 15}
+
+        // //面向对象
+        // function Person(name, age, sex) {
+        //     this.name = name;
+        //     this.age = age;
+        //     this.sex = sex;
+        // }
+        // let li = new Person('li', 15, '男');
+        // console.log(li); //Person {name: "li", age: 15, sex: "男"}
+
+        /*
+               1.实例下如果有的话先使用实例下的
+               2.实例下如果没有就通过实例的原型链(__proto__)找到实例的构造函数下的原型(prototype)
+               3.实例的构造函数下的原型里如果没有就通过原型下的原型链找到Object的原型
+               4.Function是由他自己构造的
+
+
+        */
+
+        // let fun = function () {
+
+        // }
+        // let c = new fun;
+        // console.log(fun.prototype.__proto__.__proto__); //null
+        // console.dir(fun); //fun{}
+        // console.log(Object.prototype.__proto__); //null 到头了
+        // console.log(typeof fun) //Function
+        // console.log(c.__proto__.__proto__.__proto__); //null
+        // console.log(fun.__proto__.__proto__.__proto__); //null
+        // console.log(Function instanceof Object); //true
+        // console.log(fun instanceof Function); //true
+        // console.log(c instanceof fun); //true
+        // console.log(fun instanceof Object); //true
+
+        function Fn() {
+            // this.a = 10;
+        }
+        Fn.prototype.a = 20;
+        // Fn.a = 30;
+        Fn.prototype.a = 40;
+        Object.prototype.a = 60;
+        Function.prototype.a = 50;
+        // Function.a = 70;
+        let f = new Fn();
+        // f.a = 40;
+        // console.log(Fn.__proto__.prototype.__proto__.a);//报错   
+        // console.log(f.__proto__.__proto__.a);//60
+        // console.log(f.__proto__.prototype.a);//报错
+        // console.log(Object.a);//50
+        // console.log(Fn.__proto__.__proto__.a); //60
+        // console.log(f.a); //40
+        // console.log(Function.a);//Function是由他自己构造的  50
+        // console.log(Fn.a); //50
+        // console.dir(Function);
+        // console.log(Function.__proto__ === Function.prototype);true
+        console.log(Fn.__proto__ === Fn.prototype);//true
+        console.log(Object instanceof Function);//true
+    </script>
+</body>
+
+</html>

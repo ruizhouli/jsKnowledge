@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #spn,
+        #spn1 {
+            margin: 20px;
+            float: left;
+        }
+
+        #spn .active,
+        #spn1 .active {
+            background: blueviolet;
+        }
+
+        #spn div,
+        #spn1 div {
+            width: 200px;
+            height: 200px;
+            border: 1px solid gray;
+            display: none;
+        }
+
+        #spn .show,
+        #spn1 .show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="spn">
+        <button class="active">按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <div class="show">111</div>
+        <div>222</div>
+        <div>333</div>
+    </div>
+    <div id="spn1">
+        <button class="active">按钮一</button>
+        <button>按钮二</button>
+        <button>按钮三</button>
+        <div class="show">111</div>
+        <div>222</div>
+        <div>333</div>
+    </div>
+
+    <script>
+        // function Tap(id) {
+        //     this.box = document.getElementById(id);
+        //     this.btns = this.box.querySelectorAll("button");
+        //     this.divs = this.box.querySelectorAll("div");
+        // }
+        // Tap.prototype.change = function () {
+        //     for (let i = 0; i < this.btns.length; i++) {
+        //         let that = this;
+        //         this.btns[i].onclick = function () {
+        //             that.btns.forEach((item, i) => {
+        //                 item.className = "";
+
+        //             });
+        //             that.divs.forEach((item) => {
+        //                 item.className = "";
+        //             })
+        //             this.className = "active";
+        //             that.divs[i].className = "show";
+        //         }
+        //     }
+        // }
+        // let spn1 = new Tap("spn");
+        // spn1.change();
+        // let spn2 = new Tap("spn1");
+        // spn2.change();
+
+
+        function Tap(id) {
+            this.box=document.getElementById(id);
+            this.btns=this.box.querySelectorAll("button");
+            this.divs=this.box.querySelectorAll("div");
+            this.timer=null;
+            this.num=0;
+            
+
+        }
+        //给每个按钮添加事件方法
+        Tap.prototype.even=function(evName){
+            // let that = this;
+            this.btns.forEach((item,i) => {
+                item[evName]=()=>{
+                    this.change(i);
+                }
+            });
+        }
+        //切换
+        Tap.prototype.change=function(i){
+            this.btns.forEach((item,i)=>{
+                item.className="";
+                this.divs[i].className='';
+            });
+            this.btns[i].className='active';
+
+            this.divs[i].className='show';
+        }
+        //自动轮播
+        Tap.prototype.autoPlay=function(){
+            setInterval(() => {
+                this.num++;
+                this.num%=3;
+                this.change(this.num);
+            }, 1000);
+        }
+
+        let npt1 = new Tap("spn");
+        npt1.even("onmouseover");
+        let npt2 = new Tap("spn1");
+        npt2.autoPlay();
+    </script>
+</body>
+
+</html>

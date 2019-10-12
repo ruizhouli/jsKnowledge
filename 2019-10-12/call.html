@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     /*
+        call:当一个函数在创建的时候就自带了一些方法；其中就包含call,call可以改变this指向
+        多个参数:
+                1.修改this指针
+                2.第二个参数之后都是实参
+            第一个参数除了null和undefined，别的都是写啥是啥
+     */
+     var name="ruirui";
+     function fun(a,b,c){
+         console.log(this,a,b);
+         console.log(this.name);
+         
+     }
+     let obj = {
+         name:"lilili",
+     }
+     fun();//此时this指向window
+     fun.call(obj);//lilili 此时this指向了obj;
+     console.log(fun.call(obj,1,2));//undefined
+    </script>
+</body>
+</html>

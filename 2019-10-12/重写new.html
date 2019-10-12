@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+    new :
+       函数内的this变成了实例
+       默认return实例
+       
+
+    // */
+    //     function myNew(fn, ...arg) {
+    //         let obj = {}
+    //         obj.__proto__ = fn.prototype;
+    //         let reVal = fn.call(obj, ...arg);
+
+    //     if(isYYType(reVal)){
+    //         return reVal
+    //     }else{
+    //         return obj;
+    //     }
+
+    //       console.log(reval);
+    //         return obj;
+    //     }
+
+        function isQuotesType(data){
+            if (typeof data === 'symbol') return false;
+            let ary = ['String', 'Number', 'Boolean', 'Null', 'Undefined'];
+            let t = Object.prototype.toString;
+            let rv = ary.some(item => t.call(data) === '[object ' + item + ']');
+            // let rv = ary.some(function(item){
+            //     console.log('[object ' +item + ']');
+            //    let s = t.call(data) === '[object ' + item + ']';
+            //    return s;
+            // });
+            console.log(rv);
+            if (!rv) {
+                return true;
+            }
+            return false;
+        }
+        console.log(isQuotesType("123"));
+
+        // function isYYType(data) {
+        //     //如果data是symbol那么直接返回false;
+        //     if (typeof data === 'symbol') return false;
+        //     let ary = ['String', 'Number', 'Null', 'Undefined', 'Boolean'];
+        //     let toS = Object.prototype.toString;
+        //     let rv = ary.some(item => toS.call(data) === '[object ' + item + ']');
+        //     console.log(rv);
+        //     //不是预留的简单类型就是引用类型
+        //     if (!rv) {
+        //         return true;
+        //     }
+        //     return false;
+        // }
+        // console.log(isYYType("123"));
+
+        // console.log(isYYType("123456")); 
+        // function fn(name,age){
+        //      this.name = name;
+        //      this.age = age;
+        //     console.log(this.a);
+        //      return [];
+        // }
+
+        //  let t = myNew(fn,'MI',15);
+        // //     // fn.prototype.a=20;
+        // // //  console.log(fn.a)
+        //  console.log(t);
+    </script>
+</body>
+
+</html>
