@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //回调地狱
+    function fun(a){
+        console.log('第一层')
+        a(function(a){
+            console.log('第三层')
+            a(function(a){
+                console.log('第五层')
+                a(function(a){
+                    console.log('第七层')
+                    a(function(a){
+                        a(function(b){
+                            b(function(c){
+                                c(function(d){
+                                    d(function(c){
+                                       c(function(d){
+                                        d()
+                                       })
+                                    })
+                                })
+                            })
+                        })
+                    })
+                })
+            })
+        })
+    }
+
+    fun(function(b){
+        console.log('第二层')
+        b(function(b){
+            console.log('第四层')
+            b(function(b){
+                console.log('第六层')
+                b(function(b){
+                    b(function(b){
+                        b(function(c){
+                            c(function(d){
+                              d(function(c){
+                                    c(function(d){
+                                        d(function(){
+                                            console.log(true)
+                                        })
+                                    })
+                              })
+                            })
+                        })
+                    })
+                })
+            })
+        })
+    })
+    
+    </script>
+</body>
+</html>

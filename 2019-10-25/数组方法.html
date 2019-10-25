@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <div>
+                全选:<input type="checkbox" id="all"/>
+            </div>
+            <div id="b">
+                    <input type="checkbox"/>
+                    <input type="checkbox"/>
+                    <input type="checkbox"/>
+                    <input type="checkbox"/>
+                    <input type="checkbox"/>
+            </div>
+    <script>
+      /*
+        forEach(函数,修改this指向)循环数组的   返回值为undefined
+        函数:
+            function fn(数组的每一项,数据的索引,整个数组){
+                console.log(数组的每一项,数据的索引,整个数组)
+            }
+            fn(1,2,3)
+    */
+            // let arr = ['中','华','人','民','共','和','国'];
+            // arr.forEach(item=>console.log(item))//罗列arr数组中的每一项
+
+    /*
+        some(function(){},修改this指向)
+            查看数组中的每个成员是否有一项是符合条件的，只要有一个符合就返回true，否则false
+    */
+
+    // console.log(arr.some(item=>item=='中'));//true
+
+
+    /*
+        every(回调函数,修改this指向)
+
+            查看数组中的每个成员是否*都*符合条件,都符合就返回true，否则false
+    */
+    // let ary = [false,false,false];
+    //         console.log(ary.every(item=>item===false))//true
+    //         console.log(ary.every(item=>item===true))//false
+
+     /*
+        filter(回调函数,修改this)
+        回调函数(数组的每一项,索引,整个数组)
+        过滤:把数组中符合条件的数据放到一个新数组中，并且返回这个新数组
+
+    */
+    // let ary = [false,false,false,true];
+    // console.log(ary.filter(item=>item===true));//[true]
+
+    let ary = [1,2,3,6,9];
+    console.log(ary.filter(item=>item>3))//[6,9]
+
+    //获取b下面的所有input
+    const checkeds = document.querySelectorAll('#b input');
+    //声明一个数组，为了存每个checkbox的值
+    let aryChecked = [];
+    //循环所有checkeds
+    for(let i=0;i<checkeds.length;i++){
+        //给数组的每项都添加一个false  [false,false,false,false,false]
+        aryChecked[i] = false;
+        checkeds[i].onclick = function(){
+            //当点击的时候，把checkbox对应的布尔值存到数组中
+            aryChecked[i] = this.checked; 
+            //查看数组中的布尔值是否都为true
+            //最后把结果赋值给全选的checked
+            all.checked = aryChecked.every(item=>item);
+        }
+    }
+
+
+    
+    </script>
+</body>
+</html>

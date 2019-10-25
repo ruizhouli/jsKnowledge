@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     /*
+        find  查找类
+            find(函数,修改this)
+            查找回调函数中，符合规则了数据，找不到undefined
+        findIndex
+            查找回调函数中，符合规则了数据所对应索引，找不到-1
+    */  
+    let ary = [
+        {
+            id:0,
+            name:'中'
+        },
+        {
+            id:1,
+            name:'华'
+        }
+
+    ]
+
+    // console.log(ary.find(item=>item.name=='中'));//{id:0,name:'中'}
+
+    // console.log(ary.findIndex(item=>item.name=='中'))//0
+
+
+     function find(ary,callback){
+        for(let i=0;i<ary.length;i++){
+            let b = callback(ary[i],i,ary);
+            if(b){
+                return ary[i];
+            }
+        }
+        return undefined;
+    }
+
+    function findIndex(ary,callback){
+        for(let i=0;i<ary.length;i++){
+            let b = callback(ary[i],i,ary);
+            if(b){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+    console.log(find(ary,function(item){
+        return item.name=='华';
+    }))//{id:1,name:'华'}
+
+    console.log(findIndex(ary,function(item){
+        return item.name=='华';
+    }))//1
+    </script>
+</body>
+</html>

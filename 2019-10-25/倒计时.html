@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        //倒计时
+        let future = new Date("2020 2 14 00:00");
+        console.log(future);
+
+        function toDouble(n) {
+            return n >= 10 ? n : "0" + n;
+        }
+
+        function fun() {
+            let now = new Date();
+            // console.log(now);
+            let t = Math.floor((future - now) / 1000);
+            let day = Math.floor(t / 86400);
+            t %= 86400;
+            let h = Math.floor(t / 3600);
+            t %= 3600;
+            let m = Math.floor(t / 60);
+            t %= 60;
+            box.innerHTML = "距离2020年2月14日还有：" + '<br/>' + toDouble(day) + '天' + toDouble(h) + '小时' + toDouble(m) + '分' +
+                toDouble(t) + '秒';
+
+        }
+        fun()
+        setInterval(fun, 1000);
+    </script>
+</body>
+
+</html>

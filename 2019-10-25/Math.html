@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function random(n,m){
+       return Math.round( Math.random() * (m-n)) + n;
+    }
+
+    console.log(random(1,6))//1-6随机数
+
+
+    //得到不重复的随机数验证码
+    let str = '0123456789zxcvbnmasdfghjklqwertyuiopQWERTYUIOPASDFGHJKLZXCVBNM'
+    let temp=''
+    for(let i = 0;i<4;i++){
+        temp+=str[Math.round(Math.random()*(str.length-1))]
+    }
+        console.log(temp)
+    
+    </script>
+</body>
+</html>

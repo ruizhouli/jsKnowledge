@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //flat 数组扁平化
+        let ary2=[];
+      function flat(ary){
+        for(let i=0;i<ary.length;i++){
+            if(!!ary[i].push){ //是数组
+                // ary2 = [...ary2,...ary[i]];
+                flat(ary[i]);
+            }else{
+                ary2.push(ary[i]);
+            }
+        }
+    }
+    let arr = [1,2,[2,3,[4,6,[5]]]];
+    flat(arr)
+    console.log(ary2)
+    // console.log(flat(arr));
+    </script>
+</body>
+</html>

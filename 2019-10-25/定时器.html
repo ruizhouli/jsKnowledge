@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #vid{
+        height: 100px;
+        width:100px;
+        background: skyblue;
+        position: relative;
+        top:-200px;
+        left:0;
+        transition: 1s;
+    }
+    
+    </style>
+</head>
+<body>
+    <div id="vid"></div>
+    <script>
+     /*
+        定时器
+            setTimeout  到了指定时间之后执行函数(只执行一次)
+            setTimeout(回调函数,间隔多少时间(毫秒),回调函数的实参)
+
+        关闭定时器:
+            clearTimeout(定时器的返回值,编号)
+            clearInterval(定时器的返回值,编号)
+
+
+        定时器
+            setInterval  只要一到指定时间就执行一次函数(重复多次)
+            setInterval(回调函数,间隔多少时间(毫秒),回调函数的实参)
+
+        关闭定时器:
+            clearTimeout(定时器的返回值,编号)
+            clearInterval(定时器的返回值,编号)
+        
+
+        
+    */
+
+    // setTimeout(()=>alert('我和我的祖国'),5000);
+
+//     let t = setTimeout((t)=>alert(t),5000,'我爱你中国');
+//     console.log(t);
+
+//     clearTimeout(t)//关闭定时器  t为定时器的编号
+
+//    let y= setInterval(()=>alert('我和我的祖国'),2000);
+//    console.log(y);
+
+//    clearInterval(y)
+
+        setTimeout(function(){
+                vid.style.top='0px';
+                setTimeout(function(){
+                    vid.style.top='-200px';
+                },10000)
+        },5000)
+    
+    </script>
+</body>
+</html>

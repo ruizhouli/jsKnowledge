@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="u"></ul>
+    <script>
+ /*    let str = '珠峰培训'; 
+    console.log(str.charAt(2))   //培
+    console.log(str[0])  //珠
+      //将培替换成陪
+
+      console.log(str.replace('培','陪'))
+   
+    let ary = [1]; //向ary数组中添加2,3,4
+    function push(ary,...arg){ //[2,3,4]
+        let ary2 = [...ary,...arg]; //[1,2,3,4]
+        let len = ary2.length;
+        for(let i=0;i<ary2.length;i++){
+            ary[i] = ary2[i];
+        }
+        return len;
+    }
+
+    console.log(push(ary,2,3,4))
+
+    console.log(ary);*/
+
+/*
+    map:循环数组  返回一个新数组 新数组的长度与与原数组的长度一致   return的是什么 新数组里面就是什么
+*/
+
+
+  /*  let arr = [2,5,3,6,1];
+    console.log(arr.map(item=>item**2));
+
+     //重写map
+    function map(arr,fun){
+        let ary=[];
+            for(let i=0;i<arr.length;i++){
+                   ary.push(fun(arr[i])) ;
+            }
+            return  ary
+    }
+
+    console.log(map(arr,function(i){
+                    return i**2
+    }));*/
+
+    let arr = ['好','好','学','习'];
+
+    let t = arr.map(item=>{
+        return `<li>${item}</li>`;
+    }).join('')
+    console.log(t)
+    u.style.listStyle='none';
+    u.innerHTML=t;
+    </script>
+</body>
+</html>
