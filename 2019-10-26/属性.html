@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .a {
+            border: 2px solid #000;
+        }
+
+        .b {
+            background: red;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+        }
+
+        .c {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="a">设置边框</button>
+    <button id="b">设置背景</button>
+    <button id="c">重置</button>
+    <div id="box" class="d">啦啦啦</div>
+    <script>
+        /*
+    页面中的所有的元素获取出来全是字符串
+
+    classList:
+          add:添加一个或多个class
+          contains:指定的class是否存在 存在为true 不存在的为false
+          remomve:删除一个或多个class;
+          replace(旧的class,新的class) 替换class
+          toggle(开关)
+    
+    */
+
+        a.onclick = function () {
+            // box.classList.replace('d','a')
+            box.classList.toggle('a')
+        }
+        b.onclick = function () {
+            box.classList.add('b')
+        }
+        c.onclick = function () {
+            box.classList.remove('a', 'b')
+        }
+    </script>
+</body>
+
+</html>

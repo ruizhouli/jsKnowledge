@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" class="dd" zf-color='haha'>
+        <ul>
+            <li>你好</li>
+        </ul><!---- 注释---->
+    </div>
+    <script>
+    console.log(box.childNodes)// [text, ul, comment, text]
+    console.log(box.childNodes[1])// <ul><li></li></ul>
+    console.log(box.childNodes[1].childNodes)//  [text, li, text]
+    console.log(box.childNodes[1].childNodes[1])//    <li></li>
+    console.log(box.childNodes[1].childNodes[1].innerText)//  你好
+    console.log(box.childNodes[1].childNodes[1].nodeValue)
+    console.log(box.attributes)
+    console.log(box.attributes[2])//zf-color='haha'
+    console.log(box.childNodes[1].nodeType)//1
+
+
+    let obj = {
+        arr:[1,2,3],
+        ary:[3,2,1]
+    }
+
+    let attrs = box.attributes;
+    for(let i=0;i<attrs.length;i++){
+        if(attrs[i].nodeName === 'zf-color'){
+            console.log(obj[attrs[i].nodeValue]);
+        }
+    }
+
+    console.log(box.attributes)
+
+
+
+
+          
+        
+    </script>
+</body>
+</html>

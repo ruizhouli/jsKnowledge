@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <ul id="ul">
+                <li><a href="javascript:;" id="a">1</a></li>
+                <li><a href="javascript:;">2</a></li>
+                <li><a href="javascript:;">3</a></li>
+                <li><a href="javascript:;">4</a></li>
+                <li><a href="javascript:;">5</a></li>
+            </ul>
+    <script>
+    //parentNode
+    const a= document.querySelectorAll('a');
+
+      a.forEach(function(item){
+    item.onclick = function(){
+       this.parentNode.style.display = 'none';
+    }
+});
+    </script>
+</body>
+</html>

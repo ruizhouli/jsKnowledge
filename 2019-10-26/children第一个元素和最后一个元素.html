@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="dd">
+        <p></p><!----注释--->
+        <p></p>
+        <ul><li></li>
+        <li></li><li></li><li></li><li></li></ul>
+    </div>
+    <script>
+    //children  求出来的是元素节点
+        console.log(dd.children)//[p, p, ul]
+    //firstElementChild 第一个孩子元素
+    console.log(dd.firstElementChild)// <p></p>
+    //lastElementChild 最后一个孩子元素
+    console.log(dd.lastElementChild)// <ul><li></li><li></li></ul>
+let t = dd.children;
+ let lis=t[2].children;
+
+    for(let i = 0;i<lis.length;i++){
+            if(i!=0&&i!=lis.length-1){
+                lis[i].style.background='skyblue'
+            }else{
+                lis[i].style.background='red'
+            }
+
+    }
+    //分别为第一个元素和最后一个元素添加宽
+    t[2].firstElementChild.style.width='300px';
+    t[2].lastElementChild.style.width='100px';
+    </script>
+</body>
+</html>

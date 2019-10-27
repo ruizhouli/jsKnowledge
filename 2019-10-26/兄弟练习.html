@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #ul {
+            width: 200px;
+            margin: 0 auto;
+            border: 1px solid gray;
+            margin-top:50px;
+        }
+
+        #ul li {
+            list-style: none;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        .a {
+            background: skyblue;
+            color: #fff;
+        }
+
+        .b {
+            background: pink;
+            color: #fff
+        }
+
+        .c {
+            background: cadetblue;
+            color: #000
+        }
+
+        .d {
+            background: chocolate;
+            color: #fff
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="ul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+
+    </ul>
+    <script>
+        const list = ul.children;
+
+        list[0].className = list[list.length - 1].className = 'a'
+
+        for (let i = 0; i < list.length; i++) {
+            if (i !== 0 && i !== list.length - 1&&i!==1&&i!==list.length-2) {
+                list[i].onmouseover = function () {
+                    this.className = 'b';
+                    this.previousElementSibling.className = this.nextElementSibling.className = 'c'
+                }
+                list[i].onmouseout = function () {
+                        this.className = this.previousElementSibling.className = this.nextElementSibling.className =
+                            ''
+                }
+            }
+            if(i==1){
+                list[i].onmouseover=function(){
+                    this.className = 'b';
+                    this.previousElementSibling.className='a'
+                    this.nextElementSibling.className = 'c'
+                }
+                list[i].onmouseout=function(){
+                    this.className = '';
+                    this.previousElementSibling.className='a'
+                    this.nextElementSibling.className = ''
+                }
+            }
+            if(i==list.length-2){
+                list[i].onmouseover=function(){
+                    this.className = 'b';
+                    this.previousElementSibling.className='c'
+                    this.nextElementSibling.className = 'a'
+                }
+                list[i].onmouseout=function(){
+                    this.className = '';
+                    this.previousElementSibling.className=''
+                    this.nextElementSibling.className = 'a'
+                }
+            }
+        }
+        list[0].onmouseover = list[list.length - 1].onmouseover = function () {
+            this.className = 'd'
+        }
+        list[0].onmouseout = list[list.length - 1].onmouseout = function () {
+            this.className = 'a'
+        }
+    </script>
+</body>
+
+</html>
