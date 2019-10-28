@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="t1"> +
+    <input type="text" id="t2">
+    =
+    <span id="sum">?</span>
+    <button id="btn">计算</button>
+    <script>
+        btn.onclick = function () {
+            let val = t1.value;
+            let val1 = t2.value;
+            console.log(parseFloat(val));
+            if(!isNaN(parseFloat(val)) && !isNaN(parseFloat(val1))){
+                    sum.innerText = parseFloat(val)+parseFloat(val1)
+            }else{
+                sum.innerText='请输入合法数字'
+            }
+            t1.value= t2.value=''
+        }
+    </script>
+</body>
+
+</html>

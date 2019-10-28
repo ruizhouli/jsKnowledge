@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    属性：<input type="text" id="txt">
+    值：<input type="text" id="txt1">
+    <button id="btn">完成</button>
+    <div id="dd"></div>
+    <script>
+        //当是一个英文的时候有两种情况：可能是一个变量  可能是一个字符串
+        btn.onclick = function(){
+            let val = txt.value;
+            let val1 = txt1.value;
+           dd.style[val]=val1;
+        }
+    </script>
+</body>
+</html>

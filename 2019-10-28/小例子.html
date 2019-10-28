@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #ul{
+        width: 200px;
+        height:200px;
+        border:1px solid gray;
+    }
+    </style>
+
+</head>
+<body>
+    <ul id="ul"></ul>
+    <input type="text" id="txt">
+    <button id="btn">发送</button>
+    <script>
+    btn.onclick = function(){
+        let val = txt.value;
+        ul.innerHTML+=`<li>${val}</li>`
+        txt.value=''
+    }
+    
+    </script>
+</body>
+</html>
