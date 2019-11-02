@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+
+       变量提升：主要找var 和function 
+
+       在每次执行代码之前都要进行预解析 当var 和 function都挑出来 进行比较 
+
+       比较规则：1.同类后面的会覆盖前面的
+
+                2.函数名若和var的同名 则函数会覆盖掉它
+        */
+        /*   console.log(a); //function a (){console.log(1)}
+              var a = 10;
+
+              function a() {
+                  console.log(1);
+              }
+              if (true) {
+                  function a() {
+                      console.log(2)
+                  }
+              } else {
+                  function a() {
+                      console.log(3);
+                  }
+              }
+              console.log(a); //function a (){console.log(2)}
+              for (var a = 0; a < 2; a++) {
+                  a += 1;
+              }
+              console.log(a); //2*/
+
+
+        /*var aubvar = 1;
+
+        function aub() {
+            var aravar = 2;
+            return aubvar + aravar;
+        }
+
+        console.log(aub(2));//3
+        console.dir(window);
+        var a; 
+        +function a() {
+            console.log(a);//函数a
+            a = 2;
+            console.log(this.a)//undefined
+
+        }()
+        console.log(window.a);//undefined*/
+
+
+     /*   function a() {
+            alert(1);
+        }
+        a(); //333
+        var a = function () {
+            alert(a);
+        }
+        alert(a); //function (){alert(a);}
+        var a = 30;
+        alert(a); //30
+        var b = function (a) {
+            var a = 50;
+            alert(a);
+        }
+        b(a); //50
+        alert(a); //30
+        function a() {
+            alert(333);
+        }
+        alert(a); //30*/
+    </script>
+</body>
+
+</html>

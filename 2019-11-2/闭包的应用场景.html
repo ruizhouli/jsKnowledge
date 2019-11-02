@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script>
+     //window.onload 当页面的所有静态资源加载完成才执行里面的函数
+     window.onload = function(){
+        // console.log(document.getElementById('btn'));
+        var btn = document.getElementById('btn');
+        var i = 0;
+        btn.onclick = function(){
+            alert(i);
+            i = null;
+            console.dir(btn.onclick);
+        }
+
+        btn2.onclick = function(){
+            console.dir(btn.onclick);
+        }
+
+        console.dir(btn.onclick)
+    }
+    </script> -->
+</head>
+<body>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <script>
+        let btns = document.querySelectorAll('button');
+
+      /*  for(var i = 0;i<btns.length;i++){
+            btns[i].index = i;
+            btns[i].onclick= function(){
+                console.log(this.index)//分别打印 0 1 2
+            }
+        }*/
+    
+    for(var i = 0;i<btns.length;i++){
+            //闭包
+           /* function fun(a){
+                btns[a].onclick = function(){
+                    console.log(a);
+                }
+            }
+            fun(i);*/
+            //闭包 (自执行函数形式)
+            +function fun(a){
+                btns[a].onclick = function(){
+                    console.log(a);
+                }
+            }(i)
+
+    }
+    
+    </script>
+</body>
+</html>

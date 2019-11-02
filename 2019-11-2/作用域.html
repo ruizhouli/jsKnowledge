@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var i = 30;
+
+        // console.log(j);
+    </script>
+    <script>
+        /*
+         两个script标签 若上面的出错了 是不会影响下面的script标签中的代码执行
+         */
+        // console.log(i)
+    </script>
+
+
+    <script>
+        /*  var a = 1;
+        function fn() {
+            console.log('1:' + a);//'1undefined'
+
+            var a = 2;
+            bar()//'3:1'
+            console.log('2:' + a)//'2:2'
+        }
+
+        function bar() {
+            console.log('3:' + a)
+        }
+        fn()*/
+
+        /*    var b = 10;
+            function fn(){
+             //开辟一个执行栈  先进行形参赋值再进行变量提升
+               console.log(a);//undefined
+               console.log(b);//undefined
+                var a = 20;
+                b = 50;
+               console.log(a);//20
+                var b;
+            }
+            fn();
+           console.log(b);//10*/
+
+
+        /*  var a = 1;
+
+          function fn() {
+              console.log('1:' + a);//'1:3'
+              a = 2
+          }
+
+          a = 3;
+
+          function bar() {
+              console.log('2:' + a);//'2:2'
+          }
+
+          fn();
+          bar();*/
+
+   /*     function fun(i) {
+            console.log(i);//i(){console.log(b)}
+            i();//undefined
+            var i;
+            i = 30;
+            var b;
+            function i() {
+                console.log(b)
+            }
+            i();//报错
+        }
+        fun(function(){
+            return 2;
+        })*/
+
+
+        
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //this
+        /*
+            事件触发是谁，this就指向谁
+            window  全局打印this  fn()  this是window
+            对象下的this 就是.前面的那个
+        */
+        /*  var obj = {
+              val:2,
+              dbl:function(){ 
+                  var val = 45;
+                  console.log(this); 
+                  this.val *= 2;
+                  console.log(val); 
+                  console.log(this.val);
+              }
+          }
+          var ff = obj.dbl(); //   obj  45 4
+          var fn = obj.dbl; //window 45 NaN
+          fn();*/
+
+
+        /*   var name = "222";
+           var a = {
+               name: "111",
+               say: function () {
+                   console.log(this.name);
+               }
+           }
+           var fun = a.say;
+           fun(); //222
+           a.say(); //111
+
+           var b = {
+               name: "333",
+               say: function (func) {
+                   func();
+               }
+           }
+
+           b.say(a.say); ///222
+           b.say = a.say;
+           b.say(); ///333*/
+
+        /*   var foo = '123';
+
+           function point(){
+               var foo = '456';
+               this.foo= '789';
+               console.log(foo);//'456'
+           }
+           point();
+           console.log(foo)//'789'*/
+
+      /*  var foo = '123';
+
+        function point() {
+            this.foo = '456';//此时this指向window
+            console.log(foo);//456
+        }
+        point()*/
+
+
+
+
+    </script>
+</body>
+
+</html>

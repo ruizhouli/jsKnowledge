@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*什么是闭包？倪版(通透版)：
+            1、函数套函数
+            2.子函数引用父函数的参数或变量
+            3.并且子函数被外界所引用
+            4.这样父级函数就会形成一个闭包环境;
+            5.打印父函数的返回值 就会发现有闭包
+
+    前三条 破坏一条都不能形成闭包环境
+    */
+
+
+    function fun(){
+        var i = 30;
+
+        return function(){
+            i++;
+            console.log(i)
+        }
+    }
+    let j = fun();
+    j();//31
+    j();//32
+    fun()();//31  没有被外界所引用
+    </script>
+</body>
+</html>
