@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>百度音乐</title>
+	<style>
+		body,
+		ul,
+		li {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="baidu.css" />
+</head>
+
+<body>
+	<div class="wrap">
+		<div class="baidu">
+			<ul id="list">
+				<li>
+					<div></div>
+					<span>泡沫</span>
+					<span>邓紫棋</span>
+				</li>
+				<li>
+					<div></div>
+					<span>说爱你</span>
+					<span>蔡依林</span>
+				</li>
+				<li>
+					<div></div>
+					<span>稻香</span>
+					<span>周杰伦</span>
+				</li>
+				<li>
+					<div></div>
+					<span>我的梦</span>
+					<span>张靓颖</span>
+				</li>
+				<li>
+					<div></div>
+					<span>怎么说我不爱你</span>
+					<span>萧敬腾</span>
+				</li>
+				<li>
+					<div>️</div>
+					<span>无处安放</span>
+					<span>白若溪</span>
+				</li>
+			</ul>
+			<div class="select">
+				<span class="selectAll" id="qx"></span><span>全选</span>
+				<div class="others">
+					<span><em></em>收藏</span>
+					<span><em></em>添加</span>
+					<span><em></em>删除</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		let lis = document.querySelectorAll("li");
+		let arr = [];
+		for (let i = 0; i < lis.length; i++) {
+			arr[i] = false;
+			if (i % 2 == 0) {
+				lis[i].style.background = "#7A7182";
+			} else {
+				lis[i].style.background = "#A57E7F";
+			}
+			lis[i].onmouseenter = function () {
+				this.style.background = "#F5F5F5";
+			}
+			lis[i].onmouseleave = function () {
+				if (i % 2 == 0) {
+					lis[i].style.background = "#7A7182";
+				} else {
+					lis[i].style.background = "#A57E7F";
+				}
+			}
+			lis[i].onclick = function () {
+				let select = document.getElementsByClassName('selectAll');
+				if (this.children[0].innerText == "") {
+					this.children[0].innerText = "√";
+					this.onmouseleave=function(){
+						this.style.background="#F5F5F5";
+					}
+				
+
+					arr.splice(i, 1, 'true');
+				} else {
+					this.children[0].innerText = "";
+					arr.splice(i, 1, 'false');
+					lis[i].onmouseleave = function () {
+				if (i % 2 == 0) {
+					lis[i].style.background = "#7A7182";
+				} else {
+					lis[i].style.background = "#A57E7F";
+				}
+			}
+				}
+				if (arr.every(item => {
+						return item === 'true';
+					})) {
+					qx.innerText="√";
+
+				}else{
+					qx.innerText="";
+				}
+
+			}
+		}
+		qx.onclick=function(){
+			if(qx.innerText=="√"){
+				qx.innerText="";
+				for(let i = 0; i < lis.length; i++){
+					lis[i].children[0].innerText ="";
+					if (i % 2 == 0) {
+					lis[i].style.background = "#7A7182";
+				} else {
+					lis[i].style.background = "#A57E7F";
+				}
+				}
+			}else{
+				qx.innerText="√";
+				for(let i = 0; i < lis.length; i++){
+					lis[i].children[0].innerText ="√";
+					lis[i].style.background="#F5F5F5";
+				}
+			}
+			
+
+		}
+	</script>
+</body>
+
+</html>
