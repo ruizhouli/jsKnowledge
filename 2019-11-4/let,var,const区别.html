@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+  
+    <script>
+    /*
+    原始值：存储于栈中，他们的值直接存储在变量访问的位置
+    引用值：存储于堆中，也就是存储在外变量的是一个指针，指向堆内存的地址
+    var:    var声明的变量可以变量提升
+            var在全局作用域中声明变量可以挂在window下
+            var不支持块级作用域
+            var不可以主动存储每次循环的值
+    
+    let:    let不支持变量提升；
+            let在全局作用域中声明的变量，不会挂在window下
+            let 支持块级作用域
+            let 可以主动存储每次循环的值
+            在变量声明之前是不能访问这个变量的 let 有暂存死区
+            let 不能声明重复的变量名、函数名、函数名变量名都不能相同
+
+
+    const:  (定义常量)
+
+            用const定义的常量 其值是不能改变的
+
+            const会默认跟踪值的地址，一旦变化就会报错；
+
+            const 也有暂存死区
+
+            不能声明同名的变量、函数、参数
+
+    
+      块:{}
+
+            在块套块中，子块有函数，如果在父块或者父块的上方访问这个函数
+            那么都是undefined
+
+            如果在子块的下方访问这个函数，就能找到这个函数
+    
+    
+    
+    
+    
+    */
+   /* console.log(a);//Uncaught ReferenceError: Cannot access 'a' before initialization
+    const a = 10;*/
+
+   /* console.log(a);//Uncaught ReferenceError: Cannot access 'a' before initialization
+
+    let a = 10;*/
+
+
+   /* var a = 10;
+   console.log(window.a)//10
+   let b = 20;
+   console.log(window.b);//undefined*/
+
+  /* let a = 10;
+   let a = function(){
+
+   }//Uncaught SyntaxError: Identifier 'a' has already been declared*/
+
+let btns = document.querySelectorAll('button');
+
+// for(var i = 0;i<btns.length;i++){
+//         btns[i].onclick = function(){
+//             console.log(i);//点击每个按钮输出4
+//         }
+// }
+
+/*for(let i = 0;i<btns.length;i++){
+        btns[i].onclick = function(){
+            console.log(i);//点击每个按钮一次输出0,1,2,3
+        }
+}*/
+   
+/*{
+    //let 支持块级作用域
+    let a = 10;
+    console.log(a);//10
+    
+}
+console.log(a);//Uncaught ReferenceError: a is not defined*/
+/*  const监控常量的值地址，地址不能改变，一旦改变就会报错
+const obj = {
+    a:10,
+}
+
+obj.a=40;
+console.log(obj.a)//40*/
+/*
+因为aa为一个对象 obj[aa]中的aa是一个变量，指向那个对象，而这个aa又作为obj的键，obj是一个对象键都是字符串，因为({}).toString='[object Object]',obj[aa]=50就相当于给obj添加了一个键为[object Object]，值为50；console.log(obj[bb])，打印obj[bb]中的bb也是一个对象，就相当于是打印obj.[object Object];所以打印出50
+let aa={
+    a:20,
+}
+let bb={
+    b:30,
+}
+let obj={
+    aa:20,
+}
+obj[aa]=50;
+console.log(obj[bb])//50*/
+
+/*
+for循环后面有一个分号；相当于
+let arr = []
+for(var i =0;i<4;i++){
+
+};
+{
+      arr.push(i)
+}
+console.log(arr)
+*/
+let arr = [];
+for(var i =0;i<4;i++);{
+    arr.push(i)
+}
+console.log(arr)//[4]
+    </script>
+</body>
+</html>

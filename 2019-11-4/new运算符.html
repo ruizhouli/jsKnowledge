@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    new是一个一元运算符 专门运算函数
+
+    使用new运算符不用加()函数也会运行
+
+    使用new之后this会变成实例 实例是一个空白对象{}
+
+    使用new之后构造函数的返回值会默认是this
+
+    如果构造函数中return后面是原生类型 则返回值还是实例对象  如果是引用类型 则返回值是这个引用类型
+
+    
+    */
+
+    function Person(){
+        return '123'  //[]
+    }
+    let ming = new Person;
+    // console.log(ming);//[]
+    console.log(ming);//{}
+
+
+    function fun(){
+        console.log('123');
+
+    }
+    new fun;//123
+
+
+    </script>
+</body>
+</html>

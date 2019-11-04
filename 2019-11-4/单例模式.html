@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    单例模式：单个实例
+
+    实例是描述一个具体的事务
+    构造函数：抽象一个类的封装过程
+
+     高级单例模式：
+            让当前这个实例功能更加强大，还可以隐藏或者暴露细节信息
+
+
+    高级单例模式是为了让当前这个实例功能更加强大还可以隐藏或者暴露内部的实现细节
+
+        高级单例模式的写法：(function(){
+
+            return{
+
+            }
+        })()
+    解决命名冲突的问题：
+        1.   把变量或者函数放进一个函数中；
+            let  a=5;
+            (function(){
+                let a = 5;
+            })()
+        2. let obj = {
+            name:30,
+        }
+        let obj1={
+            name:30,
+        }
+    */
+    
+    //单例
+
+        let p={
+            name:'lilili',
+            age:12,
+            sex:'男'
+        }
+
+      //高级单例
+
+      let a=(function(){
+         let name='lilili';
+         let age =12;
+         let sex = '男';
+
+         return{
+             name,
+             age,
+             sex,
+         }
+
+      })()  
+      console.log(a);
+    </script>
+</body>
+</html>

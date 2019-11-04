@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    在js中所有的类（class）都是通过函数模拟出来的
+    
+    在声明一个函数的时候，这个函数会自带一些属性和方法，其中有一个属性为prototype 它的值是一个对象  它就是原型 只有函数身上才有原型
+
+    原型身上的属性和方法只供构造函数的实例所使用的
+
+    Object.prototype.__proto__=null;如果找到Object的原型下面没有那个属性就说明真的没有这个属性
+
+   原型链：每个对象上都有原型链__proto__  因为prototype也是对象 所以prototype也有__proto___;
+
+        构造函数的每个实例的原型链全等于这个构造函数的原型
+
+        function Person(){
+
+        }
+        let ming = new Person
+        ming.__proto__===Person.prototype
+    
+    
+    
+    */
+
+    function Person(){
+
+    }
+    Person.prototype.say = function(){
+        console.log(10);
+    }
+
+    let ming = new Person;
+    ming.say();//10
+  console.log( ming.__proto__ === Person.prototype) //true
+    </script>
+</body>
+</html>

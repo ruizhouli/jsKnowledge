@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function Fun(){
+        this.a = 10;
+    }
+    Fun.prototype.b = 30;
+    Fun.a=20;
+    // Function.prototype.c=40;
+    // Function.c=50;
+    Object.prototype.c=80;
+    let f  = new Fun();
+   /* f.a = 80;
+    console.log(f.a)//80*/
+    // console.log(Function.c);//50
+    console.log(Function.__proto__===Function.prototype)//true
+    // console.log(Function.c)//40
+    console.log(Function.prototype.__proto__===Object.prototype)//true
+    console.log(Function.c)//80
+    console.log(Fun.b)//undefined
+    console.log(f.b)//30
+
+    </script>
+</body>
+</html>

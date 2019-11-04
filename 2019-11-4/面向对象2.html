@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     /*查找顺序  先看实例自身有没有 
+                如果没有再通过实例的原型链找到他的构造函数的原型
+                如果构造函数的原型没有那么通过构造函数原型中的原型链找到Object的原型
+                如果object的原型中没有那么就真的没有这个属性 返回undefined
+   */
+    function ClassRoom(students,teacher,table,blackbord){
+        this.students=students;
+        this.teacher=teacher;
+        this.table=table;
+        this.blackbord=blackbord;
+    }
+
+    ClassRoom.prototype.studentSay=function(){
+        console.log('起立')
+    }
+
+    Object.prototype.teacherSay = function(){
+        console.log('上课');
+    }
+
+    let class462=new ClassRoom(62,8,62,2);
+    class462.studentSay();
+    class462.teacherSay();
+   
+    </script>
+</body>
+</html>
