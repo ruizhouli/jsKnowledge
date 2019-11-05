@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        单例模式：单个实例  功能不强大并且暴露了很多细节
+    */
+        // let obj = {
+        //             name:'lilli',
+        //             age:50,
+        //         }
+        // console.log(obj);
+        /*
+            高级单例模式 返回一个对象  隐藏了一些细节  功能能强大一些
+        */
+      /*  let obj = (function () {
+            let name = 'lili';
+            let age = 20;
+
+            function fn() {
+                age++;
+            }
+            fn();
+
+            function sum(...arg) {
+                console.log(arg.reduce((a,b)=>{
+                    return a+b
+                }))
+            }
+            return {
+                name: name,
+                age: age,
+                sum: sum,
+            }
+
+        })()
+        console.log(obj)
+        obj.sum(1,3,5,6)*/
+
+        /*
+        工厂模式：批量生产对象
+        
+        */
+      /*  function Person(name,age){
+            let obj = {
+                name,
+                age,
+            };
+            return obj
+        }
+        let p = Person('LILI',25);
+        console.log(p)//{name: "LILI", age: 25}*/
+        /*
+
+            new
+                函数的一元运算符，只能运算函数 
+                1.this变成了实例
+                2.默认return实例，如果手动设置了返回值，如果是原始类型的那么还是实例，如果是引用类型的那么返回的就是引用类型
+                3.加不加括号都能执行函数，括号主要为了传参
+                4.首字母大写
+
+            面向对象：把具有相同特征的代码抽离出来归为一类，然后把描述这个类的特征特性(属性或方法)挂在这个类的原型上的编程思想
+
+            原型链：每个对象下面都有一个属性叫做__proto__,这个属性叫做原型链
+
+            原型：每个函数在创建完以后，自身会带有一些属性或方法，其中有一个属性名为prototype，这个属性就是这个函数的原型，构造函数的原型中的属性或者方法仅供这个构造函数的实例使用，因为构造函数的原型也是一个对象，所以他下面也有原型链
+
+            实例下面的原型链全等于它的构造函数的原型
+
+               查找顺序：先看实例下面有没有，
+                        如果没有通过实例下面的原型链找到它构造函数的原型
+                        如果还没有通过它构造函数的原型的原型链找到Object的原型
+                        如果再找不到就返回undefined        
+        */
+     
+
+        function Person(name,age,sex){
+            this.name = name;
+            this.age = age;
+            this.sex=sex;
+        }
+        Person.prototype.say=function(){
+            console.log(this.sex)
+        }
+        Object.prototype.tell=function(){
+            console.log(this.age)
+        }
+        let p = new Person('sunYu',24,'女');
+        console.log(p.name);
+        p.say();
+        p.tell();
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    
+        window:在全局打印this   自执行函数中的this  定时器中的this   函数+()直接调用
+
+       事件触发的元素
+            只要是事件函数内的this都指向事件触发的元素
+
+       点前面的主
+
+        实例
+            构造函数下的this是实例，构造函数原型的this也是实例(实例调用)
+
+       箭头函数
+            指向的是声明箭头函数的上下文this
+    
+    
+    在箭头函数中没有arguments和new(因为箭头函数没有constructor)
+    
+    */
+    
+    // document.onclick=function(){
+    //     console.log(this)//document
+    // }
+
+    // document.onclick = fn;//document
+    // function fn(){
+    //     console.log(this)
+    // }
+    // document.onclick = fn();//window
+
+    // setTimeout(function(){
+    //     console.log(this)//window
+    // },1000)
+
+
+    // let obj = {
+    //     fun:function(){
+    //         console.log(this)
+    //     }
+    // }
+    // setTimeout(obj.fun,1000)//window
+    // setTimeout(obj.fun(),1000)//obj
+    // obj.fun();//obj
+//  document.onclick=function(){
+//       setTimeout(new fn,1000)//fn{}   然后报错
+//       function fn(){
+//           console.log(this)
+//       }
+//     }
+
+
+    // function Fn(){
+    //     this.name1 = 'zf';
+    // }
+    // Fn.prototype.name1 = function(){
+    //     console.log(this);
+    //     let fn = ()=> {
+    //         console.log(this);
+    //     }
+    //     fn();
+    // };
+    // Fn.name1 = function (){
+    //     console.log(this);
+    // }
+    // Function.prototype.name1 = function(){
+    //     console.log(this);
+    // } 
+    // new Fn().name1();//报错  Uncaught TypeError: (intermediate value).name1 is not a function
+
+
+
+    /*
+        改变this
+
+        在每个函数创建时候 会自带一些属性和方法，其中有call apply bind 这几个函数可以改变this的指向
+
+        call: 有若干个参数 第一个参数是改变this的指向，后面是若干个实参
+
+        apply:有两个参数 第一个参数是改变this的指向，第二个参数是一个数组，存放函数的实参
+
+        bind:(是一个惰性函数)： 第一个参数是改变this的指向； 第二个参数之后:函数实参
+                            它返回的是新函数，只要调用返回的函数才能执行函数内的代码
+
+       在使用它们修改this的时候，不要传null和undefined，因为传了也不认还是走默认的window
+    
+    */
+
+    function fun(a,b,c){
+        console.log(this,a,b,c);
+
+    }
+    fun.call('123',5,8,9)//this指向String{'123'}
+
+    fun.apply(document,[2,6,7])//this指向document
+
+    fun.bind(document,1,2,3)()//this指向document  也可写成  fun.bind(document)(1,2,3)
+    </script>
+</body>
+</html>

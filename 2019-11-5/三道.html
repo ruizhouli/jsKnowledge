@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //1.
+        function Fn() {
+            this.x = 100;
+            this.y = 200;
+            this.getX = function () {
+                console.log(this.x);
+            }
+        }
+        Fn.prototype = { //赋址过程 如果找实例的constructor Object
+            y: 400,
+            getX: function () {
+                console.log(this.x);
+            },
+            getY: function () {
+                console.log(this.y);
+            },
+            sum: function () {
+                console.log(this.x + this.y);
+            }
+        };
+        var f1 = new Fn();
+        var f2 = new Fn;
+        //每执行一次函数就会创建一个执行栈
+        console.log(f1.getX === f2.getX); //false
+        //f1和f2的构造函数都是Fn,并且f1与f2下面都没有getY,所以他们都找到了构造函数原型下的getY
+        console.log(f1.getY === f2.getY); //true
+        //f1.__proto__===Fn.prototype
+        console.log(f1.__proto__.getY === Fn.prototype.getY); //true
+        //f1.__proto__.getX相当于 Fn.prototype.getX
+        console.log(f1.__proto__.getX === f2.getX); //false
+        console.log(f1.getX === Fn.prototype.getX); //false
+        //  Fn.prototype.constructor===Object
+        console.log(f1.constructor); //Object
+        // Fn.prototype = {__proto__:Object}
+        console.log(Fn.prototype.__proto__.constructor); //Object
+        f1.getX(); //100
+        //此时的this指向Fn.prototype 因为Fn.prototype下面没有x所以返回undefined
+        f1.__proto__.getX(); //undefined
+        //此时的this指向f2 f2.y=200
+        f2.getY(); //200
+        //此时this指向 Fn.prototype所以 Fn.prototype.y=400
+        Fn.prototype.getY(); //400
+        //先找f1下面的sum  没有  然后找fn.prototype下面的sum  有  此时的this指向f1 所以f1.x+f1.y=300
+        f1.sum(); //300
+        //400+undefined
+        Fn.prototype.sum(); //NaN 
+
+
+        //2
+
+        /*
+            首先会进行变量提升
+             Foo() {
+            getName = function () {
+                console.log(1);
+            };
+            return this;
+        }
+
+        getName() {
+            console.log(5);
+        }
+            var a  var b  var c
+        */
+
+        function Foo() {
+            getName = function () {
+                console.log(1);
+            };
+            return this;
+        }
+        Foo.getName = function () {
+            console.log(2);
+        };
+        Foo.prototype.getName = function () {
+            console.log(3);
+        };
+        var getName = function () {
+            console.log(4);
+        };
+
+        function getName() {
+            console.log(5);
+        }
+
+        Foo.getName(); //2
+        getName(); //4
+        //当执行了Foo以后window下面的getName会变成 function () { console.log(1);  };  因为Foo()返回的this是Window
+        Foo().getName(); //1
+        //此时的getName已经变为function () { console.log(1);  };
+        getName(); //1
+        //Foo.getName()打印出2 再用new foo.getName 此时a为Foo下的getName的一个实例
+        var a = new Foo.getName(); //2   Foo.getName{}    构造函数下的getName的实例  //2
+        //如果是 new Foo() 那么他的优先级是最高的 所以先得到了构造函数Foo的一个实例然后再去找这个实例下的getName方法并且执行因为getName方法没有返回值所以默认返回值为undefined
+        var b = new Foo().getName(); //{}.getName() 3  undefined
+        //首先运算new Foo()得到Foo的一个实例然后找到这个实例下的get那么方法 最后用new 运算打印出3  给c赋值一个用构造函数Foo的实例下的getName所构造的实例
+        var c = new new Foo().getName //3 Foo{}.getName   Foo实例下的getName的实例   //3
+
+
+        //3
+        function Person() {
+            this.name = 'zhufeng'
+        };
+        Person.prototype.getName = function () {
+            console.log(this.name)
+            console.log(this.age)
+        };
+        Person.prototype.age = 5000;
+
+        var per1 = new Person;
+        //此时的this指向per1 首先看per1下面有name直接打印出`zhufeng` per1下面没有age 然后去找他的构造函数的原型下面有age 所以打印出5000
+        per1.getName(); //zhufeng  5000
+        //per1下面有了一个属性age并且赋值9
+        per1.age = 9;
+        //和第一问一样 不过此时的per1.age为9
+        per1.getName(); //zhufeng  9
+        console.log(per1.age); //9
+        var per2 = new Person;
+        console.log(per2.age); //5000   
+    </script>
+</body>
+
+</html>

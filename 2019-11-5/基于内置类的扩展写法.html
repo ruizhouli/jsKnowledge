@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+    /*
+    以Array为例
+    */
+    //pop方法
+    Array.prototype.pop=function(){
+        let val = this[this.length-1];
+        this.length--;
+        return val
+    }
+    let arr = [1,2,3,4];
+    console.log(arr.pop());
+    console.log(arr);
+    console.log(arr.pop());
+    console.log(arr);
+//concat方法
+Array.prototype.concat=function(...arg){
+    
+   let arr = arg.flat(Infinity);
+   let newAry = [...this,...arr]
+    return newAry
+}
+console.log(arr.concat([1,2],[3,6,9]))
+
+//push
+Array.prototype.push=function(...arg){
+    let newAry=this.concat(arg);
+        for(let i = 0;i<newAry.length;i++){
+                this[i]=newAry[i]
+        }
+    return newAry.length
+}
+console.log(arr.push(1,2,3,6,4))
+    </script>
+</body>
+</html>
