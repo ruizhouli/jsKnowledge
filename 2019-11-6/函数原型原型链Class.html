@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+  /*  function Person(name,age){
+        this.name = name;
+        this.age = age;
+        // return []
+    }
+    Person.prototype.say=function(){
+            return this.age;
+    }
+    Person.age=38;
+    Function.prototype.age=18;
+    Function.sex = '男';
+    Object.prototype.sex = '女';
+    let p = new Person('lili',25)
+    console.log(p.age)//当return[](引用数据类型的时候，p就是那个引用类型)  undefined
+    console.log(p.age)//25
+    console.log(p.say())//p下面没有say 通过他的原型链找到构造函数的原型下有say
+    console.log(Person.name)//Person
+    console.dir(Person.age)//38  此时Person为Function的一个实例
+    console.log(p.sex)//女*/
+
+/*
+
+    上面的构造函数可以用class写
+*/
+
+    class Person{
+        static age=38;
+        constructor(name,age){
+            this.name = name;
+            this.age = age;
+        }
+        say(){
+            return this.age;
+        }
+        static say(){
+            return this.age;
+        }
+    }
+    Function.prototype.age=18;
+    Function.sex = '男';
+    Object.prototype.sex = '女';
+    let p = new Person('lili',25)
+    console.log(p.age)//当return[](引用数据类型的时候，p就是那个引用类型)  undefined
+    console.log(p.age)//25
+    console.log(p.say())//p下面没有say 通过他的原型链找到构造函数的原型下有say  25
+    console.log(Person.name)//Person
+    console.dir(Person.age)//38  此时Person为Function的一个实例
+    console.log(p.sex)//女*/
+    console.log(Person.say());//38
+    </script>
+</body>
+</html>

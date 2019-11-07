@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    function myNew(fn,...arg){
+        let obj={};
+       let callback= fn.call(obj,...arg);
+    //    console.log(callback);
+       obj.__proto__=fn.prototype;
+
+       if(callback instanceof Object){
+            return callback;
+       }
+           return obj;
+    
+
+    }
+    function fun(){
+        // return 1
+    }
+let t=myNew(fun);
+console.log(t)
+console.log(t.__proto__===fun.prototype)//true
+    </script>
+</body>
+</html>

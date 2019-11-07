@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 300px;
+            height:300px;
+        }
+    #box .active{
+        background: aqua;
+    }
+    
+    #box div{
+       border:1px solid gray;
+       width:200px;
+       height:200px;
+       display: none;
+    }
+    #box .show{
+        display: block;
+    }
+    </style>
+</head>
+<body>
+<div id="box">
+    <button class="active">按钮一</button>
+    <button>按钮二</button>
+    <button>按钮三</button>
+  
+    <div class="show">1111</div>
+    <div>2222</div>
+    <div>3333</div>
+</div>
+<button id="bttn">轮播开关</button>
+    <script>
+        //定点清除
+        class tab{
+            static c=20;
+            constructor(id){
+                this.box = document.getElementById(id);
+                this.btns = this.box.querySelectorAll('button');
+                this.divs = this.box.querySelectorAll('div');
+                // console.log(this.divs,this.btns)
+                this.prev=0;
+                this.n=0; 
+                this.timer;   
+                this.onOff=false;            
+            }
+            //添加事件
+            evens(evName='onclick'){
+                this.btns.forEach((item,index)=>{
+                  item[evName]=()=>{
+                      this.chenge(index);
+                  }
+                })
+            }
+            //切换
+            chenge(index){
+                this.btns[this.prev].className='';
+                this.btns[index].className='active';
+                this.divs[this.prev].className=''
+                this.divs[index].className='show';
+                this.prev=index;
+            }
+            //自动轮播
+            autoPlay(){
+                // let that = this;
+                // setInterval(function(){
+                //     that.n++;
+                //     that.n%=that.btns.length;
+                //     that.chenge(that.n)
+
+                // },1000)
+                this.timer=setInterval(()=>{
+                    this.n++;
+                    this.n%=this.btns.length;
+                    this.chenge(this.n)
+                    // console.log(this)
+
+                },1000)
+            }
+            //定时器开关
+            switch(){
+                if(!this.onOff){
+                    clearInterval(this.timer)
+                }else{
+                    this.autoPlay();
+                }
+               this.onOff=!this.onOff;
+              
+            }
+            static fun(){
+                console.log(1);
+            }
+        }
+    
+    class b {
+
+    }
+    let box = new tab('box');
+    // box.evens('onmouseover');
+    box.autoPlay();
+    console.dir(box)
+    tab.fun()
+    console.log(tab.c)
+    bttn.onclick=()=>{
+        box.switch();
+    }
+    </script>
+</body>
+</html>

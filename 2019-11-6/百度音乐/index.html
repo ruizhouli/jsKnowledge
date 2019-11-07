@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>百度音乐</title>
+	<style>
+		body,
+		ul,
+		li {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+
+		.sk {
+			background: skyblue;
+		}
+
+		.gr {
+			background: gray;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="baidu.css" />
+</head>
+
+<body>
+	<div class="wrap">
+		<div class="baidu">
+			<ul id="list">
+				<li>
+					<input type="checkbox">
+					<span>泡沫</span>
+					<span>邓紫棋</span>
+				</li>
+				<li>
+					<input type="checkbox">
+					<span>说爱你</span>
+					<span>蔡依林</span>
+				</li>
+				<li>
+					<input type="checkbox">
+					<span>稻香</span>
+					<span>周杰伦</span>
+				</li>
+				<li>
+					<input type="checkbox">
+					<span>我的梦</span>
+					<span>张靓颖</span>
+				</li>
+				<li>
+					<input type="checkbox">
+					<span>怎么说我不爱你</span>
+					<span>萧敬腾</span>
+				</li>
+				<li>
+					<input type="checkbox">
+					<span>无处安放</span>
+					<span>白若溪</span>
+				</li>
+			</ul>
+			<div class="select">
+				<input type="checkbox" id="all">
+				<span>全选</span>
+				<div class="others">
+					<span><em></em>收藏</span>
+					<span><em></em>添加</span>
+					<span><em></em>删除</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		// querySelectorAll
+
+		const {
+			log
+		} = console;
+		class Music {
+			constructor({id})
+			 {
+				this.lis = document.querySelectorAll('#list li');
+				this.checks = document.querySelectorAll('#list input')
+				this.all = document.getElementById(id)
+				log(this.all)
+				log(this.lis, this.checks);
+				this.arry =[];
+				this.init();
+				log(this.arry)
+			}
+			init() {
+				this.chengeColor()
+				this.evens()
+				this.mouseover()
+				this.mouseout() 
+				this.checkAll()
+			}
+			chengeColor() {
+				this.lis.forEach((item, i) => {
+					if (i % 2) {
+						item.classList.add('sk');
+					}
+				})
+			}
+			evens() {
+				this.lis.forEach((item, i) => {
+					// log(this.arry)
+					let _this = this;
+					this.arry.push(false);
+					this.checks[i].onclick = function () {
+						_this.arry[i]=this.checked;
+						if(_this.arry.every(item=>item===true)){
+									_this.all.checked=true;
+						}else{
+							_this.all.checked=false;
+						}
+					}
+				})
+			}
+			mouseover() {
+				this.lis.forEach((item,i) => {
+					item.onmouseover=function(){
+						this.classList.add('gr')
+					}
+				});
+			}
+			mouseout() {
+				let _this=this;
+				this.lis.forEach((item,i) => {
+					item.onmouseout=function(){
+						if(_this.arry[i]===false){
+							this.classList.remove('gr')
+						}
+						
+					}
+				});
+			}
+
+			checkAll(){
+				let _this=this;
+				this.all.onclick=function(){
+					let state=this.checked;
+					if(state){
+					log(state)
+					_this.checks.forEach((item,i)=>{
+						item.checked=true;
+						_this.lis[i].classList.add('gr')
+						_this.arry[i]=true;
+					})
+				}else{
+					_this.checks.forEach((item,i)=>{
+						item.checked=false;
+						_this.lis[i].classList.remove('gr')
+					_this.arry[i]=false;
+					})
+				}
+				}
+				
+			}
+
+
+		}
+		let baiDuMusic = new Music({id:'all'});
+		
+	
+	</script>
+</body>
+
+</html>

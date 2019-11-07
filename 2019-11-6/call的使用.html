@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="u">
+
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+    /*
+            所有的数据都有一个toString的方法，但是写法是不一样的
+        唯独Object的toString能够去检测当前的数据类型，所以
+        可以把this改变，达到我们的目的
+    
+        Array.from() 将类数组转为数组
+    */
+  /*  const {log} = console;
+    log(Object.prototype.toString.call([]))//[object Array]
+
+    let lis= document.getElementsByTagName('li')
+    log(Array.prototype.slice.call(lis) instanceof Array);//true
+    log(lis)
+    log(lis.forEach);//undefined
+    lis = Array.from(lis);
+    log(lis.forEach);//forEach() { [native code] }
+
+    log(Math.max.apply(null,[1,2,3,6]))*/
+
+    Array.prototype.mySlice = function(){
+        return [...this]//这个this是一个数组  通过call将其this指向类数组  然后再返回一个数组  将类数组转为数组
+    }
+const {log} = console;
+let lis = document.getElementsByTagName('li')
+log(Array.prototype.mySlice.call(lis) instanceof Array);//true
+
+
+
+
+
+    
+    </script>
+</body>
+</html>
