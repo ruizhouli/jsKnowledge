@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const {log,dir}=console;
+    /*
+        函数的三种: 普通函数调用   类     实例
+    
+    
+    */
+
+    //普通函数调用：
+
+  /*  function Person(){
+        log('这是一个普通函数')
+    }
+    Person()//这是一个普通函数*/
+
+    //类
+
+  /*  function Person(name,age){
+        this.name=name;
+        this.age =age;
+    }
+    let p = new Person('sunYu',24)*/
+
+    //实例
+    /*
+        Function本身也是一个函数  并且它的构造函数就是它的本身 所有小写的function的构造函数也是Function Function.prototype是一个函数(特例) 
+    
+    */
+    function Person(name,age){
+        this.name=name;
+        this.age =age;
+    }
+    Person.name1='sunYu';
+    Function.prototype.say=function(){
+        log(this.name1)
+    }
+    Person.say()//'sunYu'
+    
+    </script>
+</body>
+</html>

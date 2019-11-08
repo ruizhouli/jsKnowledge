@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            class继承：父类下的静态方法只能被子类自身使用 子类的实例是调用不到的
+        */
+    const{log,dir}=console;
+    class Person{
+        static fun(){
+            console.log(222);
+        }
+        constructor(name,age){
+            this.name=name;
+            this.age=age;
+        }
+        say(){
+            log('我是个Person')
+        }
+    }
+    
+    class Police extends Person{
+        constructor(name,age,sex){
+            super(name,age)//当使用了extends的时候  在constructor中必须写super 如果没有super子类中的this是不能使用的 而且必须                   在 super的后面使用在前面是引用不到this对象的
+            this.sex=sex;
+        }
+        say(){
+            log('我是sunYu')
+        }
+    }
+
+    let p = new Police('sunYu',24,'男');
+    p.say();//'我是sunYu'
+   log(p.name) //sunYu
+    let p1 = new Person('lili',24);
+    p1.say()//'我是个Person'
+    log(p1.name)//Person
+    Police.fun()//2  父类的静态方法只能被子类自身使用
+    </script>
+</body>
+</html>

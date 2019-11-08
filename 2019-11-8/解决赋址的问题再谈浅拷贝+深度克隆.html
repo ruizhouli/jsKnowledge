@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const {log} = console;
+    /*
+            如果不是赋址是赋值就解决问题了
+
+            Object.assign(obj,obj1,obj2,obj3)  从右往左依次赋值 最后只能到最左边的           
+    */
+        
+        let obj1 = {
+            say(){
+                console.log(1);
+            }
+        }
+        // obj1.__proto__.aa=20;
+        let obj2 = {
+
+        }
+        obj2.toDo=function(){
+            console.log(2);
+        }
+        for(let attr in obj1){
+            //这只是一种浅拷贝 将obj1下面的属性copy给obj2  但是存在着一些问题(如下2)
+            if(obj1.hasOwnProperty(attr)){
+                    obj2[attr]=obj1[attr];
+            }
+        }
+        log(obj1)//{say: ƒ}
+        log(obj2);//{toDo: ƒ, say: ƒ}
+
+//2   当属性下面还是一个引用类型的时候 还是赋址了   所以需要深度拷贝   
+let arr = [1,2,[3,[1,[2,null]]]];
+        function deepCopy(obj){
+            //首先在这里判断一下传进来的obj是否是引用类型，也不能为null当为这两种的时候 直接return null
+            if(!typeof obj==='object'||obj===null)return null
+
+            let o = Array.isArray(obj)?[]:{};
+
+            for(let arrt in obj){
+             
+                    if(typeof obj[arrt] ==='object'){
+                    o[arrt]=deepCopy(obj[arrt])
+                    }else{
+                        o[arrt]=obj[arrt];
+                    }
+               
+            }
+            return o
+
+        }
+        log(deepCopy(arr))
+        //JSON.parse(JSON.stringify(ary))
+
+    //Object.assign(obj1,obj2,obj3);
+
+        let t = {
+            name:'lili',
+        }
+        let t1={
+            sex:'男',
+            age:18,
+
+        }
+        let t2={
+            age:24,
+        }
+        Object.assign(t,t1,t2);
+        log(t)//{name:'lili',sex:'男',age:24}  最右边的优先级最高
+    </script>
+</body>
+</html>

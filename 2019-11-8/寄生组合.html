@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        
+            Object.create()
+        */
+        const {log,log:l,dir}=console;
+    let t = Object.create({name:'sunYu'});
+        l(t);//{}.__proto__.name='sunYu'
+  
+    function Person(name,age){
+            this.name=name;
+            this.age = age;
+        }
+        Person.prototype.say=function(){
+            console.log(this.age)
+        }
+        function Police(name,age,job){
+            //通过call来继承父类的属性
+            Person.call(this,name,age);
+            this.job=job;
+        }
+        Police.prototype=Object.create(Person.prototype)//寄生继承使用Object.create
+        // l(Police.prototype.__proto__===Person.prototype)   //true
+        Police.prototype.say=function(){
+            console.log('jingcha');
+        }
+        Police.prototype.constructor=Police;
+        let p = new Police('HUHU',19,'jingcha');
+        p.say();
+        let p1 = new Person('sunYu',24)
+        p1.say();
+    
+    </script>
+</body>
+</html>

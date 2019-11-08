@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    const {log}=console;
+    function Person(name,age){
+            this.name=name;
+            this.age = age;
+        }
+        Person.prototype.say=function(){
+            console.log(this.age)
+        }
+        function Police(name,age,job){
+            //通过call来继承父类的属性
+            Person.call(this,name,age);
+            this.job=job;
+        }
+        function excess(){}//提高性能
+        excess.prototype=Person.prototype;
+        Police.prototype=new excess();
+        Police.prototype.say=function(){
+            console.log('jingcha');
+        }
+        Police.prototype.constructor=Police;
+        let p = new Police('HUHU',19,'jingcha')
+        log(p)//Police {name: "HUHU", age: 19, job: "jingcha"}
+        /*
+        查找顺序：先看p下面有没有say
+                    没有就找它的类的原型 而此时它的类的原型是类excess的一个实例 所以查看这个实例下有没有say
+                    没有就通过这个实例的构造函数的原型去找 此时   excess.prototype=Person.prototype 所以就看Person.prototype下有没有
+
+
+        用箭头的方式为：p->p.__proto__->Police.prototype->Police.prototype.__proto__->excess.prototype->Person.prototype->Person.prototype.__proto__->Object.prototype 
+        */
+        p.say();//jingcha
+        let p1 = new Person('lili',24,'huahu');
+        p1.say();//24
+        log(p1)
+
+        log(Police.prototype.__proto__===excess.prototype)//true
+    </script>
+</body>
+</html>

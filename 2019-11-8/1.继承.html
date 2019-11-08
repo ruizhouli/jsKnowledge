@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const {log}=console;
+    
+        /*
+        面向对象的特征：封装、继承、多态
+
+        继承：子类具有父类的一部分特征(这部分相同的特征是从父类中继承过来的)，并且具有自己的特征。  
+
+        浅拷贝：Object.assign(obj,obj1,obj2)     
+
+        继承的方式：类式继承(call继承)  原型链继承   寄生式组合继承   对象继承   拷贝继承   class继承
+
+        继承的结果就是子类继承父类的属性或方法
+        */
+
+        function Person(name,age){
+            this.name=name;
+            this.age = age;
+        }
+        Person.prototype.say=function(){
+            console.log(this.age)
+        }
+        function Police(name,age,job){
+            //通过call来继承父类的属性
+            Person.call(this,name,age);
+            this.job=job;
+        }
+        //通过Object.assign类继承父类原型的方法(属于浅拷贝)
+        // Object.assign(Police.prototype,Person.prototype)  和下面的等价
+        for(let attr in Person.prototype){
+                Police.prototype[attr]=Person.prototype[attr];
+        };
+        log(Police.prototype)
+        Police.prototype.say=function(){
+            console.log('jingcha');
+        }
+        let p = new Police('HUHU',19,'jingcha')
+        log(p)//Police {name: "HUHU", age: 19, job: "jingcha"}
+        p.say();//jingcha
+        let p1 = new Person('lili',24,'huahu');
+        p1.say();//24
+       
+    
+    </script>
+</body>
+</html>
