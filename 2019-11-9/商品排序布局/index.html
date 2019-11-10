@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/1.css">
+    <style>
+        .sy{
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        /* .fw{
+            display: none;
+        }
+        .xs{
+            display: block;
+        }
+       .close{
+            display: none;
+        } */
+    </style>
+</head>
+
+<body>
+    
+    <section class="box">
+        <nav>
+            <span>排序</span>
+            <a href="javascript:void(0);" data-name="time">
+                <i class="up"></i>
+                <i class="down"></i>
+                上架时间
+            </a>
+            <a href="javascript:void(0);" data-name="hot">
+                <i class="up"></i>
+                <i class="down"></i>
+                热度
+            </a>
+            <a href="javascript:void(0);" data-name="price">
+                <i class="up"></i>
+                <i class="down"></i>
+                价钱
+            </a>
+            <div>
+                <select name="" id="sele">
+                    <option value="title">按照文字搜索</option>
+                    <option value="hot">按照热度搜索</option>
+                    <option value="price">按照价格搜索</option>
+                  
+                </select>
+                <div id="txt" class="show">
+                        <input type="text">
+                </div>
+              
+                <div   id="dd" class="hide" >
+                    从
+                <input type="text">
+                到
+                <input type="text">
+                 </div>
+                <button id="search">搜索</button>
+            </div>
+        </nav>
+        <ul class="list" id="ul">
+            <!-- <li>
+                <img src="./img/2.jpg" alt="">
+                <p>商品名称:<span>dsdsadsads</span></p>
+                <p>上架时间:<span>2019-10-10</span></p>
+                <p>商品热度:<span>32</span></p>
+                <p>商品价格::<span>200</span></p>
+            </li> -->
+        </ul>
+
+    </section>
+    <!-- <script src="./json/product.js"></script> -->
+    <script>
+        /*
+             需求:
+            1.请求数据，拿到那10个数据
+            2.把数据变成页面结构（把数据渲染到页面）
+            3.排序:
+                上架时间排序
+                热度排序
+                价格排序
+            
+            4.扩展功能:
+                搜索:
+                    按照商品名称搜索
+                    按照商品价格搜索
+                    按照商品热度搜索
+        */
+        const {
+            log,
+            dir
+        } = console; 
+        //首先获取json数据
+        fetch(`json/product.json`).then(a => {
+            return a.json()
+        }).then(data => {
+
+            //data为我们所要找的数据
+            let dataCopy = data.slice(); //将data数组copy一份新
+            // log(dataCopy, data)
+            //将数据渲染到页面的render方法
+            function render(data) {
+                //因为数组中都是一个一个的小对象，所以通过结构复制，可直接获得数据
+                let newStr = data.map(({title, price, time, hot,img}) => {
+                    return `
+                    <li>
+                       <img src="${img}" alt="">
+                         <p title=${title}>商品名称:<span class='sy'>${title.substr(0,6)}</span></p>
+                         <p>上架时间:<span>${time}</span></p>
+                         <p>商品热度:<span>${hot}</span></p>
+                         <p>商品价格::<span>${price}</span></p>
+                    </li>
+                    
+                    
+                    `
+                }).join('');
+                // 操作Dom 将最后新的字符串给ul
+                ul.innerHTML=newStr;
+            }
+            render(dataCopy);
+           
+
+             //布局转换
+        let ary = []; //初始化的位置
+        const li = document.querySelectorAll('li');
+        li.forEach((ele,i)=>{
+            ary.push({
+                l:ele.offsetLeft,
+                t:ele.offsetTop,
+                id:data[i].id
+            });
+            ele.style.top = ele.offsetTop + 'px';
+            ele.style.left = ele.offsetLeft + 'px';
+          
+        });
+
+        li.forEach(ele=>ele.style.position = 'absolute');
+         //获取所有的a标签
+        let as = document.querySelectorAll('a');
+            //给每个a标签添加点击事件
+            as.forEach(function(item,i){
+                //给每个a标签添加一个自定义的属性onOff作为开关如果是true的时候就执行升序排序如果是false的时候就降序排序
+                item.onOff = true
+                item.onclick=function(){
+                    //在这一层中this指向item
+                    if(this.dataset.name==='hot'){
+                    
+                        if(this.onOff){
+
+                        dataCopy.sort((a,b)=>{
+                            return a[this.dataset.name]-b[this.dataset.name]
+                        })
+                         this.children[1].classList.remove('activeb');
+                         this.children[0].classList.add('activet');
+                        }else{
+                            dataCopy.sort((a,b)=>{
+                            return b[this.dataset.name]-a[this.dataset.name]
+                        })
+                        this.children[1].classList.add('activeb');
+                         this.children[0].classList.remove('activet');
+                        }
+                        this.onOff=!this.onOff
+                    }
+
+                    if(this.dataset.name==='price'){
+                        if(this.onOff){
+                        dataCopy.sort((a,b)=>{
+                            return a[this.dataset.name]-b[this.dataset.name]
+                        })
+                        this.children[1].classList.remove('activeb');
+                         this.children[0].classList.add('activet');
+                        }else{
+                            dataCopy.sort((a,b)=>{
+                            return b[this.dataset.name]-a[this.dataset.name]
+                        })
+                         this.children[1].classList.add('activeb');
+                         this.children[0].classList.remove('activet');
+                        }
+                        this.onOff=!this.onOff 
+                    }
+                    if(this.dataset.name==='time'){
+                        log(this.dataset.name)
+                        if(this.onOff){
+                        dataCopy.sort((a,b)=>{
+                            return new Date(a[this.dataset.name])- new Date(b[this.dataset.name])
+                        })
+                         this.children[1].classList.remove('activeb');
+                         this.children[0].classList.add('activet');
+                        }else{
+                            dataCopy.sort((a,b)=>{
+                            return new Date(b[this.dataset.name])- new Date(a[this.dataset.name])
+                        })
+                        this.children[1].classList.add('activeb');
+                        this.children[0].classList.remove('activet');
+                        }
+                        this.onOff=!this.onOff
+                       
+                    }
+                    // render(dataCopy)
+                    dataCopy.forEach((item,i)=>{
+                    // item.id -> 0  排完序之后的值 item.id 9
+                    //0-8   8->t:0,l:0
+                    li[item.id-1].style.left = ary[i].l + 'px';
+                    li[item.id-1].style.top = ary[i].t + 'px';
+                });
+                   
+                    }
+                   
+              
+               })
+
+        //搜索
+        //获取所有的相关的元素
+         let sele = document.getElementById('sele');
+         let txt = document.getElementById('txt');
+         let dd = document.getElementById('dd');
+         let search = document.getElementById('search');
+
+         //首先需要给select框做一个chenge事件  如果是搜索价格和热度就需要一个范围需要两个文本框  如果是文字的话只需要一个文本框 并且当改变的时候文本框中的值清空
+            sele.onchange=function(){
+                    txt.children[0].value=dd.children[0].value=dd.children[1].value=''
+                   if(this.value!=='title'){
+                       txt.className='hide';
+                       dd.className='show';
+                   }else{
+                       txt.className='show';
+                       dd.className='hide';
+                   }
+               }
+       //给搜索按钮添加点击事件   按条件查找符合条件的  用数组中的filter方法可以实现
+            search.onclick=function(){
+                //当如果select的value值不值title的时候(言外之意就是value的值为hot或者是price),获取他们下面两个文本框的内容 以备后用，然后使用filter方法过滤掉不符合条件的数据
+                if(sele.value!=='title'){
+                    let val1 = dd.children[0].value;
+                    let val2=dd.children[1].value;
+                    if(val1===''||val2===''){
+                        alert('请输入查询内容')
+                    }else{
+                        let arr = data.filter((item,i)=>{
+                        return item[sele.value]>=val1 && item[sele.value]<=val2
+                      })
+                      render(arr);
+
+                    }    
+                      log(arr)
+                 
+                }else{
+                    //否则它就是title 因为当为title的时候只有一个文本框 所以只获取这个文本框的内容
+                    let val3 = txt.children[0].value;
+                    if(val3===''){
+                        alert('请输入查询内容')
+                    }else{
+                        let arr= data.filter((item,i)=>{
+                       //这里使用了字符串的includes方法 把包含val3的内容的小对象都过滤出来
+                            return item[sele.value].includes(val3);
+
+                    })
+                    render(arr)
+                    }
+                  
+                   
+                }
+            }
+       
+        })
+    </script>
+</body>
+
+</html>
