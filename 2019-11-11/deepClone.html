@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    深度克隆：  简单类型是赋值操作(改变一个是不会改变另一个)    引用类型是赋址操作(改变一个会影响另一个)
+
+    为什么要拷贝？
+            因为引用类型的赋值是赋址，即不想进行赋址操作又想拿到另一个引用类型的数据
+    
+    */    
+        
+        function deepClone(obj){
+            //首先判断一下是数组还是对象 如果是数组的话就创建一个数组 如果是对象的话就创建一个对象
+            let o = Array.isArray(obj)?[]:{}
+            //循环这个数组或对象
+            for(let attr in obj){
+                    //当这个数组中的值是一个对象或者数组的时候并且还不是null
+                if(typeof obj[attr]==='object'&&obj[attr]!=='null'){
+                    //再次调用这个方法拿到它的值
+                    o[attr]=deepClone(obj[attr]);
+                }else{
+                    //如果是简单类型的直接赋值就行
+                    o[attr]=obj[attr]
+                }
+            }
+            //返回开头创建的那个对象
+            return o
+        }
+
+        let arr = [1,2,3,[4]]
+
+        console.log(deepClone(arr));
+        
+    </script>
+</body>
+</html>

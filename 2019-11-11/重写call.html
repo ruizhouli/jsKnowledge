@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+        重写call
+
+        首先call方法可以是调用它的函数中的this指向 并且可以执行调用它的那个函数
+
+         也就是说，只要让一个函数地址，等于某个对象下的方法，
+         this自然就变成了那个对象.
+    
+
+         obj.aaa=function(){
+             console.log(this);//此时这里面的this是obj
+         }
+
+    */    
+        
+    Function.prototype.mycall=function(fun,...arg){
+                    //此时的this指向调用mycall这个方法的函数
+                //想将this指向传入的那个函数
+
+                if(fun ===null|| fun===undefined){
+                       fun= window
+                }else{
+                    switch(typeof fun){
+                    case 'number': fun = new Number(fun);
+                    break;
+                    case 'string':fun = new String(fun);
+                    break;
+                    case 'boolean':fun=new Boolean(fun);
+                    break;
+                }
+                }
+            fun.f=this;//将这个this赋给fun的属性f  f点前面是fun 所以f中的this指向fun 
+             let a=  fun.f(...arg);
+             return a;
+    }
+
+function f(){
+    // console.log(this)
+    return this
+}
+console.log(f.mycall(null));
+    </script>
+</body>
+</html>

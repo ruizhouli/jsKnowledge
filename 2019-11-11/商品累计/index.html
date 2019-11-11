@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>商品累计</title>
+	<style>
+		body,
+		ul,
+		li {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		#btn{
+			border: 0px solid gray;
+			width:66px;
+			height:36px;
+			background: #fff;
+			margin-left: 36px;
+			border-radius: 10%;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="price.css" />
+
+</head>
+
+<body onselectstart="return false;">
+	<div class="wrap">
+		<div class="box">
+			<ul class="list" id="list">
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>12.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>10.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>8.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>8元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+				<li>
+					<i></i>
+					<em>0</em>
+					<i></i>
+					<span>
+						单价：<strong>14.5元 </strong> 小计：<strong>0元</strong>
+					</span>
+				</li>
+			</ul>
+			<div class="info" id="info">
+				<span>商品公合计：<em>0</em>件</span>
+				<span>共花费了：<em>0</em>元</span>
+				<br />
+				<br />
+				<span>其中最贵的商品单价是：<em>0</em>元</span>
+				<button id="btn">归零</button>
+			</div>
+		</div>
+	</div>
+	<script>
+		function Product(id, id1,id2) {
+			this.list = document.getElementById(id)
+			this.lis = list.querySelectorAll('li')
+			this.ary = [];
+			this.arr = [];
+			this.arry = [];
+			this.info = document.getElementById(id1)
+			this.btn = document.getElementById(id2)
+			this.ele = info.children;
+			console.log(this.ele);
+			this.get();
+			this.clc()
+			this.empty();
+		}
+		//获取+ -
+		Product.prototype.get = function () {
+			this.lis.forEach(item => {
+				//获取减号
+				this.arr.push(item.children[0]);
+				//获取加号
+				this.ary.push(item.children[2]);
+				//获取价格
+				this.arry.push(parseFloat(item.children[3].children[0].innerText))
+
+			});
+		}
+		//添加事件
+		Product.prototype.clc = function () {
+			// let that = this;
+
+			for (let i = 0; i < this.arr.length; i++) {
+				// console.log(this.arr[i])
+				//-事件
+				this.arr[i].onclick = () => {
+					let val = Number(this.lis[i].children[1].innerText);
+					if (val !== 0) {
+						val--;
+						this.lis[i].children[1].innerText = val;
+						this.lis[i].children[3].children[1].innerText = this.arry[i] * val + '元'
+					}
+					this.sum()
+					// this.consume()
+				}
+				//+事件
+				this.ary[i].onclick = () => {
+					let val = Number(this.lis[i].children[1].innerText);
+					val++;
+					this.lis[i].children[1].innerText = val;
+					this.lis[i].children[3].children[1].innerText = this.arry[i] * val + '元'
+					this.sum()
+					// this.consume()
+				}
+			}
+		}
+		//商品共合计
+		Product.prototype.sum = function () {
+			let arr = []
+			let ary = [];
+			let arry = [0];
+			this.lis.forEach(item => {
+				let val = item.children[1].innerText;
+				let vl = item.children[3].children[1].innerText;
+				if (val != '0') {
+					arry.push(parseFloat(item.children[3].children[0].innerText))
+				}
+				arr.push(Number(val));
+				ary.push(parseFloat(vl))
+			})
+			// console.log(arr)
+			// console.log(arry);
+			this.ele[0].children[0].innerText = arr.reduce((a, b) => {
+				return a + b
+			});
+			this.ele[1].children[0].innerText = ary.reduce((a, b) => {
+				return a + b
+			});
+			this.ele[4].children[0].innerText = Math.max(...arry);
+		}
+		
+		Product.prototype.empty=function(){
+			let _this=this;
+			this.btn.onclick=function(){
+				_this.lis.forEach((item)=>{
+					item.children[1].innerText = item.children[3].children[1].innerText=0;
+				})
+				_this.ele[0].children[0].innerText=0;
+				_this.ele[1].children[0].innerText=0;
+				_this.ele[4].children[0].innerText=0;
+
+			}
+		}
+		let ji = new Product('list', 'info','btn')
+	</script>
+</body>
+
+</html>

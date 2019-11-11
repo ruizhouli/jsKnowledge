@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+        当是一个函数的时候 它有局部作用域：在局部作用域中我们应该注意：1.它是否有参数  2.它是否有var let function 
+    
+        如果都没有 那么这个变量就是window下面的
+
+        当函数名+()直接调用  那么函数中的this指向window
+    
+    
+    */
+
+    /*
+    首先进行预解析：
+
+    var Foo = function(){getName = function () {console.log(1);}; return this;}
+    var getName = function(){console.log(5);}
+    var a
+    var b
+    var c
+    
+    
+    
+    
+    
+    */
+    function Foo() { 
+        getName = function () {console.log(1);};
+        return this;
+    }
+
+    Foo.getName = function () {console.log(2);}; 
+    Foo.prototype.getName = function () {console.log(3);};
+    var getName = function () {console.log(4);};  
+    function getName() {console.log(5);} 
+
+    /*
+        执行了Foo下的getName方法 打印出2
+    
+    */
+    Foo.getName(); //2
+    /*
+        直接执行window下的getName方法 此时的getName方法为 var getName = function () {console.log(4);};  
+    */
+    getName();//4
+    /*
+    
+        首先执行Foo这个方法 在这里注意的是当执行完Foo的这个方法后window下面的getName方法将变为  getName = function () {console.log(1);}; 因为在Foo方法中getName没有被声明 所以此时getName方法为window下的 Foo方法return this 此时的this指向window
+    */
+    Foo().getName();//1
+    getName();//1
+    /*
+        首先执行Foo.getName() 打印出2  然后再通过new Foo.getName();此时的a为Foo.getName的实例
+    
+    */
+    var a = new Foo.getName();//2 Foo.getName{}
+    /*
+       首先new Foo()为构造函数Foo的一个实例然后去执行Foo实例下面的getName方法 ( Foo.prototype.getName = function () {console.log(3);};)此时打印出3  再将他的返回值赋给c 此时没有返回值 默认返回值为undefined
+    
+    
+    */
+    var b = new Foo().getName(); // 3 undefined
+        /*
+        
+        首先new Foo()为Foo的一个实例 然后获取这个实例下的getName方法 左后通过new 这个构造函数 的到这个构造函数的实例 因为 new 会运行一个函数所以最后结果为
+        
+        
+        */
+    var c = new new Foo().getName  //3  Foo的实例下的getName所构造的实例
+    console.log(a,b,c);    
+        
+        
+
+
+
+let obj = {
+    name:'lili'
+}
+
+function fun(obj){
+    obj.name='sunYu';//会改变外面obj.name的值
+
+    obj={
+        name:'huahua',
+    }
+    console.log(obj.name)//huahua
+}
+fun(obj)//此时传的是地址
+
+console.log(obj.name)//sunYu
+    </script>
+</body>
+</html>

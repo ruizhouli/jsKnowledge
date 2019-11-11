@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        class tools{
+            static type(data){
+               if(typeof data!='object'){
+                    return typeof data;
+                }
+               let o= Object.prototype.toString
+               let obj = {
+                   Array:'array',
+                   Object:'object',
+                   Null:'null'
+               }
+               for(let arr in obj){
+                if(o.call(data)===`[object ${arr}]`){
+                        return obj[arr]
+}
+               }
+              
+            }
+        }
+
+
+     console.log(tools.type(null));
+        
+    </script>
+</body>
+</html>
