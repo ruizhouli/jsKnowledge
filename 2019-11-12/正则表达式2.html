@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    const {log} = console;
+
+    log(/aa/);// /aa/
+    let reg = new RegExp('aa');
+    log(reg)// /aa/
+    
+
+    //两个方法 exec   test
+
+    let str = 'lsnsnw1122CCSAFzAzZ';
+
+   let rg= /C/ig.exec(str);
+    let b=/Z/.test(str)
+    log(rg,b);//["C", index: 10, input: "lsnsnw1122CCSAFzAzZ", groups: undefined]    true
+    //字符串的match replace方法
+   log(str.match(/z/g)) //["z", "z"]
+   log(str.match(/z/ig)) //["z", "z", "Z"]
+
+   //replace方法 可以用来过滤敏感词
+
+   let str1 = '羊驼我也不知是什么意思';
+  let arr=['羊驼','艹'];
+   let a = new RegExp(arr.join("|"),"g")
+  let t =  str1.replace(a,($0)=>{
+       let temp=''
+    for(let i = 0;i<$0.length;i++){
+        temp+='*'
+    }
+    return temp
+   })
+
+   log(t)//**我也不知是什么意思
+
+/*
+   //16-108岁才能注册  
+    //如何进行验证？
+*/
+
+///^(1[6-9]|[2-9][0-9]|10[0-8])$/
+
+let str3 = '1080'
+console.log(/^(1[6-9]|[2-9][0-9]|10[0-8])$/.test(str3))//false
+
+let str4 = 'a12ca456ca6789ca123456caca1ca78c';
+// /a[^12]b/g
+console.log(str4.match(/a[^123]+c/g))//以a开头c结尾 中间除了1
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+    
+   /*
+    replace 分组
+   */
+
+   let str2 = '2019/11/12';
+   //这里面有四个分组
+  let str3= str2.replace(/((\d+)\D(\d+)\D(\d+))/,($0,$1,$2,$3,$4)=>{
+    log($0,$1,$2,$3,$4)
+    return $2+'年'+$3+'月'+$4+'日'
+   })
+   log(str3);//2019年11月12日
+    
+    </script>
+</body>
+</html>

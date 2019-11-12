@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //找出下列字符串中的数字
+    let str = '123hgdtyj45e6heh1eh1e61jtej164';
+    //先声明一个数组备用 将是数字的放入到这个数组中
+        let arr = [];
+        //声明一个空字符串作为拼接变量
+        let temp='';
+        //循环这个字符串
+        for(let i =0;i<str.length;i++){
+            //if中的条件为如果他不是一个NaN返回false但取反就会变为true  可以理解为当他是一个数字的时候进入if中
+                if(!isNaN(parseInt(str[i]))){
+                    //当是一个数字的时候就拼接字符串 把这些数字拼接在一起
+                        temp+=str[i];
+                }else{
+                    //当不是数字的时候就把已经拼接好的字符串给他push到数组中并且还要判断temp是否是一个空字符串，如果是空字符串就不push了    //将temp重置为空字符串，以备下次使用
+                    if(temp){
+                        arr.push(temp);
+                        temp='';
+                    }
+                
+                   
+                }
+                //这一步是万一字符串最后全为数字，通过这一步将他们push到数组中，因为数组后面已经没有非数字了条件不成立进入不到else中所以执行这段代码
+                if(temp){
+                    arr.push(temp)
+                    temp=''
+                }
+        }
+
+    console.log(arr)
+
+    //当时用正则的时候
+    console.log(str.match(/\d+/g));
+    </script>
+</body>
+</html>

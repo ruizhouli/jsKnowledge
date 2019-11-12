@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="u"></ul>
+    <input type="text" id="txt">
+    <button id="btn">发送</button>
+    <script>
+        btn.onclick = function () {
+            if (txt.value != '') {
+                let {
+                    value
+                } = txt;
+                let val1 = value;
+                let li = document.createElement('li');
+                let span = document.createElement('span');
+                let btn = document.createElement('button');
+                btn.innerText = '显示';
+                let val;
+
+                let sql = ['尼玛', '卧槽', '艹', '靠', '你丫的', '你妈逼', '操', '我去你妈了个B']
+                let s = '@!#$%^&*'
+                let arg = new RegExp(sql.join("|"), 'g');
+                val = value.replace(arg, ($0) => {
+                    let temp = ''
+                    for (let i = 0; i < $0.length; i++) {
+                        temp += s[Math.round(Math.random() * (s.length - 1))]
+                    }
+                    return temp
+                })
+                span.innerText = val;
+                li.appendChild(span);
+                li.appendChild(btn)
+                u.insertBefore(li, u.children[0])
+                txt.value = ''
+                btn.onclick = function () {
+                    val = val1;
+                    span.innerText = val;
+                }
+            }
+
+        }
+        // let str = '艹，尼玛，在干嘛';
+        // let sql = ['尼玛','卧槽','艹']
+        // let s = '@!#$%^&*'
+        //     let arg = new RegExp(sql.join("|"),'g');
+        //   console.log(str.replace(arg,($0)=>{
+        //         let temp=''
+        //         for(let i = 0;i<$0.length;i++){
+        //             temp+=s[Math.round(Math.random()*(s.length-1))]
+        //         }
+        //         return temp
+        //     }))  ;
+
+        let str = '大扎好,师兄弟就来砍我,come.on!';
+        //  let arr= str.match( /[^\x00-\xff]+/g)
+        let num = 0;
+        for (let i = 0; i < str.length; i++) {
+            // if(/[^\x00-\xff]+/g.test(str[i]))
+            if (/[\u4e00-\u9fa5]/g.test(str[i])) {
+                num += 2;
+            } else {
+                num++;
+            }
+        }
+        console.log(num);
+// ^1 [3-9][0-9]{9}$  电话号
+
+        // let str =arr.join('');
+
+        //  console.log(arr.join(''))
+
+        let str1= '<li>vfuuhguwh</li>'
+    console.log(str1.replace(/<[^>]+>/g,'')) 
+    </script>
+</body>
+
+</html>

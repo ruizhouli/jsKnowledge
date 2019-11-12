@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+        let str = '12ss3g6wg4w64w6h4w64hw'
+        console.log(str.match(/w\d{1,}h/g))// ["w6h", "w64h"]
+        console.log(str.match(/w\d{1}h/g))// ["w6h"]
+        console.log(str.match(/w\d{1,}h\w/g))// ["w6h4", "w64hw"]
+        console.log(str.match(/w\d?h\w/g))// ["w6h4"]
+        console.log(str.match(/w\d{0,1}h\w/g))// ["w6h4"]
+        console.log(str.match(/w\d*h\w/g))// ["w6h4", "w64hw"]
+
+
+    </script>
+</body>
+</html>
