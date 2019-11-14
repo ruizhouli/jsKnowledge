@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #contain {
+            width: 400px;
+            height: 400px;
+            border: 1px solid yellowgreen;
+            border-radius: 20px;
+            margin: 20px auto;
+            padding: 60px 30px 30px 30px;
+            box-sizing: border-box;
+        }
+
+        #contain div {
+            margin-bottom: 30px;
+        }
+
+        #contain div span {
+            font-size: 20px;
+            color: #555;
+            width: 80px;
+            display: inline-block;
+        }
+
+        #contain div input {
+            width: 200px;
+            height: 30px;
+            outline: none;
+            padding-left: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid yellowgreen;
+        }
+
+        #btn {
+            display: block;
+            outline: none;
+            width: 100px;
+            height: 40px;
+            border: 1px solid yellowgreen;
+            background-color: #fff;
+            border-radius: 10px;
+            font-size: 20px;
+            margin: 20px auto;
+            /* cursor:no-drop; */
+            color: #555;
+
+        }
+        /* .cu{
+            cursor:no-drop;
+        } */
+
+        #contain .ok {
+            border-color: yellowgreen;
+        }
+
+        #contain .error {
+            border-color: red;
+        }
+       
+    </style>
+</head>
+<body>
+<div id="contain">
+    <div id="qq">
+        <span>QQ：</span>
+        <input type="text" name="qq" placeholder="请输入QQ">
+    </div>
+    <div id="email">
+        <span>Email：</span>
+        <input type="text" name="email" placeholder="请输入邮箱">
+    </div>
+    <div id="mobile">
+        <span>Mobile：</span>
+        <input type="text" name="phone" placeholder="请输入手机号码">
+    </div>
+    <div id="date">
+        <span>Date：</span>
+        <input type="text" name="birth" placeholder="请输入生日">
+    </div>
+
+    <p><input type="submit" value="注册" id="btn"></p>
+
+</div>
+<script>
+    const {log}= console;
+/*
+    设置一个时间，如果设置的时间不等于输入的时间就是错误的时间
+*/
+    // console.log(new Date('2019-11-31'));   qq:false,email:false,mobile:false,data:false
+
+        class registe{
+            constructor(){
+                this.inps = contain.querySelectorAll('input')
+                this.btn= document.getElementById('btn')
+                // log(this.btn)
+                this.obj={};
+                this.init();
+                // log(this.obj)
+                // log(this.inps)
+            }
+            init(){
+                this.qq()
+                this.email()
+                this.mobile()
+                this.data()
+                this.evens()
+            }          
+            qq(){
+                let _this = this;
+                    this.inps[0].oninput = function(){
+                           let val = this.value;
+                           if(val===''){
+                            this.classList.add('ok')
+                                this.classList.remove('error')
+                                _this.obj.qq = true;
+                           }else if(/^[1-9]\d{4,10}$/.test(val)){
+                                this.classList.add('ok')
+                                this.classList.remove('error')
+                                _this.obj[this.name] = true;
+                           }else{
+                            this.classList.add('error')
+                            this.classList.remove('ok')
+                            _this.obj[this.name]=false;
+                           }
+                        //    log( _this.obj)
+
+                    }
+            }
+
+            email(){
+                let _this = this;
+                this.inps[1].oninput =function(){
+                    let val = this.value;
+                           if(val===''){
+                            this.classList.add('ok')
+                                this.classList.remove('error')
+                                _this.obj.email = true;
+                           }else if(/^[1-9a-zA-Z][\w-.^]{5,17}@[0-9A-Za-z]{2,8}\.c(om|n)$/.test(val)){
+                                this.classList.add('ok')
+                                this.classList.remove('error')
+                                _this.obj.email = true;
+                           }else{
+                            this.classList.add('error')
+                            this.classList.remove('ok')
+                            _this.obj.email = false;
+                           }
+                        //    log( _this.obj)
+                }
+
+            }
+
+            mobile(){
+                let _this = this;
+                this.inps[2].oninput =function(){
+                    let val = this.value;
+                           if(val===''){
+                            this.classList.add('ok')
+                                this.classList.remove('error')
+                                _this.obj.mobile = true;
+                           }else if( /^(13[0-9]|14[5-9]|15[0-3, 5-9]|16[2,5,6,7]|17[0-8]|18[0-9]|19[1,3,5,8,9])\d{8}$/.test(val)){
+                                this.classList.add('ok')
+                                this.classList.remove('error')
+                                _this.obj.mobile=true
+                           }else{
+                            this.classList.add('error')
+                            this.classList.remove('ok')
+                            _this.obj.mobile = false
+                           }
+                        //    log( _this.obj)
+                }
+            }
+            data(){//([1-9]|1[1-2])
+                let _this = this;
+                this.inps[3].oninput = function(){
+                    let val = this.value;
+                    // log(this.value.substr(0,4))
+                    if(val===''){
+                                this.classList.add('ok')
+                                this.classList.remove('error')
+                                _this.obj.data = true;
+                           }else if(/^[1-9]\d{3}-((1-([1-9]|[1-2][0-9]|3[0-1]))|(2-([1-9]|[1-2][0-9]))|(3-([1-9]|[1-2][0-9]|3[0-1]))|(4-([1-9]|[1-2][0-9]|3[0]))|(5-([1-9]|[1-2][0-9]|3[0-1]))|(6-([1-9]|[1-2][0-9]|3[0]))|(7-([1-9]|[1-2][0-9]|3[0-1]))|(8-([1-9]|[1-2][0-9]|3[0-1]))|(9-([1-9]|[1-2][0-9]|3[0]))|(10-([1-9]|[1-2][0-9]|3[0-1]))|(11-([1-9]|[1-2][0-9]|3[0]))|(12-([1-9]|[1-2][0-9]|3[0-1])))$/.test(val)){
+                            //    log(val.substr(7,1));
+                            if(new Date(val)-new Date()>0){
+                                this.classList.add('error')
+                                this.classList.remove('ok')
+                                _this.obj.data=false;
+                            }else if(val.substr(7,1)==='2'){
+                                    if(!_this.pr(val.substr(0,4))&&/-([1-9]|[1-2][0-8])\b$/g.test(val)){
+                                        this.classList.add('ok')
+                                        this.classList.remove('error')
+                                        _this.obj.data=true;
+                                    }else{
+                                        this.classList.add('error')
+                                        this.classList.remove('ok')
+                                        _this.obj.data=false;
+                                    }
+                               }else{
+                                this.classList.add('ok')
+                                this.classList.remove('error')
+                                _this.obj.data=true;
+                               }
+                            /* if(_this.pr(this.value.substr(0,4))){
+                                 //如果为true润年
+                                //    let num = 29;
+                                    // log(_this.pr(this.value.substr(0,4)))
+                                   if(this.value.substr(6,1)==='2'&&/-([1-9]|[1-2][0-9])\b/g.test(this.value)){
+                                    this.classList.add('ok')
+                                    this.classList.remove('error')
+                                   }else if(this.value.substr(6,1)!=='2'){
+                                    this.classList.add('ok')
+                                    this.classList.remove('error')
+                                   }else{
+                                    this.classList.add('error')
+                                    this.classList.remove('ok')
+                                   }
+                               
+                               }else if(!_this.pr(this.value.substr(0,4))){
+                                if(this.value.substr(6,1)==='2'&&/-([1-9]|[1-2][0-8])\b/g.test(this.value)){
+                                    this.classList.add('ok')
+                                    this.classList.remove('error')
+                                   }else if(this.value.substr(6,1)!=='2'){
+                                    this.classList.add('ok')
+                                    this.classList.remove('error')
+                                   }else{
+                                    this.classList.add('error')
+                                    this.classList.remove('ok')
+                                   }
+                               }   */  
+                              
+                           }else{
+                            this.classList.add('error')
+                            this.classList.remove('ok')
+                            _this.obj.data = false;
+                           }
+                }
+            }
+//|(2-([1-9]|[1-2][0-9]))
+            pr(year){
+                //true 为闰年 false 为平年
+                if(year%100===0){
+                    if(year%400===0){
+                        //闰年
+                            return true
+                    }else{
+                        // log('平年')
+                        return false
+                    }
+                }else{
+                    if(year%4===0){
+                        // log('闰年')
+                        return true
+                    }else{
+                        // log('平年')
+                        return false
+                    }
+                }
+            }
+
+            evens(){
+                log(this.obj)
+            //    log(this.obj.data);
+               for(let i in this.obj){
+                   log(this.obj[i])
+                   if(this.obj[i]!=true){
+                    this.btn.style.cursor='no-drop'
+                   }else{
+                    this.btn.style.cursor='drop'
+                   }
+                   
+               }
+               
+               
+
+           
+                
+          
+            }
+
+        }
+
+    let r = new registe();
+    // log(r.test('2019'))
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    /*
+       把下面str的name，age，say换成obj中的value值
+    */  
+    let obj = {
+        name:'小明',
+        age:18,
+        say:'好好学习，天天向上'
+    }  
+    let str = '我的名字叫{name},年龄是{age}岁,我想说:{say}';
+
+
+    let reg = new RegExp('{(name|age|say)}','g')
+    console.log(reg);
+
+   let s = str.replace(reg,($0)=>{
+    //    console.log($0)
+       if($0==='{name}'){
+            return obj.name;
+       }else if($0==='{age}'){
+           return obj.age;
+       }else{
+        return obj.say;
+       }
+    })
+    console.log(s)
+
+    /*
+        计算下面字符串中哪个字符出现的次数最多,它是谁，出现了多少次
+    */
+    
+    let str2 = 'hd82nxa89a3axdma2naejaaxaa8n2xdanja2cah2hnadhioamwajexnad8mdahiodn';
+            // /[]/
+    // let obj1={};
+    // let n = 0;
+    //    for(let i = 0;i<str2.length;i++){
+                
+    //    }
+
+    function maxF(s){
+        let obj = {};
+        let num = 0;
+        for(let i = 0;i<s.length;i++){
+               let reg = new RegExp(`${s[i]}`,'g')
+               let arr=s.match(reg);
+               obj[s[i]]=arr.length;    
+        }
+        return obj;
+    }
+
+  let o= maxF(str2)
+    console.log(o)
+    let v = 0;
+    let t;
+    for(let i in o){
+        if(o[i]>v){
+            v=o[i];
+            t=i;
+        }
+    }
+    console.log(`出现最多的字符为${t},它出现了${v}次`);
+</script>
+</body>
+</html>

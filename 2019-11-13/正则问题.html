@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            分组：正则中一般通过分组获取更加具体的值
+
+                    一般应用于replace  match
+
+            分组的组数：从左往右数
+            (()()(()(()())))  //有八个分组
+            当\d后面有量词的时候此时的\d代表最后一个字符
+        */
+    
+    let str = '2019-11-13';//将2019-11-13换成2019年11月13日
+ let newStr =str.replace(/(\d+)-(\d+)-(\d+)/,($0,$1,$2,$3)=>{
+            console.log($0,$1,$2,$3);//2019-11-13 2019 11 13
+            return $1+'年'+$2+'月'+$3+'日';
+    })
+    console.log(newStr)//2019年11月13日
+
+    /*
+        ?=  前瞻仰
+        ?<= 后瞻仰
+        ?!  负前瞻仰
+        ?<! 负后瞻仰  
+    */
+    let str2 = '中国人中国人德国人美国人越南人缅甸人中国人老挝人菲律宾人';
+    //后瞻仰  把中国后面的 人 替换成 军人
+     console.log( str2.replace(/(?<=中国)人/g,'军人'));//中国军人中国军人德国人美国人越南人缅甸人中国军人老挝人菲律宾人
+     //只匹配中国后面的 人
+     console.log(str2.match(/(?<=中国)人/g))//["人", "人", "人"]
+     //前瞻仰   将人前面的中国 替换成 china
+     console.log(str2.replace(/中国(?=人)/g,'china'));//china人china人德国人美国人越南人缅甸人china人老挝人菲律宾人
+     //把人前面的中国匹配出来
+     console.log(str2.match(/中国(?=人)/g));// ["中国", "中国", "中国"]
+
+     let str3 = 'link,dic,div,li,activ';
+     /*
+        不要activ
+     */
+     console.log(str3.match(/[ld]i[a-z]{0,}/g))//["link", "dic", "div", "li"]
+     //负后瞻仰  ?<!
+     console.log(str3.match(/(?<!avti)(c|v)/g))// ["c", "v"]
+
+
+
+
+    </script>
+</body>
+</html>

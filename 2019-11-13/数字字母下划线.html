@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            \w 代表数字字母下划线   \W 代表非数字字母下划线
+
+            常见的邮箱格式：
+                      n63_h1@163.com
+                      xxx_love@163.com
+                      xxx_32@126.com
+                      xx-x_32@139.com
+                     xxx_32@gmail.com
+                     xxx_32@hotmail.com
+                     xxx._32@hotmail.com
+                     xxx^._32@sina.com
+                     xxx._32@sina.cn
+
+            正则：/^[a-zA-Z][\w-.^]{5,17}@[0-9A-Za-z]{2,8}\.c(om|n)$/
+
+        */
+            // let yx = 'n63_h1@163.com';//true
+            // let yx = 'xx-x_32@139.com';//true
+            // let yx = 'xxx._32@hotmail.com';//true
+            // let yx = 'xxx^._32@sina.com';//true
+            // let yx = 'xxx._32@sina.cn';//true
+            let yx = 'xxx._32@sina.con';//false
+
+            console.log(/^[a-zA-Z][\w-.^]{5,17}@[0-9A-Za-z]{2,8}\.c(om|n)$/.test(yx))
+
+    /*
+    
+        点 .  除了\n任意的字符
+    */
+    let str = 'favunnhgrgaobv564+84bguiwHNS*&^@!\n';
+    console.log(str.match(/./g))// ["f", "a", "v", "u", "n", "n", "h", "g", "r", "g", "a", "o", "b", "v", "5", "6", "4", "+", "8", "4", "b", "g", "u", "i", "w", "H", "N", "S", "*", "&", "^", "@", "!"]
+
+    /*
+    修饰符  i (不区分大小写) m (实现多行匹配)  g(实现全局匹配)
+    
+     */
+
+     let str1 = `
+     我家门前有一棵
+     树一棵是枣树
+     另一颗还是枣树`
+
+    console.log( str1.match(/树$/g));//全局匹配只匹配到了最后一个树  ["树"]
+    console.log( str1.match(/树$/mg));//全局匹配只匹配到了最后一个树   ["树", "树"]
+
+    </script>
+</body>
+</html>
