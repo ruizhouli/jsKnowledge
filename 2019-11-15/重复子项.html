@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+  
+    /*
+        重复子项
+        \数字(子项的个数) \1 \2 \3 分别代表第一个子项   第二个子项  第二个子项
+    */
+
+    let str = 'abcabc';
+  console.log(str.match(/(a)b(c)\1/g)) //["abca"] 此时的\1就代表第一个子项 a
+  console.log(str.match(/\1\2a(b)(c)/g));//["abc", "abc"] 此时得不到所想要的bcabc  因为\1\2分别代表b c  但是他们写在了b c的前面所以匹配不到
+  console.log(str.match(/(b)(c)a\1\2/g))//["bcabc"] 只需要将\1\2放到两个分组的后面就能匹配得到
+
+    //验证一个url是否合法 
+    let st = 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=huahau&oq=return';
+    //通过写正则来检测一个url是否规范
+    /*
+    http[s]?=> 代表http或者https   :\/\/ =>://   www\.[a-z]{2,14}(\.[a-z]{2,3}){1,2}
+
+    \/[a-z]{1,10}\?
+
+    ie=utf-8& (([a-z]\w{0,10})=([\w=%-]+)&?)+
+    */
+    let st1 = 'https://www.baidu.com'
+    console.log(/http[s]?:\/\/www\.[a-z]{2,14}(\.[a-z]{2,3}){1,2}/.test(st1))//true
+    let st2 = '/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=huahau&oq=return'
+    console.log(/\/[a-z]{1,10}\?(([a-z]\w{0,10})=([\w\W]+)&?)+/.test(st2))//true
+    //如果都为true就将两个合在一起 就可以检测url
+    // /http[s]?:\/\/www\.[a-z]{2,14}(\.[a-z]{2,3}){1,2}\/[a-z]{1,10}\?(([a-z]\w{0,10})=([\w=-%]+)&?)+/
+    console.log(/http[s]?:\/\/www\.[a-z]{2,14}(\.[a-z]{2,3}){1,2}\/[a-z]{1,10}\?(([a-z]\w{0,10})=([\w\W]+)&?)+/.test(st))//true
+
+
+    //全局获取里面=两边的值 放到一个对象中
+    //使用正则匹配(([a-z]\w{0,10})=([\w\W]+)&?)+
+    let obj={}
+    //可以就看出=左边的值为([a-z]\w{0,10}) 右边为([\w\W]+)
+    st.replace(/([a-z]\w{0,10})=([\w=%-]{1,10})/g,($1,$2,$3)=>{
+            console.log($2,$3)
+            obj[$2]=$3;
+    })
+    console.log(obj)
+    </script>
+</body>
+</html>

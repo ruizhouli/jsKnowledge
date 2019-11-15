@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    密码：必须6-8位，字母+数字，可以有.，严格区分大小写
+        /^[A-Z][a-zA-Z0-9.]{5,7}$/
+
+    */
+    let st = 'Lrxc.35'
+     console.log( /^[A-Z][a-zA-Z0-9.]{5,7}$/.test(st))//true
+
+     /*
+            “身份证号码规则：
+                    前1、2位数字表示：所在省份的代码；
+                    第3、4位数字表示：所在城市的代码；
+                    第5、6位数字表示：所在区县的代码；
+                    第7-14位数字表示：出生年、月、日；
+                    第15、16位数字表示：所在地的派出所的代码；
+                    第17位数字表示性别：奇数表示男性，偶数表示女性；
+                    第18位数字是校检码。
+
+        正则：[1-8]\d{5} 前六位  (19[2-9]\d|20[01][0-9])(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01]) 第七到14位 \d{3}[0-9X]后四位
+     
+     */
+    //  let str='110101199003070716'//true
+    //  let str='11010119900307475X'//true
+    //  let str='140829199606128999'//true
+    //  console.log(/^[1-8]\d{5}(19[2-9]\d|20[01][0-9])(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])\d{3}[0-9X]/.test(str))
+    </script>
+</body>
+</html>

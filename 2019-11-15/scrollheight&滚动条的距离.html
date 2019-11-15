@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+  *{
+    padding:0;
+    margin: 0;
+}
+    #txt{
+            width:200px;
+            height:300px;
+            border:2px solid gray;
+    }
+    
+    </style>
+</head>
+<body style="height:3000px;width:3000px;">
+    <!-- <textarea  id="txt"></textarea> -->
+    <div id="txt">meijhtnvgwughui
+        rovhneuohvgnwhpmwwjgmrhmeh
+        wjgvwjhjnvgwughuirovhneuohvgnwhpm
+        wjwjgmrhmehwjgvwjhjnvgwughuirovh
+        neuohvgnwhpmwjwjgmrhmehwjgvwjhjnvgwughu
+        irovhneuohvgnwhpmwjwjgmrhmehwjgvwjh
+        jnvgwughuirovhneuohvgnwhpmwjwjgmrhmehwjgvwjhjnvgwugh
+        uirovhneuohvgnwhpmwjjgmrhmehwjgvwjhjnvgwughui
+        rovhneuohvgnwhpmwjwj
+        gmrhmehwjgvwjhjnvgwug
+        huirovhneuohvgnwhpmwjwjgmr
+        hmehwjgvwjhjnvgwughuirov
+        neuohvgnwhpmwjwjgmrhm
+        ehwjgvwjhjnvgwughuirovhneuohvgnwhpmwjwjgmrhmeh
+        wjgvwjhjnvgwughuirovhneuohvgnwhpmwjwjgmrhmehwj
+    </div>
+    <button id='btn'>获取高度</button>
+    <script>
+    //scrollHeight 
+        btn.onclick = function(){
+            // console.log(txt.offsetHeight);//36
+            // console.log(txt.clientWidth);//34
+            // console.log(txt.scrollHeight)//scrollWidth/scrollHeight被内容撑开的宽度和高度,不算边框的 
+            console.log(txt.offsetHeight);//304    盒子可视的高度(支持padding border)
+            console.log(txt.clientHeight);//300   盒子可视的高度(只支持padding)
+
+            console.log(txt.clientLeft);//    盒子的左边框
+            console.log(txt.scrollHeight)//scrollWidth/scrollHeight被内容撑开的宽度和高度,不算边框的 
+        }
+
+        document.onclick = function(){
+        console.log(document.documentElement.scrollTop);
+        console.log(document.documentElement.scrollLeft);
+    }   
+    </script>
+</body>
+</html>

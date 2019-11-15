@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            padding: 100px;
+        }
+
+        #a {
+            background: red;
+            position: relative;
+        }
+
+        #b {
+            background: green;
+            position: relative;
+
+            border: 30px solid #000;
+        }
+
+        #c {
+            background: pink;
+            position: relative;
+            border: 30px solid #000;
+        }
+
+        #d {
+            background: lightseagreen;
+            position: absolute;
+            top: 50px;
+            border: 30px solid #000;
+        }
+    </style>
+</head>
+
+<body id="bod">
+    <div id="a">
+        <div id="b">
+            <div id="c">
+                <div id="d">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        /*
+        在低版本IE下要触发haslayout属性，使用起来才不会出问题
+        */
+        //offParent
+
+        console.log(c.offsetParent) //divb
+        console.log(b.offsetParent) //diva
+        console.log(a.offsetParent) //body
+        console.log(bod.offsetParent) //null
+
+        /*
+            offsetLeft offsetTop 在实际的开发过程中应该要慎用  因为他们所得到的距离是与定位父级的距离在一个庞大的网站中 父级可能会很多 有时候还会添加定位 所以要慎用
+
+            只有绝对位置距离才是死的 只要位置不变 距离就不会变
+
+            思路:
+                求得绝对位置，就是把当前元素的所有祖先节点的距离计算一遍，求和即可
+            具体实施:
+                1.先定义一个元素（作为当前元素）
+                2.先求当前元素的距离（包含定位距离和边框距离）
+                3.把这次的定位父级变成下一次循环的当前   
+        */
+        class Tools {
+            static pos(ele) {
+                let c = ele.clientLeft;
+                let d = ele.clientTop;
+                let l = 0;
+                let t = 0;
+                while (ele) {
+                    l += ele.offsetLeft + ele.clientLeft;
+                    t += ele.offsetTop + ele.clientTop;
+                    ele = ele.offsetParent;
+                }
+                l = l - c;
+                t = t - d;
+                return {
+                    l,
+                    t,
+                }
+            }
+        }
+
+let d = document.getElementById('d');
+    console.log( Tools.pos(d));  // {l:368,t:318}
+    </script>
+</body>
+
+</html>
