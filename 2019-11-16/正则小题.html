@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      /*
+       把下面str的name，age，say换成obj中的value值
+    */  
+ /*   let obj = {
+        name:'小明',
+        age:18,
+        say:'好好学习，天天向上'
+    }  
+    let str = '我的名字叫${name},年龄是${age}岁,我想说:${say}';
+    // 正则匹配
+     let s = str.replace(/\${(\w+)}/g,(...arg)=>{
+        console.log(arg)
+        let [,key] = arg; 
+        return obj[key];
+        
+    });
+    console.log(s)*/
+    
+
+    /*
+        计算下面字符串中哪个字符出现的次数最多,它是谁，出现了多少次
+    */
+    
+    let str2 = 'hdd82nxa89a3axdma2naejaaxaa8n2xdanja2cah2hnadhioamwajexnad8mdahiodn';
+    //首先先声明一个对象  
+      let obj1 = {};
+      for(let i = 0;i<str2.length;i++){
+        //如果对象中包含了这个key值就continue
+            if(Object.keys(obj1).includes(str2[i])){
+                        continue
+            }
+            //否则的话 通过正则去匹配这个字符
+            let re = new RegExp(str2[i],'g');
+            //通过match方法返回一个数组 这个数组中存储的就是在这个字符串中出现的所有的本字符
+            let ar=str2.match(re);
+            //因为要求字符出现的次数所以就是数组的长度 将字符作为对象的键 将数组的长度作为对象的值 存入对象中
+            obj1[str2[i]] = ar.length;
+      }
+      
+      let t = -Infinity;
+      let a = '';
+      for(let i in obj1){
+            if(obj1[i]>t){
+                t = obj1[i];
+                a =i;
+            }
+      }
+      console.log(`${a}出现次数最多，出现了${t}次`)
+    </script>
+</body>
+</html>
