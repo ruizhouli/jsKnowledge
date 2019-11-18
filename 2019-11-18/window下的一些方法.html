@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    
+    #dd{
+        width:100px;
+        height:100px;
+        border: 10px solid #000;
+        background: steelblue;
+        overflow: auto;
+    }
+    body{
+        height:3000px;
+    }
+    
+    </style>
+</head>
+<body>
+    <div id="dd">
+        与window相关的宽高有一下几个：
+
+            window.innerWidth，通过字面意思我们知道这是一个内部的宽度
+            
+            window.innerHeight，内部的高度
+            
+            window.outWidth，外部的宽度
+            
+            window.outHeight，外部的高度
+        
+        document下有三类属性：
+
+            与client相关的宽高
+            
+            与offset相关的宽高
+            
+            与scroll相关的宽高
+        </div>
+    <script>
+    /*
+     复习：   offsetTop:此元素距离它最近定位元素的距离(顶部)
+             offsetLeft：此元素距离它最近定位元素的距离(左边)
+             offsetwidth:当前元素的宽度+它的padding+它的border
+            offsetHeight:当前元素的宽度+它的padding+它的border
+    
+           clientTop/clientLeft:此元素的border值
+           clientWidth/clientHeight:此元素可视部分的宽和高 (此元素的本身宽度+padding)
+
+            scrollTop/scrollLeft:滚动条距离顶端或者左端的距离
+            scrollWidth/scrollHeight:元素内容被撑开的宽度、高度
+
+    DOM:获取可视区的宽度和高度；
+            document.documentElement.clientWidth
+            document.documentElement.clientHeight 如果有滚动条会减去滚动条的宽度
+
+            element.getBoundingClientRect() 获取元素的绝对位置
+
+            document.documentElement.scrollTop  获取滚动条距离顶端的距离
+
+    BOM:
+            window.innerHeight/window.innerWidth,如果有滚动条，不会减去滚动条的宽度
+
+            window.pageXOffset/window.pageYOffset  滚动条的距离
+
+
+        
+    */
+    console.log(dd.offsetTop);//8
+    console.log(dd.offsetLeft);//8
+    console.log(dd.offsetWidth);//120
+    console.log(dd.offsetHeight);//120
+    console.log(dd.clientTop)//10
+    console.log(dd.clientLeft)//10
+    console.log(dd.clientWidth)//100
+    console.log(dd.clientHeight)//100
+    console.log(100-dd.clientWidth)//17
+    console.log(dd.scrollWidth)//171
+    console.log(dd.scrollHeight)//504
+    console.log(window.innerWidth-document.documentElement.clientWidth )//17
+
+    window.onscroll = function(){
+        console.log(window.pageYOffset)
+    }
+
+ 
+    </script>
+</body>
+</html>

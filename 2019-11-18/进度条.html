@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+}
+#box{
+    margin:50px 0 0 0;
+    width:1320px;
+    height:30px;
+    border:1px solid lightseagreen;
+}
+#box2{
+    height:30px;
+    width:0%;
+    background:gray;
+    transition: .2s;
+}
+</style>
+</head>
+<body id="body">
+    <div id="box">
+        <div id="box2"></div>
+    </div>
+
+<script>
+    const {log} = console;
+    let ary = [
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-159497091.jpg',
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-152360031.jpg',
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-153725613.jpg',
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-153779846.jpg',
+        'https://goss.veer.com/creative/vcg/veer/1600water/veer-157737217.jpg',
+        'https://goss.veer.com/creative/vcg/veer/1600water/veer-312399346.jpg',
+        'https://goss.veer.com/creative/vcg/veer/1600water/veer-302333447.jpg',
+        'https://goss.veer.com/creative/vcg/veer/1600water/veer-302767150.jpg',
+        'https://goss.veer.com/creative/vcg/veer/1600water/veer-302406075.jpg',
+        'https://goss.veer.com/creative/vcg/veer/1600water/veer-309855172.jpg',
+    ];
+    let num = 0;
+    // let t = document.getElementById('box')
+    // let ww = parseFloat(window.getComputedStyle(t).width);
+    // log(ww)
+    let t = 100/ary.length;
+   ary.forEach((item,i)=>{
+       let img = document.createElement('img');
+       img.src = item; 
+      img.onload=function(){
+            // (box2.style.width*1)+=220;
+        //     box2.style.width = 220*i+'px'
+        //     log(i)
+        //     log( box2.style.width)
+        //   log()  ;
+        box2.style.width = t*(i+1)+'%'
+            if(t*(i+1) === 100){
+                body.style.transition = '1s';
+                body.style.background = 'skyblue';
+            }
+            // box2.style.width=box2.style.width+'px';
+       }
+       img.onerror=function(){
+           img.onload();
+       }
+   })
+    
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    重写foreach 返回值为undefined   里面有一个回调函数((item,i,arr),that)   that用来改变this指向
+    */
+    
+    Array.prototype.myForEach=function(callback,that){
+        for(let i = 0;i<this.length;i++){
+            callback.call(that,this[i],i,this)
+        }
+            
+    }
+    let arr = [1,2,3,6,4];
+  arr.myForEach(function(item,i,all){
+      console.log(item,i,all,this)
+    },document)
+
+/*
+
+    重写map 返回值是一个新数组 并且新数组的长度与老数组的长度一致
+*/
+    Array.prototype.myMap=function(callback,that){
+        let ary = [];
+        for(let i = 0;i<this.length;i++){
+           ary.push( callback.call(that,this[i],i,this));
+        }
+        return ary;
+    }
+ console.log(arr.myMap(function(item,i,all){
+            return item**2
+    }))   
+    </script>
+</body>
+</html>
