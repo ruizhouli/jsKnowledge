@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function myreplace(str,re,rb){
+        let str2 = '';
+        let ary =re.exec(str);
+        let rep = '';//函数return的结果
+        let reAry = [];//每次返回要修改的字符数组
+        let noRep = [];//不替换的
+        let num = 0;
+        while(ary){
+            let {index} = ary;//解构匹配到的索引
+            reAry.push(rb(...ary,index,str));
+            noRep.push(str.substring(num,re.lastIndex-ary[0].length))
+            num = re.lastIndex;
+            ary = re.exec(str);
+        }
+        //最新的字符串
+        noRep.forEach((item,i)=>{
+            str2+=(item+reAry[i])
+        })
+                return str2
+}
+
+    let str1 = 'ADFGGGG';
+   console.log(myreplace(str1,/G/g,function($0,$1,$2){
+       console.log($0,$1,$2)
+       return 'A'
+   })) ;//ADFAAAA
+    
+    </script>
+</body>
+</html>
