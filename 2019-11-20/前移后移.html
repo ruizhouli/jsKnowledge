@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#dd{
+				width: 40px;
+				height: 40px;
+				/* border: 2px solid gray; */
+                background: skyblue;
+                position: absolute;
+                top: 0;
+                left: 0;
+                transition: .3s;
+			}
+			#tt{
+				width: 0;
+				height: 80px;
+				background: skyblue;
+			}
+		</style>
+	</head>
+
+	<body id="body">
+		<div id="dd">
+			<div id="tt">
+				
+			</div>
+		</div>
+        <script type="text/javascript">
+            //      let i=0
+			// document.onkeydown=function(ev){
+			// 		// if(ev.keyCode===13){
+			// 		// 	tt.style.width+=10%
+            //         //     }
+            //         if(ev.keyCode===13){
+            //                 tt.style.width=10*++i + '%';
+                           
+            //         }else if(ev.keyCode===65){
+            //             body.style.background= 'red'
+            //         }
+            //         // if(10*i===100){
+            //         //             body.style.background = 'red'
+            //         //  }
+
+            // }
+             let left = false;
+             let right =false;
+             let up = false;
+             let dw = false;
+    setInterval( function(){
+        if (left){
+            dd.style.left=dd.offsetLeft-15+'px';
+        }
+        else if (up) {
+            dd.style.top=dd.offsetTop-15+'px';
+        }
+        else if (right) {
+           
+            dd.style.left=dd.offsetLeft+15+'px';
+
+        }
+        else if (dw) {
+            dd.style.top=dd.offsetTop+15+'px';
+        }
+    },100)
+            document.onkeydown = function(ev){
+                // console.log(ev.keyCode)
+                switch(ev.keyCode){
+                    case 83:
+                    if(dd.offsetTop+40!==document.documentElement.clientHeight){
+                       dw=true
+                    }
+                        break;
+                    case 87:
+                    if(dd.offsetTop!==0){
+                       up = true
+                    }
+                        break;
+                    case 65:
+                    if(dd.offsetLeft!==0){
+                       left=true
+                    }
+                        break;
+                    case 68:
+                   
+                    right = true
+                        break;
+                }
+                //shift+z键左上方
+                if(ev.shiftKey&&ev.keyCode===90){
+                            dd.style.left=dd.offsetLeft-15+'px';
+                            dd.style.top=dd.offsetTop-15+'px';
+                }
+                //shift+x键右上方
+                if(ev.shiftKey&&ev.keyCode===88){
+                            dd.style.left=dd.offsetLeft+15+'px';
+                            dd.style.top=dd.offsetTop-15+'px';
+                }
+                 //shift+h键左下方
+                 if(ev.shiftKey&&ev.keyCode===72){
+                            dd.style.left=dd.offsetLeft-15+'px';
+                            dd.style.top=dd.offsetTop+15+'px';
+                }
+               //shift+j键右下方
+               if(ev.shiftKey&&ev.keyCode===74){
+                            dd.style.left=dd.offsetLeft+15+'px';
+                            dd.style.top=dd.offsetTop+15+'px';
+                }
+            }
+        document.onkeyup=function(ev){
+                console.log(ev.keyCode)
+                // console.log(ev.keyCode)
+                switch(ev.keyCode){
+                    case 83:
+                    if(dd.offsetTop+40!==document.documentElement.clientHeight){
+                       dw=false
+                    }
+                        break;
+                    case 87:
+                    if(dd.offsetTop!==0){
+                       up = false
+                    }
+                        break;
+                    case 65:
+                    if(dd.offsetLeft!==0){
+                       left=false
+                    }
+                        break;
+                    case 68:
+                    right = false
+                        break;
+                }
+            }
+            // console.log(document.documentElement.clientHeight)
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            height: 3000px;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background: palevioletred;
+            position: absolute;
+            top:0;
+            left: 0;
+        }
+    
+    </style>
+</head>
+<body>
+     <div id="box"></div>
+    <button id="btn">1</button>
+    <input type="text" id="txt">
+    <script>
+        let imgs = [
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-159497091.jpg',
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-152360031.jpg',
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-153725613.jpg',
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-153779846x.jpg'
+        ]
+        //onclick 点击+1
+       /* btn.onclick = function(){
+            this.innerText++;
+        }
+        //onmouseover 移入+1
+        btn.onmouseover = function(){
+            this.innerText++;
+        }
+        //onmouseout 移出-1
+        btn.onmouseout = function(){
+            this.innerText--;
+        }*/
+        //onload onerror
+      /*  imgs.forEach(item=>{
+            let img= document.createElement('img')
+           img.src = item;
+           img.onload = function(){
+            alert('图片加载成功')}
+            img.onerror = function(){
+                alert('图片加载失败')
+            }
+
+        })*/
+        // onchange    
+       /* txt.onchange = function(){
+            alert('输入框失焦弹出')
+        }*/
+
+     /*   window.onresize = function(){
+            let W=window.innerHeight;//加滚动条
+            let W1 = document.documentElement.clientHeight;//不加滚动条
+            console.log(`此时可视区的高度为${W}`)
+            console.log(`此时可视区的高度为${W1}`)
+        }*/
+        // window.onscroll = function(){
+        //     let H = document.documentElement.scrollTop;
+        //     console.log(`滚动条的高度为${H}`);
+        // }
+        console.log(txt.onblur)
+        txt.onblur = function(){
+            console.log('已失焦')
+        }
+        txt.onfocus = function(){
+            console.log('已聚焦')
+        }
+        function chan (cb){
+           let timer;
+            window.onkeydown = function(){
+                let time = +new Date;
+                timer = setInterval(() => {
+                    let now = new Date;
+                    if(now - time>1000){
+                            cb();
+                    }
+                });
+            }
+            btn.onkeyup =function(){
+                clearInterval(timer)
+            }
+        }
+        let num = 1
+        chan(function(){
+            num-=0.1;
+            box.style.opacity = num
+        })
+
+        box.onmousemove = function(ev){
+                this.style.left = ev.clientX-this.clientWidth/2+'px'
+                this.style.top = ev.pageY-this.clientHeight/2+'px'
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            padding: 100px;
+        }
+        #box{
+            background: palevioletred;
+        }
+        #box2{
+            background: green;
+        }
+        #btn{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="box2">
+           <button id="btn">按钮</button>
+        </div>
+    </div>
+    <script>
+    box.addEventListener('click',function(){
+        alert('我是box捕获')
+    },true);
+    box.addEventListener('click',function(){
+        alert('我是box冒泡')
+    },false);
+    box2.addEventListener('click',function(){
+        alert('我是box2捕获')
+    },true);
+    box2.addEventListener('click',function(){
+        alert('我是box2冒泡')
+    },false);
+    btn.addEventListener('click',function(){
+        alert('我是btn捕获')
+    },true);
+    btn.addEventListener('click',function(){
+        alert('我是btn冒泡')
+    },false);
+    </script>
+</body>
+</html>

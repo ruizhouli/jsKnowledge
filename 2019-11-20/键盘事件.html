@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt">
+    <ul id="ul">
+
+    </ul>
+    <script>
+    /*
+    
+            onkeydown 按键按下  onkeyup 按键抬起
+
+        特殊按键
+            ev.ctrlKey   布尔值  只要按着就为true
+            ev.shiftKey
+            ev.altKey
+
+        组合键默认是用不了的，后面的按键会把前面的按键覆盖
+    
+    */
+    // onkeydown=function(ev){
+    //     console.log(ev.keyCode)
+    // }
+    // onkeyup=function(ev){
+    //     console.log(ev.keyCode)
+    // }
+    txt.onkeyup = function(ev){
+        if(ev.ctrlkey&&ev.keyCode===13){
+            ul.innerHTML+=`<li>${this.value}</li>`
+        }
+    }
+    </script>
+</body>
+</html>
