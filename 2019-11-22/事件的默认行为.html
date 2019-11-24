@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #ul{
+            width: 50px;
+            background: lightpink;
+            position: absolute;
+            list-style: none;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        li{
+            color: antiquewhite;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            border-bottom: mediumslateblue dashed 1px;
+        }
+        #ul li:hover{
+         background: hotpink;
+          color:#fff;
+}
+    
+    </style>
+</head>
+<body style="height:3000px">
+    <!-- <a href="http://www.baidu.com" id="bd">去百度</a> -->
+    <ul id="ul">
+        <li>查看</li>
+        <li>刷新</li>
+        <li>粘贴</li>
+        <li>个性化</li>
+    </ul>
+    <script>
+    //  onkeydown = function(ev){
+    //      console.log(ev.keyCode)
+    //      if(ev.keyCode===32){
+    //         // ev.returnValue=false;
+    //         return false;
+    //      }
+    //  }
+
+     //  bd.addEventListener('click',function(ev){
+        //         ev.preventDefault();
+        //  })
+    
+   document.oncontextmenu = function(ev){
+       console.log(ev)
+        ul.style.top = ev.clientY+'px';
+        ul.style.left = ev.clientX+'px';
+        ul.style.display = 'block'
+      return false
+
+    }
+    document.onclick = function(){
+        ul.style.display = 'none'
+    }
+    ul.onclick = function(ev){
+        console.log(ev.target.textContent)
+        ul.style.display = 'none'
+    }
+
+    </script>
+</body>
+</html>

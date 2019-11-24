@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            overflow: hidden;
+        }
+    #ul{
+        list-style: none;
+        /* overflow: hidden; */
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: 1s;
+    }
+    ::-webkit-scrollbar{
+        display: none;
+    }
+    </style>
+</head>
+<body>
+    <ul id='ul'> 
+
+    </ul>
+    <script>
+        let ul = document.getElementById('ul')
+    let ary= ['red','skyblue','green','yellow'];
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+    let str = ary.map(item =>{
+        return `<li style = 'width:${w}px;height:${h}px;background:${item}'></li>`
+    }).join('')
+    // let t = Window.getComputedStyle(ul)
+    // console.log(t)
+    ul.innerHTML = str
+    let num = 0;
+    
+    //封装一个方法让两个浏览器兼容
+    function addWheelEvent(ele,callback){
+            if(ele.onmousewheel===null){//当等于null的时候说明ele下面有这个事件 谷歌
+                ele.onmousewheel = listen;
+            }else{
+                //火狐
+                ele.addEventListerner('DOMMouseScroll',listen)
+            }
+            function listen(ev){
+                //统一一下方向
+                let direction = false;//默认向下
+                if(ev.wheelDelta){
+                    direction = ev.wheelDelta>0?true:false;
+                }else{
+                    direction = ev.detail>0?false:true
+                }
+               
+               callback.call(this,direction);
+            }
+    }
+    // let num = 0;
+    addWheelEvent(ul,jl(fn,1000))
+    function fn(direction){
+       if(direction){
+           num++;
+           if(num>ary.length-1){
+               num = ary.length-1
+           }
+       }else{
+           num--;
+           if(num<0){
+              num=0
+           }
+       }
+       ul.style.top = -num*h+'px'
+}
+    //防抖
+    function fd(fn,time){
+        let timer;
+        return function(...arg){
+            if(timer){
+                clearTimeout(timer);
+            }
+            timer = setTimeout(()=>{
+                fn.call(this,...arg);
+            },time)
+        }
+    }
+    //节流
+    function jl(f,time){
+        let prevtime = 0;
+        return function(...arg){
+            let now = +new Date;
+            // console.log(now)
+            if(now - prevtime>time){
+                f.call(this,...arg)
+            }
+            prevtime = now;
+        }
+    }
+    </script>
+</body>
+</html>

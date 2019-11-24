@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 200px;
+            height: 200px;
+            background: skyblue;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        /*
+            拖拽是由三个事件合成：onmousedown  onmousemove   onmouseup
+        */
+        box.onmousedown = function(ev){
+            
+            let l = ev.offsetX
+            let t = ev.offsetY;
+            console.log(l,t)
+
+            document.onmousemove = function(ev){
+                box.style.left = ev.clientX-l + 'px';
+                box.style.top=ev.clientY-t + 'px';
+                console.log(box.style.left)
+                
+            
+            }
+
+            document.onmouseup = function(){
+                document.onmousemove = null;
+            }
+           
+
+        }
+    </script>
+</body>
+</html>

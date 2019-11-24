@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background: mediumslateblue;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+        <div id="box"></div>
+    <script>
+    /*
+        onscroll 滚动条改变的时候触发    
+         谷歌:onmousewheel 滚轮事件  ev.wheelDelta  检测滚轮的方向 大于0向上 小于0向下
+
+         火狐：DOMMouseScroll 这个事件只能用事件绑定的方式去写  ev.detail 去检测滚轮的方向 大于0向下 小于0向上
+    
+    */
+
+    //封装方法  因为滚轮事件两个浏览器不一样
+
+        function addWheelEvent(obj,callback){
+            if(obj.onmousewheel===null){//说明这个元素下面有这个事件
+                obj.onmousewheel=listen;
+            }else{
+                obj.addEventListener('DOMMouseScroll',listen)
+            }
+            function listen(ev){
+                let o = false;//默认方向向下  true代表向上
+                if(ev.wheelDelta){
+                    o = ev.wheelDelta<0?false:true;
+                }else{
+                    o = ev.datail<0?true:false;
+                }
+               callback.call(this,o)
+            }
+        }
+    
+    addWheelEvent(box,function(o){
+        console.log(1)
+        let {width,height} = getComputedStyle(this);
+        console.log(width,height)
+        if(o){
+            this.style.width = parseFloat(width)+15+'px';
+            this.style.height = parseFloat(height)+15+'px';
+        }else{
+            this.style.width = parseFloat(width)-15+'px';
+            this.style.height = parseFloat(height)-15+'px';
+        }
+    })
+    </script>
+</body>
+</html>
