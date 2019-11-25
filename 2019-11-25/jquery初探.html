@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="ul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        const {log:l}=console;
+    ;(function(global,factor){
+        factor(global)
+    })(this,function(global,noglobal){
+            //noglobal为undefined
+        function myQuery(selector){
+            return new fn.init(selector);
+        }
+    let fn=myQuery.prototype ={
+            constructior:myQuery,
+            isObject(obj){
+                return obj!=null&&typeof obj==='object'
+            },
+            css(...arg){
+                let len = arg.length;
+                //不带单位的
+                let ry = ['background','color','opacity','position','display'];
+                //获取元素节点
+                let ary = Object.values(this);
+                if(len===1){
+                    //如果len是1的时候 要么是获取要么就是批量设置
+                    if(typeof arg[0]==='string'){
+                        return getComputedStyle(this[0])[arg[0]];
+                    }else if(this.isObject(arg[0])){//说明外面传的对象
+                        let ary2 = Object.keys(arg[0]);//获取对象的每一个key值
+                        ary.forEach((item,i)=>{
+                            ary2.forEach(ele=>{
+                                if(typeof arg[0][ele]==='number'){
+                                    //如果对象中的键值是一个数字时 再看他的key值是否与ry数组中的元素匹配 如果匹配说明不用加单位 否则需要加单位
+                                    if(new RegExp(ry.join('|')).test(ele)){
+                                        item.style[ele]=arg[0][ele];
+                                    }else{
+                                        item.style[ele]=arg[0][ele]+'px';
+                                    }
+                                }else{
+                                    //如果对象中的键值不是一个数字 那么肯定不用加单位
+                                    item.style[ele]=arg[0][ele];
+                                }
+                            })
+                        })
+
+                    }
+                }else if(len ===2){
+                    //如果len是2的时候 直接设置即可
+                    ary.forEach(item=>{
+                        if(typeof arg[1] === 'number'){
+                            if(new RegExp(ry.join('|')).test(arg[0])){
+                                item.style[arg[0]] = arg[1];
+                            }else{
+                                item.style[arg[0]] = arg[1] + 'px';
+                            }
+                        }else{
+                            item.style[arg[0]] = arg[1];
+                        }
+                    
+                    })
+                }
+
+            }
+        }
+    fn.init = function(selector){
+        let arr = document.querySelectorAll('selector');
+        arr.forEach((item,i)=>this[i]=item)
+    }
+    fn.init.prototype = fn;
+    window.$ = myQuery; 
+
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <button>发送</button>
+    <ul></ul>
+    <div class="box"></div>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+    console.log($)
+    $('button').click(function(){
+       let va = $(':text').val();
+       $('ul').html('<li>'+va+'</li>'+$('ul').html());
+       $(':text').val('')
+    });
+    console.log($('.box'))
+    $('.box').css({
+        'width':200,
+        'height':200,
+        'background':'red',
+    })
+    </script>
+</body>
+
+</html>

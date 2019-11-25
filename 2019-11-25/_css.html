@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <button>切换</button>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+      const {log:l} = console;
+    let box= document.getElementById('box')
+    $('#box').css({
+        width:200,
+        height:200,
+        background:'red',
+        display:'block'
+    })
+    // l(getComputedStyle(box).display)
+    $('button').click(function(){
+        if(getComputedStyle(box).display==='block'){
+                $('#box').hide();
+        }else{
+            $('#box').show();
+        }
+       
+    })
+    </script>
+</body>
+</html>
