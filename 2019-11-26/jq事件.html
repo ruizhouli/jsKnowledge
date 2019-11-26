@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        width: 200px;
+        height: 200px;
+        background: skyblue;
+    }
+    
+    </style>
+</head>
+<body>
+    <div id="box">
+        <button>按钮</button>
+    </div>
+    <ul id="ul">
+        <!-- <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li> -->
+    </ul>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+    //hove 中的两个函数为 mouseenter  mouseleave
+        // $('#box').hover(function(){
+        //         console.log(0)
+        // },function(){
+        //     console.log(1)
+        // })
+  //事件监听
+    //  $('ul').delegate('li','click',function(){
+    //      console.log($(this).text());
+    //  })
+    //  //on
+    //  $('#box').on('mouseenter',function(){
+    //      console.log(1)
+    //  })
+    //  $('#box').on('mouseleave',function(){
+    //      console.log(2)
+    //  })
+    $('ul').on('click','li',function(){
+         console.log($(this).text());
+     })
+
+      /*
+        问题：
+            触发一次hover，就绑定一次click，触发的越多，绑定的就越多，当触发一次click就会执行多次的click事件
+
+        解决:
+            绑一次解绑一次，保持始终一次click
+            off() 解绑
+
+    */
+    $('#box').hover(function(){
+        $(this).css({background:'skyblue'});
+        //解绑上一次，再添加一次新的click
+        $('button').off().click(function(){
+            console.log('发起了一次请求');
+        });
+    },function(){
+        $(this).css({background:'red'});
+    })
+
+
+    let ary = ['fev','fvru','veby'];
+    ary.forEach((item,i)=>{
+        let $li = $('<li>'+(i+1)+'</li>');
+        $li.on('click',{data:item},function(ev){
+            console.log(ev.data.data); 
+        })
+        $('#ul').append($li)
+    })
+    </script>
+</body>
+</html>
