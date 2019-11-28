@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>按钮</button>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        //定时器,所有的事件是一个异步代码并且在异步队列中他属于宏任务
+        //在执行代码的时候先执行主线程中的代码 当异步队列中的代码条件成立时，才会将异步代码压入主线程去执行
+        let a = 10;
+
+        setTimeout(() => {
+            a = 20;
+            console.log(a)//20
+        }, 0);
+        $('button').click(function(){
+            console.log(11111)
+        })
+        console.log(a);//10 先输出25行  
+
+        let p = new Promise((reslove,reject)=>{
+                a = 80;
+                reslove(a);
+        })
+        p.then((a)=>{
+            console.log(a)
+        })
+    </script>
+</body>
+
+</html>

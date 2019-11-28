@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+    
+    //promise
+        let a = 1;
+    let p = new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            a = 20;
+            resolve(a)
+        },3000)
+    })
+    //then中有两个函数 第一个函数为成功后的函数(resolve) 第二个函数是失败后的函数(reject)   
+     //then 后面可以有一个finally函数这个函数是不管是成功还是失败都会进入这个函数
+      p.then(function(a){
+        console.log(a); 
+        console.log(1000);
+    },function(){
+        console.log('失败'); 
+    }).finally(function(){
+        console.log('都来')
+    });
+
+    //resolve也可以传一个对象
+    let p = new Promise((resolve,reject)=>{
+        setTimeout(() => {
+            resolve({
+                data:'{"name":"珠峰"}',
+                json:function (){
+                    return JSON.parse(this.data);
+                }
+            })
+        }, 2000);
+    });
+
+    p.then(function(d){
+       return d.json();
+    })
+    .then(function(d){
+        //{"name":"珠峰"} -> json是字符串，把json转成对象使用JSON.parse  
+        console.log(d.name);
+    });
+    </script>
+</body>
+</html>
