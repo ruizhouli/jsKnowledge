@@ -1,0 +1,194 @@
+body,
+html {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+#main {
+    width: 100%;
+    height: 100%;
+    /* overflow:auto; */
+}
+
+#header {
+    height: 80px;
+    background: #00AFFE;
+    border-bottom: 1px solid #d1d9db;
+    display: flex;
+    line-height: 80px;
+    justify-content: space-between;
+    display: none;
+}
+
+#header .filePan {
+    display: flex;
+    height: 75px;
+    width: 175px;
+    line-height: 75px;
+    vertical-align: middle;
+    justify-content: space-around;
+}
+
+#header .filePan img {
+    width: 80px;
+    height: 75px;
+}
+
+#header .filePan p {
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: large;
+}
+
+#header .login {
+    width: 175px;
+    height: 105px;
+    line-height: 75px;
+    vertical-align: middle;
+}
+
+#header .login img {
+    width: 60px;
+    height: 55px;
+    margin-top: 12px;
+}
+
+#nav {
+    height: 63px;
+    border-bottom: 1px solid #d1d9db;
+    background: #ecf1f7;
+    display: flex;
+}
+
+#nav .navleft {
+    display: flex;
+    height: 63px;
+}
+
+#nav .navleft li {
+    width: 108px;
+    height: 38px;
+    background: #fff;
+    border: 1px solid #d1d9db;
+    border-radius: 4px;
+    margin-left: 10px;
+    margin-top: 10px;
+    position: relative;
+    /* display: flex; */
+    /* justify-content: space-between; */
+    line-height: 38px;
+    text-align: center;
+
+}
+
+#nav .navleft .fold {
+    width: 125px;
+    height: 38px;
+}
+
+#nav .navleft li img {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    left: 15px;
+}
+
+#nav .navleft li p {
+    position: absolute;
+    /* width:20px;
+    height:20px; */
+    top: 2px;
+    left: 56px;
+    color: #000
+}
+
+#bod {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    /* border-right: 1px solid #d1d9db; */
+    display: flex;
+    
+}
+
+#bod .l {
+    width: 20%;
+    height: 100%;
+    background: #ecf1f7;
+    border-right: 1px solid #d1d9db;
+    /* overflow: auto; */
+}
+
+#bod .folders {
+    width: 80%;
+    height: 100%;
+    background: #fff;
+    /* overflow: scroll; */
+}
+#bod .folders #wenjian{
+    width: 100%;
+    background: #fff;
+    /* overflow: scroll; */
+    overflow:-Scroll;
+    overflow-x:hidden
+
+}
+#bod .folders #wenjian .file-item {
+    height: 180px;
+    width: 180px;
+    border: 1px solid #ebeff0;
+    box-sizing: border-box;
+    margin-top: 30px;
+    margin-left: 30px;
+    /* margin-bottom: 20px; */
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+    position: relative;
+}
+
+/* #bod .folders #box1 .file-item:hover {
+    border-color: skyblue;
+    background: skyblue;
+
+} */
+
+#bod .folders #wenjian .file-item img {
+    width: 100px;
+    vertical-align: -34px;
+    position: absolute;
+    top: 25px;
+    left: 40px;
+}
+
+#bod .folders #wenjian .file-item .folder-name {
+    position: absolute;
+    top: 125px;
+    left: 57px;
+}
+
+#bod .folders #wenjian .file-item .editor {
+    position: absolute;
+    top: 125px;
+    left: 31px;
+    text-align: center;
+    display: none;
+    width: 117px;
+    height: 30px;
+    border: none;
+    border:1px solid gray;
+    border-radius: 10px;
+    line-height: 30px;
+}
+#bod .folders #box{
+    width:0;
+    height:0;
+    background:#fff;
+    border:1px dashed green;
+    position: absolute;
+    left:0;
+    top:0;
+    display: none;
+}

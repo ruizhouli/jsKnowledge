@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script src="./jquery.min.js"></script>
+    <script>
+       box.onmousedown = function(ev){
+        //    console.log(this.offsetLeft)
+        //    console.log(this.offsetTop)
+        //    let disX = ev.pageX - this.offsetLeft;
+        //    let disY = ev.pageY -  this.offsetTop;
+        //    console.log(disY,disX);
+        // console.log(disY)
+        let disX = ev.offsetX;
+        let disY = ev.offsetY;
+        console.log(disX,disY);
+                document.onmousemove = function(ev){
+                        // console.log(ev.offsetX)
+                        // console.log(ev.pageY - disY)
+                        console.log(ev.offsetX,ev.offsetY)
+                        box.style.top = ev.pageY - disY + 'px';
+                        box.style.left = ev.pageX - disX + 'px';
+                }
+                document.onmouseup = function(ev){
+                    document.onmousemove =null;
+                    document.onmouseup=null;
+                    return false
+
+
+                }
+            // ev.cancelBubble = true;
+       }
+       document.onmousedown = function(ev){
+                        // console.log(ev.offsetX)
+                        // console.log(ev.pageY - disY)
+                        console.log(ev.offsetX ===ev.clientX)
+                        // box.style.top = ev.pageY - disY + 'px';
+                        // box.style.left = ev.pageX - disX + 'px';
+                }
+    </script>
+</body>
+</html>

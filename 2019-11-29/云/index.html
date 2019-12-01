@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/reset.min.css">
+    <link rel="stylesheet" href="./css/1.css">
+</head>
+
+<body>
+    <div id="main">
+        <div id="header">
+
+            <div class="filePan">
+                <img src="./img/文档云盘.png" alt="">
+                <!-- <p>宙云</p> -->
+            </div>
+
+            <div class="login">
+                <!-- <p>搜索:</p>
+                 <input type="text" id="txt"> -->
+                <a href="javascript:;">
+                    <img src="./img/登录 (1).png" alt="">
+                </a>
+            </div>
+        </div>
+        <div id="nav">
+            <ul class="navleft">
+                <li>
+                    <a href="javascript:;">
+
+                        <img src="./img/移动到.png" alt="">
+                        <p>移动</p>
+
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+
+                        <img src="./img/分享.png" alt="">
+                        <p>分享</p>
+
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+
+                        <img src="./img/删 除.png" alt="">
+                        <p>删除</p>
+
+                    </a>
+                </li>
+
+
+
+                <li id="folder" class="fold">
+                    <a href="javascript:;">
+                        <img src="./img/新建文件夹.png" alt="">
+                        <p>新建文件夹</p>
+                    </a>
+                </li>
+
+
+
+                <li>
+                    <a href="javascript:;">
+                        <img src="./img/下载.png" alt="">
+                        <p>下载</p>
+                    </a>
+                </li>
+
+
+
+
+                <li>
+                    <a href="javascript:;">
+                        <img src="./img/重命名.png" alt="">
+                        <p>重命名</p>
+                    </a>
+                </li>
+
+
+
+                <li>
+                    <a href="javascript:;">
+                        <img src="./img/更新.png" alt="">
+                        <p>更新</p>
+                    </a>
+                </li>
+
+
+            </ul>
+        </div>
+        <div id="bod">
+            
+            <div class="l">
+
+            </div>
+            <div class="folders">
+                    <div id="box"></div>
+                    <div id="wenjian">
+                         <!-- <div class="file-item active">
+                    <img src="./img/文件夹.png" alt="">
+                    <span class="folder-name">新建文件夹</span>
+                    <input type="text" value="新建文件夹" placeholder="请设置文件夹名" class="editor">
+                    <i class="checked"></i>
+                </div>  -->
+                    </div>
+               
+            </div>
+        </div>
+    </div>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/crash.js"></script>
+    <script src="./js/拖框.js"></script>
+    <script>
+        const {log:l} = console;
+        
+    let arr= [
+      /*  {
+            id:1,
+            title:'新建文件夹'
+    },{
+        id:2,
+        title:'新建文件夹(2)'
+    },
+    {
+            id:3,
+            title:'新建文件夹(3)'
+    },{
+        id:4,
+        title:'新建文件夹(4)'
+    },{
+            id:5,
+            title:'新建文件夹(5)'
+    },{
+        id:6,
+        title:'新建文件夹(6)'
+    }*/
+    
+    
+    ]
+    let $bod = $(bod);
+    let $folders = $bod.find('.folders')
+        l($(folder));
+    /*
+    <div class="file-item active">
+                    <img src="./img/文件夹.png" alt="">
+                    <span class="folder-name">新建文件夹</span>
+                    <input type="text" value="新建文件夹" placeholder="请设置文件夹名" class="editor">
+                    <i class="checked"></i>
+                </div> 
+       */
+       function render(ary){
+        $folders.find(wenjian).html('');
+            ary.forEach(item => {
+                let $div =$(`<div class="file-item active">
+                    <img src="./img/文件夹.png" alt="">
+                    <span class="folder-name">${item.title}</span>
+                    <input type="text" value="新建文件夹" placeholder="请设置文件夹名" class="editor">
+                    <i class="checked"></i>
+                </div> `) 
+                $div.find('input').css('display','none');
+                $folders.find(wenjian).append($div);
+            });
+       }
+    // render(arr)
+
+     $(folder).click(function(){
+           let $div = $(`<div class="file-item active">
+                    <img src="./img/文件夹.png" alt="">
+                    <input type="text" value="新建文件夹" placeholder="请设置文件夹名" class="editor">
+                    <i class="checked"></i>
+                </div>`)
+                // $div.find('span').css('display','none');
+            let $input=$div.find(':text')
+                $input.css('display','block');
+            $folders.find(wenjian).append($div);
+            $input.select();
+            $input.blur(function(){
+                let newVal = $input.val();
+                let num = 1;
+                let bool = arr.map(item=>item.title).includes(newVal);
+                while(bool){
+                    let s = newVal.replace(/\(\d+\)$/,'')+`(${num++})`;
+                    bool =  arr.map(item=>item.title).includes(s);
+                    newVal = s
+;                }
+            arr.push({
+                id:+new Date,
+                title:newVal,
+            })
+            // l(arr)
+            render(arr);
+            }) 
+           
+       })
+   l(arr)
+   let b = document.getElementsByClassName('active');
+
+//    l(f);
+    // let b = Array.from(f);
+    // console.log(b)
+    for(let i = 0;i<b.length;i++){
+                console.log(b[i])
+        }
+    // let t = document.getElementById('box')
+    let d = new Drag('box','wenjian');
+    d.init();
+
+
+    </script>
+</body>
+
+</html>

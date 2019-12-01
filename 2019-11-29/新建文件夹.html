@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/1.css">
+</head>
+<body>
+    <button id="btn">新建文件夹</button>
+    <div id="box">
+         <!-- <div class="folder">
+            <img src="./img/folder-b.png">
+            <input type="text"/>
+            <p>新建文件夹</p>
+        </div> -->
+    </div>
+    <script src="./jquery.min.js"></script>
+    <script>
+        let ary = [ 
+            {
+            title:'新建文件夹',
+            id:0
+            },
+            {
+            title:'新建文件夹(1)',
+            id:1
+            }
+            ]
+        //渲染函数
+        function rander(arr){
+            $(box).html('');
+            $.each(arr,(i,item)=>{
+                //创建的每一个文件夹
+                let $folder = $(`
+                <div class="folder">
+            <img src="./img/folder-b.png">
+            <input type="text"/>
+            <p>${item.title}</p>
+        </div>
+                
+                `);
+                $folder.find('input').hide();
+                $('#box').append($folder)
+            })
+        }
+    rander(ary)
+    // select 全选 + 聚焦  表单的
+
+        /*
+        点击创建文件夹   先在box中插件一个folder的元素，然后当folder中的input失焦之后再添加数据
+
+         通过最新的数据进行渲染所以在渲染之前需要将box清空
+        */
+
+        $(btn).click(function(){
+            let $folder = $(`
+            <div class="folder">
+                <img src="./img/folder-b.png">
+                <input type="text" placeholder="请设置文件名"  value="新建文件夹"/>
+            </div>
+            `)
+            $(box).append($folder);
+
+            let $txt = $folder.find('input');
+            $txt.select();//选中聚焦
+            $txt.blur(function(){
+                    //当失焦的时候把新的数据push扫数组中，并通过新的数据去渲染页面
+
+                    //首先获取input框中的value值
+
+                    let $val = $txt.val();
+                    //然后看看是否重名
+                    let bool = ary.map(item=>item.title).includes($val);
+                    let nval = '';
+                    let num = 1;
+                    nval = $val;
+                    while(bool){
+                        let s = $val.replace(/\(\d\)$/,'')+'('+ num++ +')';
+                        bool = ary.map(item=>item.title).includes(s);
+                        nval = s;
+                    }
+                    ary.push({
+                        id: +new Date,
+                        title:nval
+                    })
+                    rander(ary);
+            })
+        })
+    </script>
+</body>
+</html>
