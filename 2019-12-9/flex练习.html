@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #dd{
+        display:flex;
+        /* justify-content: flex-start; */
+        /* justify-content: flex-end; */
+        /* justify-content: center; */
+        /* justify-content: space-between; */
+        /* justify-content: space-around; */
+        justify-content: space-evenly;
+        /* align-items: flex-start; */
+        align-items:stretch;
+        /* align-items: flex-end; */
+        /* align-items: center; */
+        /* align-items: baseline; */
+        /* align-content: flex-start; */
+        /* align-content: flex-end; */
+        /* align-content:center; */
+        /* align-content:space-around; */
+        /* align-content:space-between; */
+        /* align-content:stretch; */
+
+
+        flex-wrap: wrap;
+        width: 300px;
+        height:300px;
+        border:3px solid gray;
+    }
+    #dd span:nth-child(odd){
+        width:30px;
+        /* height:30px; */
+        background: skyblue;
+    }
+    #dd span:nth-child(even){
+        width:30px;
+        height:30px;
+        background: springgreen;
+    }
+
+    
+    </style>
+</head>
+<body>
+    <div id="dd">
+        <span>01
+        </span>
+        <span>02</span>
+        <span>03</span>
+        <span>04</span>
+        <span>05</span>
+        <span>06</span>
+        <!-- <span>7</span>
+        <span>8</span>
+        <span>9</span>
+        <span>10</span>
+        <span>11</span> -->
+    </div>
+</body>
+</html>

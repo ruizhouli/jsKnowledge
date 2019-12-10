@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    /*文字阴影
+    第一个数字代表 水平方向 x
+    第二个数字代表 垂直方向 y
+    第三个数字模糊半径 
+    颜色
+*/
+@font-face{
+    font-family: kong;
+    src: url('./STCAIYUN.TTF');
+}
+    #box{
+        width: 200px;
+        height: 200px;
+        background: skyblue;
+         
+        /* border-radius: 10px;   四个角*/
+        /* border-radius: 10px 5px;  左上角右下角  右上角左下角*/
+        /* border-radius: 10px 5px 20px; 左上角 右上角左下角 右下角 */
+        /* border-radius: 10px 50px 9px 50px; */
+
+        border-top-left-radius: 60px  80px;
+        border-top-right-radius: 50px  100px;
+        border-bottom-left-radius: 50px  100px;
+        border-bottom-right-radius: 50px  100px;
+        text-shadow: 2px -2px 2px black;
+        line-height: 200px;
+        text-align: center;
+        font-family: kong;
+        font-size: 200%;
+    }
+    
+    </style>
+</head>
+<body>
+    <div id="box">李瑞州</div>
+</body>
+</html>
