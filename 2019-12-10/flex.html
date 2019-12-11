@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #000;
+            display: flex;
+            flex-flow: row wrap;
+            /* flex-wrap: wrap; */
+            /* flex-direction: column; */
+            /* justify-content:space-evenly; */
+            /* justify-content:center;  主轴居中 */
+            /* align-items: center; 侧轴居中 */
+            /* align-items:flex-end; */
+            /* align-content:flex-end; */
+        }
+
+        span {
+            width: 50px;
+            height: 30px;
+            background: orange;
+        }
+
+        #box div {
+            width: 50px;
+            height: 30px;
+            background: indianred;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <div>4</div>
+        <span>5</span>
+        <span>6</span>
+        <div>7</div>
+        <span>8</span>
+        <div>9</div>
+    </div>
+</body>
+<script>
+ /* flex:给父级添加display:flex后他的子集将变成弹性盒子,flex-direction默认为row(这是将横轴设为主轴) flex-direction:column(将纵轴设为主轴)  在主轴上的排列方式用justify-content来定义 
+
+ justify-content:flex-start(从起点开始排列)|flex-end(从终点开始排列)|center(中间对齐)|space-between(让除了第一个和最一个Flex项目的两者间间距相同（两端对齐）)|spaace-around(让每个Flex项目具有相同的空间。)|space-evenly(让所有的子元素平均分配)
+ 
+ flex-wrap:表示是否折行 有三个值(nowrap:表示不折行 wrap:表示折行 wrap-reverse：它让Flex项目在容器中多行排列，只是方向是反的)
+
+ align-items：控制交叉轴方向的排列 控制单行 下面有stretch:让所有的Flex项目高度和Flex容器高度一样|flex-start|flex-end|center|baseline
+
+ align-content:控制多行 也只能控制多行 在使用它之前 需要使用flex-wrap:wrap 他下面有：stretch |flex-start|flex-end|center|space-between|space-around
+ 
+ */
+</script>
+
+</html>
