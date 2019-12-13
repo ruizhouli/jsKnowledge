@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+            function Rem(){
+                var desDrawWidth = 750,
+                     winW = window.screen.width,
+                     radio = winW/desDrawWidth,
+                     html = document.documentElement;
+                     html.style.fontSize = radio*100+'px';
+                     console.log( winW )
+            }
+            Rem()
+            window.addEventListener('resize',Rem)
+        </script>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            #box{
+                width: 3.75rem;
+                height: 100vh;
+                background: slateblue;
+                float: left;
+            }
+            #box1{
+                width: 3.75rem;
+                height: 100vh;
+                background: red;
+                float:right;
+            }
+            #box #bb{
+                width: 1rem;
+                height: 1rem;
+                background: teal;
+            }
+            #box .oo{
+                width: 1rem;
+                height: 1rem;
+                background:yellowgreen;
+            }
+            #box1 #qq{
+                width: 1rem;
+                height: 1rem;
+                background: teal;
+            }
+            #box1 .oo{
+                width: 1rem;
+                height: 1rem;
+                background:yellowgreen;
+            }
+        </style>
+</head>
+
+
+<body>
+    <div id="warp">
+        <div id="box">
+            <div id="bb"></div>
+            <div class="oo"></div>
+        </div>
+        <div id="box1">
+            <div id="qq"></div>
+            <div class="oo"></div>
+        </div>
+    </div>
+
+</body>
+</html>

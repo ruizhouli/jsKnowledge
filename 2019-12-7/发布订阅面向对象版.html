@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象版的发布订阅</title>
+    <style>
+        #box{
+            width:100px;
+            height: 100px;
+            background: red;
+        }
+        #box1{
+            width:100px;
+            height: 100px;
+            background: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <div id="box1"></div>
+    <script>
+        class releaseSub{
+            constructor(){
+                // this.box = document.querySelector(t)
+                this.obj={};
+            }
+            //订阅
+            addEvent(event,fun){
+                this.obj[event]=this.obj[event]||[];
+                this.obj[event].push(fun);
+            }
+            //发布
+            publish(ggg,event){
+                if(this.obj[event]){
+                    this.obj[event].forEach(item => {
+                        item.call(ggg);
+                        
+                    });
+                }else{
+                    return null
+                }
+            }
+            //解绑
+            remove(event,fun){
+                try{
+                    if(this.obj[event]){
+                    this.obj[event].forEach((item,i)=>{
+                        if(item===fun){
+                            this.obj[event].splice(i,1);
+                            throw Error();
+                        }
+                    })
+                }
+                }catch(e){
+                    return
+                }
+               
+            }
+
+        }
+    let t = new releaseSub();
+     t.addEvent('click',function(){
+            console.log(111)
+            console.log(this)
+     })
+     t.addEvent('click',function(){
+            console.log(111222)
+            console.log(this)
+     })
+     t.addEvent('click',function(){
+            console.log(111333)
+            console.log(this)
+     })
+     t.addEvent('click',fun)
+     function fun(){
+            console.log(1114444)
+            console.log(this)
+     }
+    document.onclick=function(ev){
+        if(ev.target.tagName==='DIV'){
+            t.publish(box,'click')
+            t.remove('click',fun)
+            t.publish(box1,'click')
+        }
+    }
+    </script>
+</body>
+</html>

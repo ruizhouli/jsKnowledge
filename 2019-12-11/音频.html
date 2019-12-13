@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+            function Rem(){
+                let DrawWidth = 750,
+                    screnWidth = window.screen.width,
+                    ratio = screnWidth/DrawWidth,
+                    html = document.documentElement;
+                    html.style.fontSize = ratio*100 + 'px'
+
+            }
+            Rem();
+            window.addEventListener('resize',Rem)
+    
+    </script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #bo{
+            border:none;
+            border:1px solid gray;
+        }
+       #box{
+           width:0.1rem;
+           height:1rem;
+           background: skyblue;
+           position: relative;
+           left:60px ;
+       }
+       #box1{
+           width: 0.1rem;
+           height: 0.1rem;
+           background: #000;
+           position: absolute;
+           top: 0;
+       }
+    </style>
+</head>
+<body>
+    <audio src="./庄心妍 - 可惜不是你.mp3" id="au" loop></audio>
+    <button id="bo">播放</button>
+    <button id="zt">暂停播放</button>
+    <button id="">控制音量</button>
+    <div id="box">
+        <div id="box1"></div>
+    </div>
+    <script>
+        bo.onclick=function(){
+            //paused会返回一个布尔值来说明是否是暂停播放
+            console.log(au.paused)
+            if(au.paused){
+                au.play();
+            }else{
+                au.pause()
+            }
+            
+        }
+        zt.onclick=function(){
+            au.pause()
+        }
+     box1.onmousedown=function(ev){
+
+        //  let disX = ev.clientX-this.offsetLeft;
+         let disY = ev.clientY-this.offsetTop;
+         document.onmousemove = function(ev){
+             console.log(ev.clientY-disY)
+             let t = ev.clientY-disY;
+             if(t<0){
+                t=0;
+             }else if(t>=box.offsetHeight-box1.offsetHeight){ 
+                t=box.offsetHeight-box1.offsetHeight
+             }
+             let scal = 1-t/(box.offsetHeight-box1.offsetHeight)
+              box1.style.top=t+'px';
+             au.volume=scal;
+         }
+         document.onmouseup = function(){
+            document.onmousemove=null;
+            document.onmouseup=null;
+         }
+        //  console.log(disX)
+     }
+    </script>
+</body>
+</html>

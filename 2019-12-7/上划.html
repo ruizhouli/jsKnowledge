@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        ////DOM的事件绑定在某些浏览器模拟器上面是没有效果的，但是在真机上是OK的
+        //一般开发的时候，使用DOM2的方式去绑定，每个浏览器都吃
+        let num = 0;
+        let eve = new Event('top');
+        document.addEventListener('top', function () {
+            console.log(num++)
+
+        })
+        document.addEventListener('top', function () {
+            console.log(1111)
+
+        })
+
+        let startX = 0,
+            startY = 0;
+        let moveX = 0,
+            moveY = 0;
+            document.ontouchstart=function(ev){
+                startX = ev.targetTouches[0].pageX;
+                startY = ev.targetTouches[0].pageY;
+            }
+            document.ontouchmove=function(ev){
+                moveX = ev.targetTouches[0].pageX;
+                moveY = ev.targetTouches[0].pageY;
+            }
+            document.ontouchend=function(ev){
+                let endX = ev.changedTouches[0].pageX;
+                let endY = ev.changedTouches[0].pageY;
+                if(startX===endX&&startY===endY){
+                    console.log('点击')
+                }
+                //上划
+                if(endY-startY<0){
+                    document.dispatchEvent(eve)
+                    console.log('上划')
+                }
+                //右划
+                if(endX-startX>0){
+                    console.log('优化')
+                }
+            }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active{
+            background: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <button class="active">111</button>
+    <button>222</button>
+    <button>3333</button>
+    <script>
+      /*
+        changedTouches
+        targetTouches
+        touches
+    */
+     let bts = document.querySelectorAll('button')
+     console.log(bts)
+     let prev=0;
+     let disX=0,disY=0;
+     bts.forEach((item,i)=>{
+         item.ontouchstart=function(ev){
+                console.log(ev)
+                disX=ev.changedTouches[0].clientX;
+                disY=ev.changedTouches[0].clientY;
+         }
+         item.ontouchend=function(ev){
+            let endx = ev.changedTouches[0].clientX;
+            let endy = ev.changedTouches[0].clientY;
+            if(Math.abs(endx - disX) > 10 || Math.abs(endy - disY) > 10){
+                return
+            }
+            bts[prev].className=''
+             this.className='active'
+             prev=i;
+         }
+     })
+    </script>
+</body>
+</html>

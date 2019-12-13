@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #dd{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="dd"></div>
+    <script>
+    
+     //首先订阅
+      function addEvent(ele,event,fn){
+        ele.obj=ele.obj||{};
+        ele.obj[event] = ele.obj[event]||[];
+        ele.obj[event].push(fn)
+        return ele.obj
+      }
+    console.log(addEvent(dd,'click',function(){
+          console.log(1)
+      })) 
+      addEvent(dd,'mousedown',function(){
+          console.log(2)
+      }) 
+      addEvent(dd,'click',function(){
+          console.log(3)
+      })
+      addEvent(dd,'kakaka',function(){
+          console.log('kakaka')
+      })
+      addEvent(dd,'click',ff)
+      function ff(){
+          console.log(11)
+          remove(dd,'click',ff)
+      }
+      //然后发布 发布的时候首先看看元素 下面有没有obj并且obj下面有没有该事件如果有一个就return
+      function pubulish(ele,event){
+            if(ele.obj && ele.obj[event]){
+                ele.obj[event].forEach(item => {
+                    item.call(ele);
+                });
+            }else{
+                return
+            }
+      }
+    //   pubulish(dd,'click')
+
+      //解绑某个事件函数
+      function remove(ele,event,fn){
+        if(ele.obj && ele.obj[event]){
+            //   for(let i=0;i<ele.obj[event].length;i++){
+            //       if(ele.obj[event][i]===fn){
+            //         ele.obj[event].splice(i,1);
+            //       }
+            //   }
+        try{
+            ele.obj[event].forEach((item,i)=>{
+                    if(item===fn){
+                        ele.obj[event].splice(i,1)
+                        throw Error();
+                    }
+            })
+            
+        }catch(e){
+
+        }
+           
+      }else{
+                return
+     }
+     }
+document.onclick=function(ev){
+        if(ev.target.tagName==='DIV'){
+            pubulish(dd,'click');
+            pubulish(dd,'kakaka');
+        }
+}
+document.onmousemove=function(ev){
+        if(ev.target.tagName==='DIV'){
+            // pubulish(dd,'click');
+            pubulish(dd,'mousedown');
+        }
+}
+    </script>
+</body>
+</html>

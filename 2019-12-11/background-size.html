@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+    
+         function Rem(){
+             let planDrawWidth = 750,//设计图的宽度
+                 winW = window.screen.width,//适配的屏幕的宽度
+                 redio = winW/planDrawWidth;
+                 html = document.documentElement;
+                 html.style.fontSize = redio *100 + 'px'
+         }
+         Rem();
+         window.addEventListener('resize',Rem)
+    </script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+
+        }
+      ul{
+          display: flex;
+          list-style: none;
+      }
+      li{
+          width: 0.4rem;
+          height: 0.4rem;
+          background: url('./nav.png') no-repeat; 
+          background-size: 0.4rem auto;
+      }
+      ul li:nth-child(1){
+          background-position: 0 0;
+      }
+      ul li:nth-child(2){
+          background-position: 0 -0.4rem;
+      }
+      ul li:nth-child(3){
+          background-position: 0 -0.8rem;
+      }
+      ul li:nth-child(4){
+          background-position: 0 -1.2rem;
+      }
+      ul li:nth-child(5){
+          background-position: 0 -1.6rem;
+      }
+
+    </style>
+</head>
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+</html>

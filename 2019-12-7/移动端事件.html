@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background: skyblue;
+
+            margin-top: 300px;
+        }
+    </style>
+</head>
+<body style="height: 3000px;">
+    <div id="box">
+
+    </div>
+    <script>
+    
+    /*以下三个事件是一套事件：
+        ontouchstart 手指按下
+        ontouchmove 手指滑动
+        ontouchend  手指抬起
+
+         比鼠标事件更加便捷，大大 提升用户体验
+
+         在某个元素上按下之后，在屏幕的任意位置move,end都能触发
+         
+          */
+          box.ontouchstart=function(ev){
+              console.log('start')
+              console.log(ev)
+          }
+          box.ontouchmove=function(ev){
+              console.log(ev.changedTouches[0].pageX)
+              console.log(ev.changedTouches[0].clientX)
+              console.log(ev.changedTouches[0].pageY)
+              console.log(ev.changedTouches[0].clientY)
+              console.log('move')
+              console.log(ev)
+          }
+          box.ontouchend=function(){
+              console.log('end')
+          }
+        
+    </script>
+</body>
+</html>

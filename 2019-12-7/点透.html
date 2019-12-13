@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #dd{
+            width:100px;
+            height: 100px;
+            background: skyblue;
+            opacity: 0.6;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: 2s;
+        }
+    
+    </style>
+</head>
+<body>
+<a href="http://www.baidu.com" id="aa">进百度</a>
+<!-- <div id="div">进入百度</div> -->
+<div id="dd"></div>
+<script>
+    //300ms问题
+   /*  移动端的点透问题(移动端的300ms问题)
+       因为手机浏览器认为用户在300毫秒之内，如果在某个坐标点连续触发了2次判定为双击，浏览器就会在某个坐标点上监听，这个时候如果上层元素消失或者偏移正好下层元素是一个焦点元素(a,input...),这个时候就会触发焦点行为 */
+    //第一种解决方案 浏览器会在300ms内默认点击，如果在某个坐标点连续触发了2次判定为双击， 我们可以假设他在300ms外再触发 缺点是：有延迟用户体验不好
+  /*   dd.ontouchstart=function(){
+        setTimeout(() => {
+            dd.style.display='none'
+        }, 301);
+    } */
+
+    //第二种解决方案：可以在他的下面放一个不是焦点元素即可
+   /*  dd.ontouchstart=function(){
+            dd.style.display='none'
+    } 
+    div.ontouchstart=function(){
+        window.location.href='http://www.baidu.com';//采用bom的方法也可进入网站
+    } */
+    //第三种解决方案：直接在document身上阻止默认行为，然后在焦点元素身上添加事件，阻止冒泡 
+    dd.ontouchstart=function(ev){
+        this.style.display='none';
+        // ev.cancelBubble=true;
+        return false
+    }
+    // aa.ontouchstart=function(){
+    //     // return false
+    //     // ev.cancelBubble=true;
+    // }
+</script>
+</body>
+</html>
