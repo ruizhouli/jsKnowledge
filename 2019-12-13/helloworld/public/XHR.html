@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        注册用户名：<input id="user" type="text" placeholder="用户名以字母开头中间可以为数字字母-6-7位"><span id="span"></span></br>
+        注册密码：<input type="password" id="pw">
+        <button id="btn">提交</button>
+    <script>
+        //现实开发中前端首先要验证用户所输入的字符串是否符合规则如果不符合规则就就拦截不用去请求服务器减少服务器的压力当否和规则是再去请求服务器
+        
+        let reg = /^[A-Za-z][\w-]{5,7}$/
+        user.onblur = function(){
+            let vul=user.value.trim();
+             if(vul&&reg.test(vul)){
+                let xhr = new XMLHttpRequest();//创建一个电话
+                console.log(xhr);
+               xhr.open('get','./get?user='+user.value);//打开拨号面拨号
+               xhr.send()//点绿色按钮拨通
+               xhr.onload=function(){//连接中1
+                let d = JSON.parse(xhr.responseText)
+                console.log(d)
+                   if(d.code===0){
+                        user.style.border = '1px solid red'
+                   }
+                   if(d.code===1){
+                    user.style.border = '1px solid green'
+                   }
+        }
+             }else{
+                span.innerHTML = '请检查格式问题'
+             }
+        }
+        
+    </script>
+</body>
+</html>
