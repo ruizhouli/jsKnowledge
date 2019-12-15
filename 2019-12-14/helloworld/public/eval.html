@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt"/>
+    <button id="btn">变</button>
+    <script>
+        btn.onclick = function(){
+            let val = txt.value;
+            if(/href|src|style|location/.test(val)){
+                alert('哈哈哈,想搞事情？')
+            }else{
+                console.log(eval(`${txt.value}`))
+            }
+        }
+        let val = '1';
+        let val2 = '+';
+        let val3 = '2';
+        console.log(new Function('','return'+'{name:"李瑞州"}')())
+    </script>
+</body>
+</html>
