@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+        注册的用户名:<input id="user" type="text"/><span id="s"></span> </br>
+        注册的密码:<input type="password" id="pw"/>
+        <button id="btn">提交</button>
+
+    <ul id="ul">
+
+    </ul>
+    <script>
+    
+    /* 
+    
+        let pro = new promise((resolve,reject)=>{
+
+        })
+        pro.then((d)=>{
+            console.log(d)//成功的函数
+        },(d)=>{
+            console.log(d)//失败的函数
+        })
+     */
+     user.oblur = function(){
+        ajax('/get?user='+this.value)
+        .then(d=>{
+            console.log(d);
+        });
+     }
+     function ajax(url,opt){//使用promise就不需要成功函数和失败函数，promise参数里有
+      return new Promise((resolve,reject=>{
+        var myopt = opt || {};
+        //创建一个默认的参数
+        let defaultObj={
+                method:'get',//默认的请求方式为get;
+                body:'',//默认的请求体
+                headers:{},//默认的请求头部
+                dataType:'json',//默认的数据类型
+                timeout:10000,//默认超时时间为10s
+                ontimeout:function(){},//监听超时后所执行的函数
+                async:true,//默认为异步方式
+        }
+        for(let arr in myopt){
+            if(myopt.hasOwnProperty(arr)){
+                    defaultObj[arr]=myopt[arr];
+            }
+        }
+        myopt=defaultObj;
+        var len = arguments.length;//如果为2的话说明没有传配置项，如果是3的话就是有配置项
+        var xhr = new XMLHttpRequest;
+        if(myopt.async===true){//为true说明是异步操作 才能够设置超时
+         xhr.timeout=myopt.timeout;//设置超时的时间
+         xhr.ontimeout = myopt.ontimeout;//监听如果超时了所要执行的函数
+        }
+        function ready(){//因为好几处都需要使用 onreadystatechange去监听 所以在这里进行封装
+        //在这个大的方法中可以去设置同步或者异步 在这里只有异步才可以使用onreadystatechange监听所以需要分同步和异步两种情况
+        if(myopt.async===true){//当为true的时候代表的是异步状态
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState===4){//4代表的是服务器已经接受请求并作出了响应 所以当他等于4的时候可以肯定服务器已经返回了数据表示成功了
+                    succOrError();
+
+                }
+            }
+
+        }else{//当为false的时候就代表是同步了
+            succOrError();
+        }
+
+        }
+        function succOrError(){//表示成功或者失败的时候所要执行的函数
+            if(/(20[0-7]|(30[14]))/.test(xhr.status)){
+                    //当http状态码为200-207，301或者304就代表成功就执行成功了的函数
+                    //当数据类型为json的时候
+                    if(myopt.dataType==='json'){
+                        resolve(eval('('+xhr.responseText+')'));
+                        //当数据类型为XML
+                    }else if(myopt.dataType==='xml'){
+                        resolve(xhr.responseXML);
+            }
+
+            }else{
+                //错误的时候就执行错误函数 返回错误码
+                reject(xhr.status);
+            }
+        }
+        if(len===2){//如果参数的长度为2，说明没有传入opt直接走默认 请求方式为get
+           ready();//多监听一次
+           xhr.open('get',url,true);
+           xhr.send();
+        }else if(len===3){//如果参数的个数为3的时候说明有配置项，就走配置项
+       // 可以分为get,post
+            if(/^get$/i.test(myopt.method)){
+                ready();
+                url = myopt.body?url+'?'+myopt.body:(url.includes("?")?url:url+"?");
+                xhr.open('get',url+"&myruizh="+Date.now(),myopt.async)
+                xhr.send();
+            }else if(/^post$/i.test(myopt.method)){
+                ready();
+
+                xhr.open('post',url,myopt.async)
+                for(let attr in myopt.headers){
+                    if(myopt.headers.hasOwnProperty(attr)){
+                        xhr.setRequestHeader(attr,myopt.headers[attr])
+                    }
+                }
+                xhr.send(myopt.body)
+            }
+        }
+          }))
+
+     }
+
+    </script>
+</body>
+</html>
