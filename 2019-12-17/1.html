@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+          #box div{
+              width:1366px ;
+              height:657px;
+              overflow: hidden;
+          }
+        #box div:nth-child(1){
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div ></div>
+        <div></div>
+        <div ></div>
+        <div ></div>
+    </div>
+    <script>
+        // document.onclick = function(){
+        //     localStorage.setItem('user','李瑞州');
+        // }
+        window.localStorage.setItem('user','李瑞州');
+        // console.log(localStorage.getItem('user'))
+        // localStorage.removeItem('user')
+        // sessionStorage.setItem('age',18)
+        // window.onstorage = function(){
+        //     console.log('触发')
+        // }
+       document.onwheel =function(ev){
+           console.log(ev)
+       }
+       console.log(document.documentElement.clientHeight,document.documentElement.clientWidth)
+    </script>
+</body>
+</html>

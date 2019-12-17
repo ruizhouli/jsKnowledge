@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* onstorage事件
+    
+         兄弟页面才能触发：同一个浏览器同一个域名，不同的tab
+
+         cookie 前端用基本是为了缓存，前端用是为了下次操作的时候操作时候的记录发送给后端
+    
+    */    
+    let local = window.localStorage;
+    local.user='李瑞州';
+    document.onclick = function(){
+        localStorage.setItem('sex','男')
+    }
+        
+    </script>
+</body>
+</html>
