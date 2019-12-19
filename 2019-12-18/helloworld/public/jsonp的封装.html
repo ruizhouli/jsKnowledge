@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    
+    
+    function jsonp(data,cb='callback'){//形参中data也是一个对象，其形式和opt一样，如果传入了就按传入的走如果没有传入按照默认的走
+         let opt = {
+             url:'',
+             data:{},
+             success:function(){}
+         }
+
+         Object.assign(opt,data);
+           
+            let options = '';
+            let ary = [];
+            for(let arr in opt.data){
+                ary.push(arr+'='+opt.data[arr]);
+            }
+            options = ary.join('&');
+            let os = document.createElement('script');
+            let fnName = 'jQuery_'+ Date.now();
+            window[fnName] = function(d){
+                    opt.success(d)
+            }
+             os.src = opt.url+'?'+options+'&'+cb+'='+fnName;
+             document.getElementsByTagName('head')[0].append(os);
+             os.remove()
+        }
+    
+    
+
+        let opt = {
+            name:'huahua',
+            age:15,
+        }
+
+        let hh = {
+            age:9999,
+            sex:'女'
+        }
+        //opt里面有的后面的没有会保留，opt里面有的，后面也有，后面会把前面的覆盖，opt里面没有的，后面有会往opt里面添加        
+        Object.assign(opt,hh)
+        console.log(opt,hh);
+    </script>
+   
+</body>
+</html>

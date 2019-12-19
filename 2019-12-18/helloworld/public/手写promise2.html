@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       function MyPromise(executor){
+            let that = this;
+            that.value;//成功的值
+            that.reason;//失败的值
+            that.status = 'pending'//初始状态
+
+            //成功和失败的事件池 
+
+            that.fulfilledCb=[];
+            that.rejectedCb=[];
+            function fulfilled(value){
+                if(that.status === 'pending'){
+                    console.log(11111111111)
+                    that.status='fulfilled'
+                    // that.fulfilledCb.forEach(item=>{
+                    //     console.log(item)
+                    //     item();
+                    // })
+                    that.value = value;
+                    console.log( that.fulfilledCb)
+                    that.fulfilledCb.forEach(item=>{
+                        console.log(item)
+                        item();
+                    })
+                    // console.log(that.value)
+                }
+               
+            }
+
+            function rejected(reason){
+               
+                if(that.status === 'pending'){
+                that.status='rejected'
+                that.reason = reason
+                that.rejectedCb.forEach(item=>{
+                    item();
+                })
+            }
+            }
+            // executor(fulfilled,rejected)
+
+               try {
+                    executor(fulfilled,rejected);
+                } catch (error) {
+                    rejected(error);
+                }
+       } 
+        MyPromise.prototype.then=function(res,rej){
+            let that = this;
+            return new MyPromise((resolve1,reject1)=>{
+                 //通过状态来控制同步异步
+    //同步状态下
+                //当成功的时候就调用res
+                if(that.status === 'fulfilled'){
+                 try{
+                    let x= res(that.value)
+                       resolve1(x)
+                 }catch(error){
+                    res(that.value)
+                              }                     
+                }
+                if(that.status === 'rejected'){
+                    try{
+                        let x= rej(that.reason)
+                       reject1(x)
+                    }catch(error){
+                        rej(that.reason)
+                    }
+                     
+            
+                }
+            })
+   
+            
+    //异步状态下
+    console.log(that.status)
+               if(that.status === 'pending'){
+                that.fulfilledCb.push(function(){
+                    try{
+                    let x= res(that.value)
+                       resolve1(x)
+                 }catch(error){
+                    res(that.value)
+                 }
+                })
+                that.rejectedCb.push(function(){
+                    try{
+                        let x= rej(that.reason)
+                       reject1(x)
+                    }catch(error){
+                        rej(that.reason)
+                    }
+                })
+              
+               }
+        }
+       new MyPromise(function(resolve,reject){
+          setTimeout(()=>{
+               resolve(2222222)
+           },3000)
+               
+       }).then((d)=>{
+            console.log(d)
+       })
+    </script>
+</body>
+</html>

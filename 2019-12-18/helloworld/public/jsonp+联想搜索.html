@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head id="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #ul{
+        list-style: none;
+    }
+    
+    </style>
+</head>
+<body>
+
+    <input type="text" id="inp">
+    <ul id="ul"></ul>
+    <script>
+        
+       function fn1(a){
+           console.log(a)
+           a.g.forEach(item=>{
+               let li = document.createElement('li')
+               li.innerText=item.q;
+               ul.append(li);
+           })
+       }   
+        
+    ul.onclick = function(ev){
+        if(ev.target.tagName==='LI'){
+                window.open(`https://www.baidu.com/s?ie=utf-8&f=3&rsv_bp=1&rsv_idx=1&tn=baidu&wd=${ev.target.innerText}`,'_blank');
+        }
+    }
+    inp.onkeyup = function(){
+        ul.innerText='';
+        let val = inp.value;
+        let o = document.createElement('script')
+        o.src = `https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=1461,21082,30210,30328,30284,26350&wd=${val}&cb=fn1`
+        head.append(o)
+        o.remove()
+    }
+    </script>
+</body>
+</html>
