@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      /*   function* fn(){
+            let t=yield 'huahua';
+            console.log(t)
+          }
+            let g = fn()  //g为遍历器对象 下面有next接口
+
+          let f = g.next();
+          console.log(f.value)//huahua
+          g.next(555) //会返回555 */
+
+          function* fn(){
+              console.log('请求之前')
+
+              let res = yield request('/sleep?user=123');
+              console.log(res);
+              console.log('请求最后')
+          }
+          let t = fn();
+          document.onclick = function(){
+              f.next()
+          }
+          function request(url){
+              let xhr = new XMLHttpRequest;
+              xhr.open('get',url);
+              xhr.send();
+              xhr.onload=function(){
+                    t.next(xhr.responseText)
+              }
+          }
+    </script>
+</body>
+</html>
