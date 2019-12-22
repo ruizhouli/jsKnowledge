@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let obj={};
+    let url = 'user=李瑞州&pass=123'
+        // str.replace(/(\w+)=([^&]+)(&|$)/g,($0,$1,$2)=>{
+        //         console.log($0,$1,$2)
+        //         obj[$1]=$2
+        // })
+        // console.log(obj)
+
+
+        // let params = new URL(url).searchParams
+        // console.log(params)
+        // let p = params.entries()
+        // let o = {}
+        // for (let obj of p) {
+        //     o[obj[0]] = obj[1]
+        //     console.log(obj);
+
+        // }
+        // console.log(o)
+
+
+//         let url = "https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=62095104_19"
+
+// let params = new URL(url).searchParams
+// let p = params.entries() 
+// let o = {}
+// for (let obj of p) {
+//     // o[obj[0]] = obj[1]
+//     console.log(obj)
+//     // console.log(obj);
+
+// }
+// console.log(p)
+
+// let p=Object.fromEntries(new URLSearchParams(url))
+
+// console.log(p)
+
+function queryString(url){
+    url.replace(/(\w+)=([^&]+)(&|$)/g,($0,$1,$2,$3)=>{
+            console.log($1,$2)
+    })
+}
+let s = "user='李瑞州'&password=123";
+queryString(s)
+        </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt"/>
+    <input type="password" id="pw"/>
+    <button id="sub">注册</button>
+    <script>
+        sub.onclick = function(){
+            let val = txt.value;
+            let passw = pw.value;
+           fetch('/post',{
+               method:'POST',
+               body:''+new URLSearchParams({
+                   user:val,
+                   password:passw,
+               }),
+               headers:{
+                   'content-type':'application/x-www-form-urlencoded',
+               }
+           }).then(d=>d.json()).then(d=>{
+            if(d.code===0){
+                    alert(d.msg)
+                }else if(d.code===1){
+                    alert(d.msg)
+                }else if(d.code===2){
+                    alert(d.msg)
+                }
+           })
+        }
+        // let o = ''+new URLSearchParams({
+        //            user:'txt.value',
+        //            password:'pw.value',
+        //        });
+        //        console.log(o)
+    </script>
+</body>
+</html>
