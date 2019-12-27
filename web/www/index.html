@@ -1,0 +1,208 @@
+﻿<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="/public/css/weibo.css" rel="stylesheet" type="text/css" />
+    <style>
+       #lay{
+           width: 200px;
+           height:50px;
+           border: solid 1px gray;
+           position: absolute;
+           top:-52px;
+           left:650px;
+           background-color: aqua;
+           /* display: none; */
+       }
+    </style>
+</head>
+<script src="./axios.min.js"></script>
+<script src="./tween.js"></script>
+<body>
+    <div id="lay"></div>
+    <div class="nArea">
+        <!--留言-->
+        <div class="takeComment">
+            <textarea name="textarea" class="takeTextField" id="text"></textarea>
+            <div class="takeSbmComment">
+                <input type="button" id="submit" class="inputs" value="" />
+                <span>(可按 Enter 回复)</span>
+            </div>
+        </div>
+        <!--已留-->
+        <div class="commentOn">
+            <div class="messList" id="div1" style="height:502px">
+                <!-- <div class="reply">
+                <p class="replyContent">卫士，新款卫士将推出总共14种车身式样。其中， XS旅行款车型售价为32295英镑(约33.6万元)。</p>
+                <p class="operation">
+                    <span class="replyTime">2018-09-08 16:37:60</span>
+                    <span class="handle">
+                        <a href="javascript:;" class="top">0</a>
+                        <a href="javascript:;" class="down_icon">0</a>
+                        <a href="javascript:;" class="cut">删除</a>
+                    </span>
+                </p>
+            </div> -->
+            </div>
+            <div class="page" id="page">
+                <!-- <a href="#" class="active">1</a>
+                <a href="#">2</a> -->
+                <!-- <a href="#">3</a> -->
+                <!-- <a href="#">4</a> -->
+            </div>
+        </div>
+    </div>
+    <script>
+      let pageNum = 1;
+       //获取指定页的数据
+    function getData(num=1){
+            axios.get(`/api/weibo?act=get&page=${num}`).then(d=>{
+                console.log(d)
+                render(d.data)
+            })
+            creatpages();
+     }
+     getData(pageNum)
+      //渲染页面
+      function render(data){
+        div1.innerHTML='';
+        console.log(data)
+        if(data.code!==-1){
+            data.forEach(item => {
+                 let {id,content,time,like=0,dislike=0}=item;
+                 let date = new Date(time);
+                 let year = date.getFullYear();
+                 let month = date.getMonth();
+                 let dat = date.getDate();
+                 let hour = date.getHours();
+                 let mint = date.getMinutes();
+                 let seconds = date.getSeconds();
+
+                 div1.innerHTML+=`<div class="reply">
+                        <p class="replyContent">${content}</p>
+                        <p class="operation">
+                    <span class="replyTime">${toDoub(year)}-${toDoub(month)}-${toDoub(dat)} ${toDoub(hour)}:${toDoub(mint)}:${toDoub(seconds)}</span>
+                    <span class="handle" data-id=${id}>
+                        <a href="javascript:;" class="top">${like}</a>
+                        <a href="javascript:;" class="down_icon">${dislike}</a>
+                        <a href="javascript:;" class="cut">删除</a>
+                    </span>
+                </p>
+            </div>`
+            });
+        }else{
+            lay.innerText='没有数据了'
+            move({
+                el:lay,
+                attr:{
+                    top:'0px',
+                }, //一个样式的运动属性
+                time:5000, //默认为500毫秒
+                cb:function(){
+                    move({
+                        el:lay,
+                        attr:{
+                            top:'-52px',
+                        },
+                        time:5000,
+                        fx:'elasticOut'
+                    })
+                },
+                fx:'elasticOut'
+            })
+        }
+            
+      }
+        //创建页码
+      function creatpages(){
+          axios.get("api//weibo?act=get_page_count").then(d=>{
+              console.log(d)
+              let temp='';
+              for(let i = 0;i<d.data.count;i++){
+                    // let a = document.createElement('a');
+                    // a.href='javascript:void(0);'
+                    // a.innerText=i+1;
+                    // page.append(a);
+                    temp += `<a href="javascript:void(0);" class="${i===(pageNum-1)?'active':''}">${(i+1)}</a>`;
+              }
+              page.innerHTML=temp;
+          })
+       
+      }
+
+      //添加数据
+    submit.onclick = function(){
+            let val = text.value;
+            axios.get(`/api/weibo?act=add&content=${val}`).then(d=>{
+                console.log(d)
+                if(d.data.code===0){
+                    getData(1)
+                }
+            })
+            text.value='';
+      }
+   
+     //点击页码 事件委托
+     page.onclick=function(ev){
+            if(ev.target.tagName==='A'){
+                // console.log(ev.target.innerText)
+             pageNum = Number(ev.target.innerText);
+             getData(pageNum)
+
+            }
+      }
+
+     //赞 踩 删除 事件委托
+     div1.onclick=function(ev){
+          console.log(ev)
+          //赞
+            if(ev.target.className==='top'){
+                    console.log('top')
+                  let {id} = ev.target.parentNode.dataset
+                  axios.get(`/api/weibo?act=like&id=${id}`).then(d=>{
+                      console.log(d)
+                      if(d.data.code===0){
+                        let num = ev.target.innerText;
+                         ev.target.innerText = ++num;
+                      }
+                  })
+            //踩
+            }else if(ev.target.className==='down_icon'){
+                  let {id} = ev.target.parentNode.dataset
+                  axios.get(`/api/weibo?act=dislike&id=${id}`).then(d=>{
+                      console.log(d)
+                      if(d.data.code===0){
+                        let num = ev.target.innerText;
+                         ev.target.innerText = ++num;
+                      }
+                  })
+            //删除
+            }else if(ev.target.className==='cut'){
+                    let {id} = ev.target.parentNode.dataset
+                    axios.get(`/api/weibo?act=del&id=${id}`).then(({data})=>{
+                        console.log(data)
+                        if(data.code===0){
+                            console.log(div1.children)
+                            if(div1.children.length===1){
+                                pageNum--
+                                console.log(pageNum);
+                            }
+                            getData(pageNum)
+                        }
+                    })
+                   
+            }
+      }
+
+      //小于10补0
+     function toDoub(num){
+           num = Number(num);
+            return num>=10?num:'0'+num;
+      }
+
+    </script>
+</body>
+
+</html>
