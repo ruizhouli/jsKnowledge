@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       img{
+        margin-top:50px ;
+        display: none;
+       }
+       button{
+           display: none;
+       }
+    </style>
+</head>
+<script src="./axios.min.js"></script>
+<body>
+    <div>
+        登录：<input type="text" id="txt">
+    </div>
+    <hr>
+    <div id="an">
+        <button id="an1">按钮一</button>
+        <button id="an2">按钮二</button>
+        <button id="an3">按钮三</button>
+    </div>
+    <img src="./1.gif" id='img'>
+    <script>
+       axios.interceptors.request.use(config=>{
+           console.log(config)
+            img.style.display = 'block'
+            if(config.url==='/login2'){
+                let type = localStorage.getItem('type');
+                console.log(type)
+                if(type >= 1){
+                    return config;
+                }else{
+                    console.log('权限不够');
+                    config.url = ''; //破坏url
+                }
+            }
+           return config
+       })
+       axios.interceptors.response.use(config=>{
+           img.style.display='none';
+           const {type} = config.data;
+           if(type !== undefined){
+            if(type===0){
+            an1.style.display='inline-block'
+           }else if(type===1){
+            an2.style.display=an1.style.display='inline-block'
+           }else if(type>=9){
+            an3.style.display=an2.style.display=an1.style.display='inline-block'
+           }
+           //为了请求的时候判断权限级别，可以通过权限判断用户是否能够访问接口
+           localStorage.setItem('type',type);
+           }else{
+            //没有权限就删除type
+            localStorage.removeItem('type');
+           }
+          
+           return config
+       })
+       
+      txt.onblur = async function(){
+          let val = txt.value;
+          let data = await axios.post('/login2',{
+              user:val
+          }).then(d=>d);
+          if(data.data.code===1){
+                an.style.display='none'
+          }
+            console.log(data.data.code)
+      }
+      an.onclick = function(ev){
+              console.log(ev)
+            if(ev.target.innerText==='按钮一'){
+                axios.post('/login').then(d=>{console.log(d.data)})
+            }else if(ev.target.innerText==='按钮二'){
+                axios.post('/regist').then(d=>{console.log(d.data)})
+            }else if(ev.target.innerText==='按钮三'){
+                alert(3)
+            }
+      }
+    </script>
+</body>
+</html>
