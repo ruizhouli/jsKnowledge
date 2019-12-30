@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <a href="javascript:void(0);">{{message}}</a>
+    <ul>
+        <li v-for="(val,key) in arr">{{val}}</li>
+    </ul>
+</div>
+<script>
+    let vu = new Vue({
+        el:'#app',
+        data:{
+            arr:['李瑞州','梁兴','豆晋杰','张晓燕'],
+            message:'花房'
+
+        }
+    })
+    setTimeout(()=>{
+        vu.arr.push('侯勇')
+    },3000)
+</script>
+</body>
+</html>
