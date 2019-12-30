@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+    全选中:<input type="radio" name="" id="" value="全选中" v-model='val'>
+    选中的:<input type="radio" name="" id="" value="选中的" v-model='val'>
+    未选中的:<input type="radio" name="" id="" value="未选中的" v-model='val'>
+    <hr />
+    <p>选的是<h2>{{val}}</h2></p>
+    <hr />
+    <span v-for='(val) in fun'>{{val.value}}--{{val.checked}}</span>
+</div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                val:'全选中',
+                ary:[
+                    {
+                        id:0,
+                        value:'梁兴富',
+                        checked:true,
+                    },
+                    {
+                        id:0,
+                        value:'张阳',
+                        checked:false,
+                    },
+                    {
+                        id:0,
+                        value:'李瑞州',
+                        checked:false,
+                    }
+                ]
+                
+
+            },
+            computed: {
+               fun(){
+                   let v = this.val;
+                   switch(v){
+                        case "全选中":
+                            return this.ary.filter(item=>item)
+                        case "选中的":
+                          return this.ary.filter(item=>item.checked)
+                        case "未选中的":
+                        return this.ary.filter(item=>!item.checked)
+                   }
+               }
+                   
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 300px;
+            height:300px;
+        }
+    #box .active{
+        background: aqua;
+    }
+    
+    #box div{
+       border:1px solid gray;
+       width:200px;
+       height:200px;
+    }
+    #box .show{
+        display: block;
+    }
+    </style>
+</head>
+<script src="./vue.js"></script>
+<body>
+<div id="box">
+    <button @click='fn(0)' :class='[isclass===0?clas:" "]' v-for=''>按钮一</button>
+    <button @click='fn(1)' :class='[isclass===1?clas:" "]'>按钮二</button>
+    <button @click='fn(2)' :class='[isclass===2?clas:" "]'>按钮三</button>
+  
+    <div class="show" v-show='num===0'>1111</div>
+    <div  v-show='num===1'>2222</div>
+    <div  v-show='num===2' >3333</div>
+</div>
+    <script>
+       new Vue({
+           el:'#box',
+           data:{
+                show:false,
+                num:0,
+                isclass:1,
+                clas:{
+                    active:true,
+                },
+                ary:[]
+           },
+           methods:{
+               fn(num1){
+                    this.num=num1;
+                    this.isclass=num1;
+               }
+           }
+       })
+       
+    </script>
+</body>
+</html>

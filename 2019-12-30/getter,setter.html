@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <script>
+        /* 数据拦截(劫持) */
+        let obj ={}
+        let num= 2;
+        Object.defineProperty(obj,'data',{
+            // value:2,
+          /*   writable:false,//是否可写(修改)
+            configurable:false,//是否可配置(删除 delete)
+            enumerable:false,//是否可枚举 (for in) */
+            get(){
+                //获取(读)数据时触发
+                num+=1.5
+                return num
+
+            },
+            set(){
+                //(设置)写数据是触发
+            }
+        })
+        console.log(obj.data<4&&obj.data>=5);
+    </script>
+</body>
+</html>

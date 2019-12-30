@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+     #box{
+         height:100px;
+         width:100px;
+         border: 1px solid gray;
+     }
+    </style>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <button v-for='(item,index) in arr' @click='fn(index)'>{{item}}</button>
+        <img :src="ary[num]" alt="">
+
+        <p :style="obj" @click.prevent='fn1'>找个对象</p>
+        <button @click='fun'>{{txt}}</button>
+        <div :style='[isStyle?obje:obj1,obje1]' id="box"></div>
+    </div>
+    <script>
+     new Vue({
+         el:'#app',
+         data:{
+             onoff:true,
+             txt:'变',
+             fontSize:100,
+             obj:{
+                color:'red',
+                fontSize:100+'px',
+             },
+             isStyle:true,
+             obje:{
+                background:'red'
+             },
+             obj1:{
+                background:'green'
+             },
+             obje1:{
+                width:200+'px',
+                height:200+'px',
+             },
+             num:0,
+             arr:['第一张','第二张'],
+             ary:['./pic2.png','./pic3.png']
+         },
+         methods: {
+             fn(inde){
+                 this.num=inde;
+                 this.obj.color='green';
+             },
+             fn1(){
+                 if( this.obj.color==='green'){
+                    this.obj.color='red';
+                 }else{
+                    this.obj.color='green'
+                 }
+               
+             },
+             fun(){
+                this.onoff=!this.onoff;
+                 if(this.onoff){
+                    this.txt='变'
+                 }else{
+                    this.txt='再变'
+                 }               
+                 this.isStyle=!this.isStyle;
+             }
+         }
+
+     })
+    </script>
+</body>
+</html>

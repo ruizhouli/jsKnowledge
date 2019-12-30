@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+    <input type="text" v-model.lazy='val'> <!--v-model.lazy=''代表像原生中的change事件 v-model.number=''代表会自动将字符串转换为数字-->
+    <p>{{val}}</p>
+    <input type="checkbox" id="" v-model='changed'>
+    <p>{{changed}}</p>
+    <input type="radio" name="" value='李瑞州' id="" v-model='name'>李瑞州
+    <input type="radio" name="" id="" value='梁兴富'  v-model='name'>梁兴富
+    <input type="radio" name="" id=""  value='张阳'  v-model='name'>张阳
+    <input type="radio" name="" id=""  value='豆晋杰'  v-model='name'>豆晋杰
+    <p>{{name}}</p>
+    <input type="radio" name="" id="" value="0" v-model='num'>刘翔
+    <input type="radio" name="" id="" value="1" v-model='num'>赵丽颖
+    <p>{{ary[num]}}</p>
+    <select name="" id=""  v-model='title'>
+       <option value="赵本山" >赵本山</option>
+       <option value="小沈阳" >小沈阳</option>
+       <option value="宋小宝" >宋小宝</option>
+    </select>
+    <p>{{title}}</p>
+
+    <textarea v-model='content'></textarea>
+    <p>{{content}}</p>
+</div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                val:'',
+                changed:true,
+                name:'李瑞州',
+                num:0,
+                ary:['男','女'],
+                title:'赵本山',
+                content:''
+            },
+            methods:{
+
+            },
+            computed: {
+                
+            }
+        })
+    </script>
+</body>
+</html>
