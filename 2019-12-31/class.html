@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+     #box{
+         height:200px;
+         width:200px;
+     }
+     .red{
+        background: red;
+     }
+     .green{
+        background: green;
+     }
+    </style>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <button @click='fn'>变红</button>
+        <button  @click='fn1'>变绿</button>
+        <!-- <div id="box" :class='[isClass?red:green]'> -->
+            <!-- <div id="box" :class='{red:isClass,green:!isClass}'></div> -->
+
+            <div id="box" :class='["red",obj]'></div>
+
+        </div>
+
+    </div>
+    <script>
+      new Vue({
+          el:"#app",
+          data:{
+            /* isClass:true,
+            red:'red',
+            green:'green' */
+            
+            obj:{
+                green:true,
+            }
+          },
+          methods:{
+                fn(){
+                    // this.isClass=true
+                    this.obj.green=false;
+                } ,
+                fn1(){
+                    // this.isClass=false
+                    this.obj.green=true;
+                }
+
+          }
+      })
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    [v-cloak]{
+        display: none;
+    }
+    </style>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <div v-cloak>
+            {{val}}
+        </div>
+    </div>
+    <script>
+        /* v-cloak:加载的时候不显示{{}} */
+      new Vue({
+          el:'#app',
+          data:{
+            val:'1234696'
+          },
+          methods:{
+          },
+          computed:{
+
+          },
+          watch:{
+
+          },
+          filters: {
+              
+          }
+      })
+    
+    </script>
+</body>
+</html>

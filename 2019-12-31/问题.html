@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+      #box{
+          height:100px;
+          width:100px;
+          background:gold;
+          position:absolute;
+          left:0;
+          top:0;
+      }
+    </style>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+            <div id="box" :style='{"left":l+"px","top":t + "px"}' @mousedown='down'>
+
+            </div>
+
+    </div>
+<script>
+    /* 钩子函数  回调函数()某个条件成立触发这个函数 */
+    new Vue({
+        el:'#app',
+        data:{
+            l:0,
+            t:0,
+        },
+        methods:{
+            down(ev){
+                let disX = ev.pageX - this.l;
+                let disY = ev.pageY - this.t;
+                let _this = this;
+                document.onmousemove=function(ev){
+                    _this.t = ev.pageY - disX;
+                    _this.l = ev.pageX - disY;
+                }
+                document.onmouseup=function(){
+                    document.onmousemove=document.onmouseup=null;
+                }
+            }
+        }
+    })
+
+    let obj = {};
+    let num=40 ;
+    Object.defineProperty(obj,'data',{
+        // value:2, 给data设值为2
+
+        // writable:true, 可写
+
+        // configurable:true, 可设置的 
+
+        get(){
+                //在get中必须return  读的时候触发
+                console.log(num)
+                return num
+        },
+        set(val){
+            // 在set中可以不return    写的时候触发
+            console.log(val)
+            num = val;
+        }
+    });
+console.log(obj.data);
+obj.data=10
+
+</script>
+</body>
+</html>

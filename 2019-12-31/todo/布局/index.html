@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <style>
+       [v-cloak]{
+           display: none;
+       }
+       .dis1{
+        display: none;
+       }
+       .dis{
+        display: block;
+       }
+
+    </style>
+</head>
+
+<body>
+    <section class="todoapp">
+        <div>
+            <header class="header" >
+                <h1>todos</h1>
+                <input 
+                    class="new-todo" 
+                    placeholder="请输入内容" 
+                    v-model.lazy='val'
+                    @keyup.enter='send'
+                >
+            </header>
+            <section class="main">
+                <input class="toggle-all" type="checkbox"  @click = 'togg()'>
+                <ul class="todo-list" v-cloak >
+                    <li class="active" v-for='(val) in ar' @dblclick='doubl(val.id,$event)' ref='lis'>
+                        <div class="view" :class="[val.checked===true?'completed':' ']">
+                            <input class="toggle" type="checkbox" v-model='val.checked'  @click='destory'>
+                            <label>{{val.txt}}</label>
+                            <button class="destroy" @click='destory(val.id)'></button>
+                        </div>
+                        <input 
+                        class="edit dis1"
+                        @keyup.Esc='fn1(va,$event)'
+                        @keyup.Enter ='chang(val.id,val.txt,$event)'
+                        v-model.lazy="va" 
+                        ref='input'  
+                               
+                        />
+                    </li>
+                    <!-- <li class="active">
+                        <div class="view">
+                            <input class="toggle" type="checkbox" >
+                            <label>呵呵</label>
+                            <button class="destroy"></button>
+                        </div>
+                        <input 
+                            class="edit" 
+                        />
+                    </li> -->
+
+                </ul>
+            </section>
+            <footer class="footer">
+	            <span class="todo-count">
+	            	<strong>{{num}}</strong>
+	            	<span>条未选中</span>
+                </span>
+                <ul 
+                    class="filters"
+                >
+                    <li>
+                        <a 
+                            href="#/all" 
+                            :class="[item==='all'?obj:obj2]"
+                           @click="fn('all')"
+                           id="all"
+                        >全部</a>
+                    </li>
+                    <li>
+                        <a 
+                            href="#/unchecked" 
+                            :class="[item==='unchecked'?obj:obj2]"
+                            @click = 'fn("unchecked")'
+                        >未选中</a>
+                    </li>
+                    <li>
+                        <a 
+                            href="#/checked"
+                            :class="[item==='checked'?obj:obj2]"
+                            @click = 'fn("checked")'
+                            id="checked"
+                        >已选中</a>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+    </section>
+<script src="./vue.js"></script>
+<script>
+    // editing completed
+    // editing ''
+    // ''
+    //completed
+ 
+    new Vue({
+        el:'.todoapp',
+        data:{ 
+            ok:false,
+            val:'',
+            va:'',
+            ary:rend(),
+            ar:rend(),
+            item:'all',
+            obj:{
+                selected:true,
+            },
+            obj2:{
+                selected:false,
+            },
+
+            obj3:{
+                completed:true,
+            }
+        },
+        methods:{
+            send(){
+               this.ary.unshift({
+                    id:Date.now(),
+                    txt:this.val,
+                    checked:false,
+                    onoff:false,
+                });
+                this.val='';
+                this.ar = this.ary
+                /* this.ar.unshift({
+                    id:Date.now(),
+                    txt:this.val,
+                    checked:false,
+                    onoff:false,
+                }) */
+                
+            },
+            destory(val){
+                     console.log(val)
+                    this.ary = this.ary.filter(item=>item.id!=val)
+                     this.ar = this.ary;
+            },
+            doubl(id,ev){
+              console.log(id,ev);
+              this.ok=true;
+              if(ev.target.tagName==='LABEL'){
+                ev.target.parentElement.style.display='none';
+                ev.target.parentElement.nextElementSibling.style.display='block'
+                ev.target.parentElement.nextElementSibling.value = ev.target.innerHTML;
+              }
+              this.$nextTick(() => {
+                console.log(222);
+                this.ar.forEach((item,i)=>{
+                    if(item.id===id){
+                        this.$refs['input'][i].select()
+                         console.log(this.$refs['input'])
+                    }
+                })
+            
+             })
+
+               
+            },
+            fn(name){
+                switch(name){
+                    case 'all':
+                    this.item='all'
+                    this.ar = this.ary.filter(item=>item);
+                       
+                        break;
+                    case  'unchecked':
+                    this.item='unchecked'
+                       this.ar =this.ary.filter(item=>item.checked===false)
+                     
+                       break;
+                    case 'checked':
+                     this.item='checked'
+                      this.ar = this.ary.filter(item=>item.checked===true);  
+                       break
+                       
+                    default:
+                    this.item='all'
+                    this.ar = this.ary.filter(item=>item);
+                                            
+                }
+            },
+
+            fn1(va,ev){
+                
+                ev.target.previousElementSibling.style.display='block';
+                ev.target.style.display='none';
+            },
+            chang(t,txt,ev){
+                ev.target.previousElementSibling.style.display='block';
+                ev.target.style.display='none';
+                console.log(ev)
+                let tes = '';
+                if(ev.target.value===txt){
+                    tes=txt
+                }else{
+                    tes = ev.target.value
+                }
+                this.ar.forEach(item => {
+                    if(item.id===t){
+                        item.txt=tes;
+                    }
+                });
+                
+                
+            },
+           togg(){
+            this.ar= this.ary.filter(item=>item.checked===true);
+            this.item='checked'
+           }
+
+        },
+        computed: {
+            arr(){
+                let v = localStorage.getItem('data')
+               this.ary = v?JSON.parse(v):[{
+                    id:0,
+                    txt:'哈哈',
+                    checked:true,
+                    onoff:false
+                },
+                {
+                    id:1,
+                    txt:'呵呵',
+                    checked:false,
+                    onoff:false
+                }]
+                console.log(this.ary)
+              return this.ary
+            },
+
+            num(){
+                let arr = this.ary.filter(item=>item.checked!=true)
+                let nu = arr.length;
+                return nu;
+            },
+           
+            
+        },
+        watch: {
+            ary:{
+                handler(val, oldVal){
+                    localStorage.setItem('data',JSON.stringify(val))
+                },
+                deep:true,
+            },
+          /*   ar:{
+                handler(val, oldVal){
+                    localStorage.setItem('dat',JSON.stringify(val))
+                },
+                deep:true,
+            } */
+        } ,   
+      /*   directives:{
+                focus:{
+                //根据focusState的状态改变是否聚焦focus
+                update: function (el, {value}) {    //第二个参数传进来的是个json
+                    if (value) {
+                        console.log(el.value)
+                        // if(el.value){
+                        //     el.focus()
+                        // }
+                   
+                    }
+                }
+                }
+            } */
+    })
+
+    function rend(){
+        
+        return JSON.parse(localStorage.getItem('data'))?JSON.parse(localStorage.getItem('data')):[
+                {
+                    id:0,
+                    txt:'哈哈',
+                    checked:true,
+                    onoff:false
+                },
+                {
+                    id:1,
+                    txt:'呵呵',
+                    checked:false,
+                    onoff:false
+                }
+            ]
+    }
+</script>
+</body>
+</html>

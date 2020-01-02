@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <input type="text" name="" id="" v-model="val"> <button @click='fn'>发送</button>
+        {{ary}}
+    </div>
+    <script>
+        // let t = document.querySelector('#app');
+        // let arr=[]
+        //  console.log(arr.push(t))
+        //  console.log(arr)
+        //  console.log(t.outerHTML)
+
+    new Vue({
+        el:'#app',
+        data:{
+            val:'',
+            ary:getItem(),
+        },
+        methods:{
+            fn(){
+                this.ary.unshift({
+                    id: Date.now(),
+                    checked:false,
+                    val:this.val
+                })
+                this.val=''
+            }
+        },
+        //watch 监听的都是data中的数据
+        //watch默认只能监听一层数据，如果有多层是监听不到的
+        watch:{
+            //这个名字必须要和数据中的那个变量名字一致
+            ary:{
+                handler(val,oldVal){
+                    localStorage.setItem('data',JSON.stringify(val))
+                },
+                //深度监听
+                deep:true  //有了这个属性就可以监听多层了
+            }
+        }
+    })
+
+    function getItem(){
+        let v = localStorage.getItem('data');
+        return v && JSON.parse(v) || [
+                {
+                    id:1,
+                    checked:false,
+                    val:'哈哈'
+                },
+                {
+                    id:2,
+                    checked:false,
+                    val:'呵呵'
+                }
+            ] 
+    }
+    </script>
+</body>
+</html>

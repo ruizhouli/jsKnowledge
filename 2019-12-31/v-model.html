@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <input type="text" name="" v-model.lazy='val' >
+            <button @click='fn'>点击</button>
+        <ol>
+            <li v-for='(val,key) in arr' @click='del(key)' >{{val}}</li>
+        </ol>
+    </div>
+    <script>
+        /* 双向数据绑定(为数据驱动视图，视图也可驱动数据 双向驱动) */
+      new Vue({
+          el:'#app',
+          data:{
+            arr:[]
+          },
+          methods:{
+                fn(){
+                    this.arr.unshift(this.val)
+                    this.val = ''
+                },
+                del(key){
+                    this.arr=this.arr.filter((item,i)=>i!=key)
+                }
+
+
+          }
+      })
+    </script>
+</body>
+</html>

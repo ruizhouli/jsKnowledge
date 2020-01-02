@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <input type="text" name="" id="" v-model.number='val'>
+        {{val|toDo}}
+        <p>{{val}}</p>
+        <p>{{reverse}}</p>
+    </div>
+    <script>
+        /* computed 数据的二次处理
+        
+            管道符:(数据的二次处理)
+                局部注册: filters:{
+                    fn(传进来的参数就是管道符之前的值){
+                            return 基于管道符之前的值进行二次处理
+                    }
+                }
+                全局注册：Vue.filter('名字',function(val值为管道符之前的值){
+                    return  基于管道符之前的值进行二次处理
+                })
+         */
+         Vue.filter('toDo',function(val){
+                return val>10?''+val:'0'+val
+         })
+        new Vue({
+            el:'#app',
+            data:{
+                val:'',
+            },
+            methods:{
+
+            },
+            computed:{
+                    reverse(){
+                        return this.val.split('').reverse().join('')
+                    }
+            }
+        })
+    </script>
+</body>
+</html>

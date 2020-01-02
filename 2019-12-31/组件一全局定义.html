@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        {{msg}}
+        <hr>
+        <app></app>
+    </div>
+    <script>
+        /* 定义子组件：
+        组建中的数据使用方法形式return一个对象
+             Vue.component('组件名字',{
+                 template:'<div>{{val}}</div>'
+                 data(){
+                     return{
+                         val:'123'
+                     }
+                 }
+             })
+             组件的名字如果是直接引得Vue.js那么尽量不要遵循驼峰命名法
+
+             因为命名后，使用子组件的时候会报错，如果非要使用把子组件改成烤串命名
+           */
+
+           /* 注册组件必须放在new Vue的上方 */
+          Vue.component('app',{
+              template:'<div @click="fn"> {{msg}}<p>{{val}}</p></div>',
+              data(){
+                return{
+                    val:'123',
+                    msg:'我是子组件'
+                }
+              },
+              methods:{
+                  fn(){
+                      console.log(this.val)
+                      alert('1')
+                  }
+              }
+          })
+      new Vue({
+          el:'#app',
+          data:{
+            msg:'我是父组件'
+          },
+          methods: {
+              
+          },
+          computed: {
+              
+          },
+          watch: {
+              
+          },
+          filters: {
+              
+          }
+      })
+    </script>
+</body>
+</html>

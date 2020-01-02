@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <lrz></lrz>
+    </div>
+    <script>
+       const lrz = {
+           template:`
+           <div>
+           <input v-model='val' @keyup.enter='fn' >
+                    <button >发送</button>
+                  <ul>
+                    <li v-for='(va) in arr'>{{va}}</li>
+                  </ul>
+                  {{val}}
+                </div>
+           `,
+           data(){
+               return{
+                   val:'',
+                   arr:[1,115,445,48,156],
+               }
+           },
+           methods:{
+                    fn(){
+                        // this.arr = this.arr.push(this.val)
+                        console.log(this.arr)
+                        }
+           },
+          
+       } 
+    new Vue({
+        el:'#app',
+        data:{
+
+        },
+        methods:{
+
+        },
+        watch:{
+
+        },
+        coputed:{
+
+        },
+        filters:{
+            
+        },
+        components: {
+            lrz,
+        }
+    })
+    </script>
+</body>
+</html>

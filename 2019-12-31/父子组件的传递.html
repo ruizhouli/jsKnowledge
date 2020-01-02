@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <button @click='fn'>加一</button>
+        {{num}}
+        <lrz :fnum='num'></lrz>
+    </div>
+
+    <script>
+        /* 父子组件的传递：
+           1.子组件上写一个自定义的名用v-bind绑定因为这个数往往是改变的不能写死   v-bind:自定义的名字='父级中的数据'   :fnum='num'
+
+           2.在子组件上定义一个props的属性接受，属性的值为一个数组，也可为一个对象，数组中的没一项就是在自组件上定义的个名字 props:['fnum']
+
+           3.用法：直接用{{}} + props中的名字即可  {{fnum}}
+
+           总结：  往子组件上的行间属性上传值   子组件用props接受
+           
+         */
+       /* 小试牛刀 */  
+       const lrz = {
+           template:`<div>我是子组件{{fnum}}</div>`,
+          props:['fnum']
+       }
+     new Vue({
+         el:'#app',
+         data:{
+            num:0
+         },
+         computed:{
+
+         },
+         watch:{
+
+         },
+         methods:{
+                fn(){
+                    ++this.num
+                }
+         },
+         components:{
+             lrz,
+         }
+     })
+    </script>
+</body>
+</html>
