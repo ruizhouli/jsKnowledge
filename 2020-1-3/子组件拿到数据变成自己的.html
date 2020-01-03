@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <button @click='change'>
+            父
+        </button>
+        <p>
+            我是父组件{{num}}
+        </p>
+        <lrz :fnum='num' @child='childs'></lrz>
+    </div>
+    <template id="lrz">
+        <div>
+            <button @click='add'>
+                子
+            </button>
+            <p>我是子组件{{mynum}}</p>
+        </div>
+    </template>
+    <script>
+        const lrz = {
+            template:'#lrz',
+            data () {
+                return {
+                    mynum:this.fnum,
+                }
+            },
+            props: ['fnum'],
+            methods:{
+                add(){
+                    ++this.mynum
+                    this.$emit('child',this.mynum)
+                }
+            }
+        }
+    new Vue({
+        el:'#app',
+        data () {
+            return {
+               num:0
+            }
+        },
+        methods: {
+            change(){
+                ++this.num
+            },
+            childs(val){
+                this.num =val 
+            }
+        },
+        components: {
+            lrz,
+        }
+    })
+    
+    </script>
+</body>
+</html>

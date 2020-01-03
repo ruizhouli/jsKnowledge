@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <div v-color="'green'">{{word}}</div>
+        <lrz></lrz>
+    </div>
+    <template id='lrz'>
+        <div>
+            <p v-size="'100'" v-color='"skyblue"'>{{haha}}</p>
+        </div>
+        
+    </template>
+    <script>
+        const lrz={
+            template:'#lrz',
+            data () {
+                return {
+                    haha:'过年好!'
+                }
+            },
+            directives: {
+                size(el,val){
+                    console.log(el,val)
+                    el.style.fontSize=val.value?val.value+'px':50+'px'
+                }
+            }
+        }
+       Vue.directive('color',function(el,val){
+            console.log(el,val);
+            el.style.color=val.value?val.value:'red'
+            
+       })
+
+      new Vue({
+          el:'#app',
+          data () {
+              return {
+                  word:'新年好!'
+              }
+          },
+          methods: {
+              
+          },
+          components: {
+                lrz,
+          }
+      })
+    </script>
+</body>
+</html>

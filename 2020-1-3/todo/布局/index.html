@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <section class="todoapp">
+        <div>
+            <header class="header" >
+                <h1>todos</h1>
+                <input 
+                    class="new-todo" 
+                    placeholder="请输入内容" 
+                    v-model='val'
+                    @keyup.Enter='add'
+                >
+            </header>
+            <section class="main">
+                <input class="toggle-all" type="checkbox" :checked="all"  
+                @click = 'changeAll'>
+                <ul class="todo-list">
+                    <li class="active" v-for="(va) in hashAry" :key="va.id":class="{
+                        completed:va.checked,
+                        editing:va.onoff
+                    }"   @dblclick = 'changSty(va.id)'>
+                        <div class="view">
+                            <input class="toggle" type="checkbox" v-model="va.checked" 
+                           
+                            >
+                            <label>{{va.txt}}</label>
+                            <button class="destroy" @click = 'destroy(va.id)'></button>
+                        </div>
+                        <input 
+                            class="edit"
+                            ref="input" 
+                            :value='va.txt'
+                            @keyup.Esc = 'exit(va.id,false)'
+                            @keyup.Enter = 'insert(va,$event)'
+                        />
+                    </li>
+                </ul>
+            </section>
+            <footer class="footer">
+	            <span class="todo-count">
+	            	<strong>{{num}}</strong>
+	            	<span>条未选中</span>
+                </span>
+                <ul 
+                    class="filters"
+                >
+                    <li>
+                        <a 
+                            href="#/all" 
+                            :class="{
+                                selected:hash==='#/all'
+                            }"
+                           
+                           
+                        >全部</a>
+                    </li>
+                    <li>
+                        <a 
+                            href="#/unchecked" 
+                            
+                            :class="{
+                                selected:hash==='#/unchecked'
+                            }"
+                        >未选中</a>
+                    </li>
+                    <li>
+                        <a 
+                            href="#/checked"
+                            :class="{
+                                selected:hash==='#/checked'
+                            }"
+                        >已选中</a>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+    </section>
+<script src="./vue.js"></script>
+<script>
+    // editing completed
+    // editing ''
+    // ''
+    //completed
+ /* created 在实例创建完成后立马被调用，在这一步，实例已经完成了以下配置，数据观测，属性和方法的运算，watch/event事件的回调 */
+    new Vue({
+        el:'.todoapp',
+        data:{ 
+            ary:[],
+            val:'',
+            all:false,
+            hash:window.location.hash||'#/all'
+        },
+        created(){
+            window.onhashchange=()=>{
+                this.hash = window.location.hash;
+            }
+            this.ary=getData();
+            console.log(this.ary)
+        },
+        methods:{
+            add(){
+                if(!this.val)return 
+                this.ary.unshift({
+                    id:Date.now(),
+                    txt:this.val,
+                    checked:false,
+                    onoff:false
+                }),
+                this.val=''
+            },
+            destroy(id){
+                this.ary = this.ary.filter(item=>item.id!==id)
+            },
+            changeAll(ev){
+                    this.ary = this.ary.map(e=>{
+                        e.checked=ev.target.checked;
+                        return e
+                    })
+            },
+            changSty(id){
+                console.log(id)
+              this.exit(id,true)
+                this.$nextTick(()=>{
+                    this.$refs['input'][id].select();
+                })
+            },
+            exit(id,b){
+                console.log(id)
+                let it =  this.ary.filter(item=>{
+                   return item.id===id
+                })
+                it[0].onoff=b;
+
+            },
+            insert({id,txt,onoff},ev){
+                if(!onoff)return
+
+                const {value} = ev.target;
+                if(value && txt!==value){
+                        this.ary.forEach(item=>{
+                            if(item.id===id){
+                                item.txt=value;
+                              
+                            }
+                        })
+                }
+
+                this.exit(id,false)
+                
+            }
+
+        },
+        computed: {
+          num(){
+              let arr = this.ary.filter(item=>!item.checked)
+              return arr.length
+          },
+          hashAry(){
+              const {ary,hash} = this;
+              return ary.filter(item=>{
+                  switch (hash) {
+                      case '#/all':
+                          return item
+                          break;
+                    case '#/unchecked':
+                          return !item.checked
+                          break; 
+                     case '#/checked':
+                          return item.checked
+                          break;       
+                  
+                      default:
+                          return item
+                          break;
+                  }
+              })
+          }  
+        },
+       
+        watch:{
+            ary:{
+                handler(){
+                    if(this.ary.length){
+                        localStorage.setItem('data',JSON.stringify(this.ary));
+                        this.all=this.ary.every(item=>item.checked===true)
+                    };
+                  
+                    
+                },
+                deep:true,
+                immediate:true
+            }
+        }
+            
+    })
+        function getData(){
+            let v= localStorage.getItem('data');
+           return v?JSON.parse(v):[{
+                    id:0,
+                    txt:'哈哈',
+                    checked:true,
+                    onoff:false,
+                },
+                {
+                    id:1,
+                    txt:'呵呵',
+                    checked:false,
+                    onoff:false
+                } ]
+        }
+    /**/
+</script>
+</body>
+</html>

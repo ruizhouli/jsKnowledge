@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <button @click='++num'>我是父组件</button>
+        <p>{{num}}</p>
+        <hr>
+        <hh></hh>
+        <hr>
+        <temp></temp>
+    </div>
+    <template id="hh">
+      
+        <div>
+            <button @click='++num'>我是子组件注册在了两个地方</button>
+            哈哈，我是模板{{num}}
+        </div>
+    </template>
+    <script>
+        const temp = {
+            template:`<div>我是另一个子组件{{num}}
+            
+            <hh></hh>
+            </div>`,
+            data () {
+                return {
+                    num:60
+                }
+            },
+            components:{
+                hh:{
+                    template:'#hh',
+                    data () {
+                        return {
+                            num:0
+                        }
+                    }
+                }
+            }
+        }
+        Vue.component("temp",temp) //全局注册在哪里都可以使用
+        new Vue({
+            el:'#app',
+            data:{
+                num:20
+            },
+            components: {
+                hh:{
+                    template:'#hh',
+                    data () {
+                        return {
+                            num:0
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

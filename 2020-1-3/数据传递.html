@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <button @click='++num'>父</button>
+        <div>我是父组件{{num}}</div>
+        <hr>
+          <!-- 在这里自定义的名字中不能有大写字母否则会报错 -->
+        <tem 
+        :fnum='num'
+        :fname='yourname'
+        ></tem>
+    </div>
+    <template id="tem">
+        <div>
+            <button>子</button>
+            <p>我是子组件{{fnum}}</p>
+            <p>{{fname}}</p>
+        </div>
+       
+    </template>
+    <script>
+        const tem = {
+            template:'#tem',
+            data () {
+                return {
+                    num:0
+                }
+            },
+            // props: ['fnum']
+            props:{
+                fnum:{
+                    type:Number,
+                    default:0
+                },
+                fname:{
+                    required:true,//是否必传
+                    validator:function(value){
+                        return /[\u4e00-\u9fa5]+/.test(value)
+                    }
+                }
+               
+            }
+        }
+      new Vue({
+          el:'#app',
+          data:{
+              num:0,
+              yourname:"李瑞州",
+          },
+          methods:{
+
+          },
+          components: {
+              tem,
+          }
+      })
+    </script>
+</body>
+</html>
