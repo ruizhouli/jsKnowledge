@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <lrz>
+            <div slot='n'>你好</div>
+            <div slot='h'>中国</div>
+            <div slot="l">航天</div>
+            <h2 slot="i">加油</h2>
+            <!-- <div slot="i">加油</div> -->
+        </lrz>
+
+    </div>
+    <template id="lrz">
+        <div>
+            <slot name='n' >
+                <div>问候</div>
+            </slot>
+            <slot name='h'></slot>
+            <slot name='l'></slot>
+            <slot name='i'></slot>
+            <div v-color='"green"'>我是子组件</div>
+        </div>
+    </template>
+    <script>
+
+       new Vue({
+           el:'#app',
+           components:{
+                lrz:{
+                    template:'#lrz',
+                    directives: {
+                        color(el,value){
+                            console.log(el,value)
+                        }
+                    }
+                }
+           }
+       })
+    </script>
+</body>
+</html>

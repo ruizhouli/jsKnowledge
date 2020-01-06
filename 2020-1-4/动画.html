@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      *{
+          margin: 0;
+          padding: 0;
+      }
+      .n-enter,.n-leave-to{
+        opacity: 0;
+         transform:translateY(300px)
+      }
+      .n-enter-active,.n-leave-active{
+           transition: .5s;
+         }
+    .n-enter-to,.n-leave{
+    opacity: 1;
+    transform:translateY(0)
+}
+.f-enter,.f-leave-to{
+        opacity: 0;
+         transform:translateX(300px)
+      }
+      .f-enter-active,.f-leave-active{
+           transition: .5s;
+         }
+    .f-enter-to,.f-leave{
+    opacity: 1;
+    transform:translateX(0)
+}
+    </style>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <button @click='fn'>父组件按钮</button>
+       <transition name="n" mode="">
+           <lrz :h='ary' v-show='onoff'>
+               <p slot="ss">中国航天,加油!</p>
+            </lrz>
+       </transition>
+       
+    </div>
+    <template id="lrz">
+        <div>
+            <button @click='onoff=!onoff'>点击</button>
+            <ul>
+              <transition-group name="f" mode=""  >
+                    <li v-show='onoff' v-for='(item,val) in h' :key="val">{{item}}</li>
+                </transition-group>
+            </ul>
+            
+            <slot name='ss'></slot>
+           
+        </div>
+    </template>
+    <script>
+        Vue.component('lrz',{
+            template:'#lrz',
+            data () {
+                return {
+                    onoff:false,
+                }
+            },
+            methods:{
+
+            },
+            props: {
+                h:{
+                    required: true, 
+                }
+            }
+
+        })
+      new Vue({
+          el:'#app',
+          data() {
+              return {
+                  onoff:false,
+                  ary:['你好，我爱我的祖国，中国!','哈哈']
+                // word:'你好，我爱我的祖国，中国!'
+              }
+          },
+          methods: {
+              fn(){
+                  this.onoff = !this.onoff
+              }
+          }
+      })
+    </script>
+</body>
+</html>

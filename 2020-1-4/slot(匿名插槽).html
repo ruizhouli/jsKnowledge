@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      .box{
+          width:100px;
+          height: 100px;
+          background-color: green;
+      }
+      .box1{
+          width:100px;
+          height:100px;
+          background-color: skyblue;
+      }
+    </style>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <lrz><div class="box1" v-color="'green'">花花世界谁来主宰</div>
+        <div class="box"></div>
+        </lrz>
+    </div>
+    <template id="lrz">
+        <div>
+         <slot><div class="box"></div></slot>
+        </div>
+    </template>
+    <script>
+     Vue.directive('color',function(el,value){
+        console.log(el,value)
+        el.style.color= value.value?value.value:'red'
+     })
+      new Vue({
+          el:'#app',
+          components: {
+              lrz:{
+                  template:'#lrz',
+              }
+          }
+      })
+    </script>
+</body>
+</html>

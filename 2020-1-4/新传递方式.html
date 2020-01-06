@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <lrz></lrz>
+    </div>
+    <template id="lrz">
+        <div>{{ary}}</div>
+    </template>
+    <script>
+        /* 更简单  provide(在父组件中提供数据) inject(在子组件中直接接受数据) */ 
+        new Vue({
+            el:"#app",
+            data () {
+                return {
+                    
+                }
+            },
+            provide:{
+                ary:[156,5256,558]
+            },
+            components: {
+                lrz:{
+                    template:'#lrz',
+                    inject:['ary']
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>

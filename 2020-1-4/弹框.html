@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .shadow {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background-color: rgba(0, 0, 0, .3);
+        }
+
+        #box {
+            width: 400px;
+            height: 200px;
+            border-radius: 10px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            z-index: 999;
+            left: 50%;
+            margin-left: -200px;
+            transform: translateY(100px);
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+        }
+
+        .btns {
+            position: absolute;
+            bottom: 0;
+        }
+
+        .txt {
+            width: 300px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .v-enter{
+            opacity: 0;
+        }
+        .v-enter-active{
+            transition: .5s;
+        }
+        .n-enter,.n-leave-to{
+            z-index:999;
+            transform:translateY(-500px);
+        }
+        .n-enter-active,.n-leave-active{
+            z-index: 999;
+            transition: .5s;
+        }
+        .tk{
+            position: relative;
+            z-index: 999;
+        }
+    </style>
+</head>
+<script src="./vue.js"></script>
+
+<body>
+    <div id="app">
+        <button @click='change'>点</button>
+        <transition name="n" mode="">
+            <lrz @coff='change'
+            v-show='onoff'
+            :of='onoff'
+           >
+             <p slot="content">hello world!</p>
+             <p slot="content2">你好,世界!</p>
+         </lrz>
+        </transition>
+       
+        <transition>
+            <div class="shadow" v-show="onoff"></div>
+        </transition>
+    </div>
+    <template id="lrz">
+        <div>
+            <div id="box" class="tk">
+                <div class="txt" >
+                    <div>
+                        <slot name="content"></slot>
+                        <slot name="content2"></slot>
+
+                    </div>
+                </div>
+                <div class="btns">
+                    <button @click='off'>确定</button>
+                    <button @click='off'>取消</button>
+                </div>
+            </div>
+
+        </div>
+    </template>
+    <script>
+        const lrz = {
+            template: '#lrz',
+            // props: ['of'],
+            // props: {
+            //     of: {
+            //         type: Object | Array,
+            //         defalut: () => ({})
+
+            //     }
+            // },
+            methods: {
+                off() {
+                    this.$emit('coff')
+                }
+            }
+        }
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    onoff: true
+                }
+            },
+            methods: {
+                change() {
+                    this.onoff = !this.onoff
+                }
+            },
+            components: {
+                lrz,
+            },
+
+        })
+    </script>
+</body>
+
+</html>

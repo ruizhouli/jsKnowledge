@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <lrz :fnum='ary'>
+            <template #data='child'>
+                <h2>我的名字叫{{child.tet}}</h2>
+                <h3>我的年龄是{{child.ag}}</h3>
+                <h3>我的工作是{{child.job}}</h3>
+            </template>
+        </lrz>
+    </div>
+      <template id="lrz">
+          <div>
+              <ul>
+                  <li v-for="item in fnum">
+                    <slot
+                        name='data'
+                        :tet='item.txt'
+                        :ag = 'item.age'
+                        :job='item.job'
+                    ></slot
+                        >
+                  </li>
+              </ul>
+          </div>
+          
+      </template>
+    <script>
+      new Vue({
+          el:'#app',
+          data(){
+              return{
+                ary:[
+                    {
+                        id:Date.now(),
+                        txt:'李瑞州',
+                        age:24,
+                        job:'哈哈'
+                    },
+                    {
+                        id:Date.now(),
+                        txt:'梁兴富',
+                        age:24,
+                        job:'呵呵'
+                    },
+
+
+                ]
+              }
+          },
+          components:{
+                lrz:{
+                    template:'#lrz',
+                    props: ['fnum']
+                }
+          }
+      })
+    </script>
+</body>
+</html>
