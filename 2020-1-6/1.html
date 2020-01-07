@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <a href="#/checked">哈</a>
+    <ul id="ul">
+        <li>花花</li>
+    </ul>
+    <script>
+        let li = ul.children[0]
+        console.log(li)
+        li.onclick = function(){
+            window.location.hash='unchecked'
+        }
+    </script>
+</body>
+</html>

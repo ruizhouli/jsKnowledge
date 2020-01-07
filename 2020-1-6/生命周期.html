@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <div id="box">
+            <button @click="++num">点击添加{{num}}</button>
+            <button @click='ary.push(111)'>给ary添加数据</button>
+            <button @click='rm'>销毁组件</button>
+            <p v-for="item in ary">{{item}}</p>
+        </div>
+    </div>
+    <script>
+      new Vue({
+        data() {
+            return {
+                num: 0,
+                ary:[
+                    '李瑞州',
+                    '梁兴富'
+                ],
+                timer:null
+            }
+        },
+        
+        beforeCreate () {
+            /* beforeCreate生命周期函数执行的时候，data和methods中的数据都还没有初始化*/
+            console.log(this.num)
+        },
+        methods: {
+            rm(){
+                this.$destroy();
+            }
+        },
+        created () {
+            /* created生命周期函数执行的时候，data与methods中的数据已经初始化 在使用data和methods中的数据最早是在created中*/
+            console.log(this.num)
+            this.timer=setInterval(()=>{
+                ++this.num
+            },1000)
+        },
+        beforeMount () {
+            /*beforeMount生命周期函数执行的时候，代表渲染之前，此时模板已经在内存中编译好了，但没有挂载到页面中去,  此时页面还是旧的*/
+            console.log(box.children)
+        },
+        mounted () {
+            /* mounted生命周期函数执行的时候，代表渲染完成，此时页面已经是最新的页面了 此时可以去获取页面中的DOM，最早获取DOM是在mounted阶段，此时组件已经脱离了创建阶段，进入到运行阶段*/
+            console.log(box.children)
+        },
+        beforeUpdate () {
+            /* beforeupdate生命周期函数 在这个阶段获取到的数据是最新的数据，但是此时页面中尚未与最新数据保持同步*/
+            console.log(box.children.length)
+            console.log(this.ary.length)
+        },
+        updated () {
+            /* updated生命周期函数，在这个阶段获取到的数据是最新的页面中的数据也与最新数据保持一致了 */
+            console.log(box.children.length)
+            console.log(this.ary.length)
+        },
+        beforeDestroy () {
+            /* 当执行beforeDestroy生命周期函数，说明已经进入到了销毁阶段，但是此时的data,methods以及过滤器，自定义指令......都还可以使用 */
+            console.log('销毁之前')
+        },
+        destroyed () {
+            /* 当执行destroyed周期函数的时候说明组件已经销毁完成了，此时这个Vue实例下的所有功能都不能使用 */
+            console.log('销毁之后')
+            clearInterval(this.timer)
+        }
+
+
+
+      }).$mount('#app')
+    </script>
+</body>
+</html>
